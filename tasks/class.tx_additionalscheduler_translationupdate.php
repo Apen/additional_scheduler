@@ -74,7 +74,8 @@ class tx_additionalscheduler_translationupdate extends tx_scheduler_Task
 	}
 
 	public function updateTranslation($extKey, $lang) {
-		$mirrorURL = $this->getMirrorURL();
+		//$mirrorURL = $this->getMirrorURL();
+		$mirrorURL = 'http://typo3.org/fileadmin/ter/';
 		if (t3lib_div::int_from_ver(TYPO3_version) <= 4005000) {
 			return $this->em->updateTranslation($extKey, $lang, $mirrorURL);
 		} else {
