@@ -33,6 +33,7 @@ class tx_additionalscheduler_exec extends tx_scheduler_Task
 	 */
 
 	public function execute() {
+		require_once(PATH_site . 'typo3conf/ext/additional_scheduler/classes/class.tx_additionalscheduler_utils.php');
 
 		// exec SH
 		if (substr($this->path, 0, 1) == '/') {
@@ -47,10 +48,9 @@ class tx_additionalscheduler_exec extends tx_scheduler_Task
 		$mailTo = $this->email;
 		$mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/locallang.xml:task.exec.name');
 		$mailBody = $cmd . LF . LF . $return;
-		$mailHeaders = 'From: ' . $this->emailfrom . " \r\n" . 'Reply-To: ' . $this->emailfrom . " \r\n";
 
 		if (empty($this->email) !== TRUE) {
-			mail($mailTo, $mailSubject, $mailBody, $mailHeaders);
+			tx_additionalscheduler_utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', $this->emailfrom, $this->emailfrom, 'utf-8');
 		}
 
 		return TRUE;

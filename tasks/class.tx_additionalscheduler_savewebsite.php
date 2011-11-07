@@ -26,6 +26,7 @@ class tx_additionalscheduler_savewebsite extends tx_scheduler_Task
 {
 
 	public function execute() {
+		require_once(PATH_site . 'typo3conf/ext/additional_scheduler/classes/class.tx_additionalscheduler_utils.php');
 
 		// exec SH
 		$saveScript = PATH_site . 'typo3conf/ext/additional_scheduler/sh/save_typo3_website.sh';
@@ -36,10 +37,9 @@ class tx_additionalscheduler_savewebsite extends tx_scheduler_Task
 		$mailTo = $this->email;
 		$mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/locallang.xml:task.savewebsite.name');
 		$mailBody = $cmd . LF . LF . $return;
-		$mailHeaders = 'From: ' . $this->emailfrom . " \r\n" . 'Reply-To: ' . $this->emailfrom . " \r\n";
 
 		if (empty($this->email) !== TRUE) {
-			mail($mailTo, $mailSubject, $mailBody, $mailHeaders);
+			tx_additionalscheduler_utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', $this->emailfrom, $this->emailfrom, 'utf-8');
 		}
 
 		return TRUE;
@@ -57,6 +57,7 @@ class tx_additionalscheduler_savewebsite extends tx_scheduler_Task
 	public function getAdditionalInformation() {
 		return $this->path;
 	}
+
 
 }
 
