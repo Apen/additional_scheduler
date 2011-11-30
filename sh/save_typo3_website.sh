@@ -149,17 +149,21 @@ fi
 echo "-----------------------------------------------------------------------"
 echo "Export the DB $typo_db..."
 echo "-----------------------------------------------------------------------"
-mysqldump -h$typo_db_host -u$typo_db_username -p$typo_db_password --skip-lock-tables $typo_db > $nom_fichiersql
+mysqldump -d -h$typo_db_host -u$typo_db_username -p$typo_db_password $typo_db > $nom_fichiersql
+mysqldump -nt --ignore-table=$typo_db.cache_extensions --ignore-table=$typo_db.cache_hash --ignore-table=$typo_db.cache_imagesizes --ignore-table=$typo_db.cache_md5params --ignore-table=$typo_db.cache_md5params --ignore-table=$typo_db.cache_pages --ignore-table=$typo_db.cache_pagesection --ignore-table=$typo_db.cache_treelist --ignore-table=$typo_db.cache_typo3temp_log -h$typo_db_host -u$typo_db_username -p$typo_db_password $typo_db >> $nom_fichiersql
+
 echo "-----------------------------------------------------------------------"
 echo "Compress the files and DB..."
 echo "-----------------------------------------------------------------------"
 tar cfz $nom_fichier * .htaccess
+
 echo "-----------------------------------------------------------------------"
 echo "Delete export_$typo_db-$day_date.sql..."
 echo "-----------------------------------------------------------------------"
 rm $nom_fichiersql
+
 echo "-----------------------------------------------------------------------"
-echo "Backup sucess"
+echo "Backup success"
 echo $(pwd)"/"$nom_fichier
 echo "-----------------------------------------------------------------------"
 
