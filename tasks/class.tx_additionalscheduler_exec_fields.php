@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 CERDAN Yohann (cerdanyohann@yahoo.fr)
+ *  (c) 2012 CERDAN Yohann (cerdanyohann@yahoo.fr)
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,34 +27,34 @@ class tx_additionalscheduler_exec_fields implements tx_scheduler_AdditionalField
 
 	public function getAdditionalFields(array &$taskInfo, $task, tx_scheduler_Module $parentObject) {
 
-		if (empty($taskInfo['additionalscheduler_path'])) {
+		if (empty($taskInfo['additionalscheduler_exec_path'])) {
 			if ($parentObject->CMD == 'edit') {
-				$taskInfo['additionalscheduler_path'] = $task->path;
+				$taskInfo['additionalscheduler_exec_path'] = $task->path;
 			} else {
-				$taskInfo['additionalscheduler_path'] = '';
+				$taskInfo['additionalscheduler_exec_path'] = '';
 			}
 		}
 
-		if (empty($taskInfo['additionalscheduler_email'])) {
+		if (empty($taskInfo['additionalscheduler_exec_email'])) {
 			if ($parentObject->CMD == 'edit') {
-				$taskInfo['additionalscheduler_email'] = $task->email;
+				$taskInfo['additionalscheduler_exec_email'] = $task->email;
 			} else {
-				$taskInfo['additionalscheduler_email'] = '';
+				$taskInfo['additionalscheduler_exec_email'] = '';
 			}
 		}
 
-		if (empty($taskInfo['additionalscheduler_emailfrom'])) {
+		if (empty($taskInfo['additionalscheduler_exec_emailfrom'])) {
 			if ($parentObject->CMD == 'edit') {
-				$taskInfo['additionalscheduler_emailfrom'] = $task->emailfrom;
+				$taskInfo['additionalscheduler_exec_emailfrom'] = $task->emailfrom;
 			} else {
-				$taskInfo['additionalscheduler_emailfrom'] = '';
+				$taskInfo['additionalscheduler_exec_emailfrom'] = '';
 			}
 		}
 
 		$additionalFields = array();
 
 		$fieldID = 'task_path';
-		$fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_path]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_path'] . '" size="50" />';
+		$fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_path]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_path'] . '" size="50" />';
 		$additionalFields[$fieldID] = array(
 			'code' => $fieldCode,
 			'label' => 'LLL:EXT:additional_scheduler/locallang.xml:execdir',
@@ -63,7 +63,7 @@ class tx_additionalscheduler_exec_fields implements tx_scheduler_AdditionalField
 		);
 
 		$fieldID = 'task_email';
-		$fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_email'] . '" size="50" />';
+		$fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_email'] . '" size="50" />';
 		$additionalFields[$fieldID] = array(
 			'code' => $fieldCode,
 			'label' => 'LLL:EXT:additional_scheduler/locallang.xml:email',
@@ -72,7 +72,7 @@ class tx_additionalscheduler_exec_fields implements tx_scheduler_AdditionalField
 		);
 
 		$fieldID = 'task_emailfrom';
-		$fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_emailfrom]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_emailfrom'] . '" size="50" />';
+		$fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_emailfrom]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_emailfrom'] . '" size="50" />';
 		$additionalFields[$fieldID] = array(
 			'code' => $fieldCode,
 			'label' => 'LLL:EXT:additional_scheduler/locallang.xml:emailfrom',
@@ -85,7 +85,7 @@ class tx_additionalscheduler_exec_fields implements tx_scheduler_AdditionalField
 
 	public function validateAdditionalFields(array &$submittedData, tx_scheduler_Module $parentObject) {
 		$result = true;
-		if (empty($submittedData['additionalscheduler_path'])) {
+		if (empty($submittedData['additionalscheduler_exec_path'])) {
 			$parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/locallang.xml:savedirerror'), t3lib_FlashMessage::ERROR);
 			$result = FALSE;
 		}
@@ -93,9 +93,9 @@ class tx_additionalscheduler_exec_fields implements tx_scheduler_AdditionalField
 	}
 
 	public function saveAdditionalFields(array $submittedData, tx_scheduler_Task $task) {
-		$task->path = $submittedData['additionalscheduler_path'];
-		$task->email = $submittedData['additionalscheduler_email'];
-		$task->emailfrom = $submittedData['additionalscheduler_emailfrom'];
+		$task->path = $submittedData['additionalscheduler_exec_path'];
+		$task->email = $submittedData['additionalscheduler_exec_email'];
+		$task->emailfrom = $submittedData['additionalscheduler_exec_emailfrom'];
 	}
 
 }

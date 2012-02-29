@@ -1,6 +1,8 @@
 <?php
 
-$tasks = array('savewebsite', 'translationupdate', 'exec');
+require_once(t3lib_extMgm::extPath('additional_scheduler') . 'classes/class.tx_additionalscheduler_utils.php');
+
+$tasks = tx_additionalscheduler_utils::getTasksList();
 $loadArray = array();
 $extensionPath = t3lib_extMgm::extPath('additional_scheduler');
 

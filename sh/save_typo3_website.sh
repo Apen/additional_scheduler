@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ##########################################################################
-# (c) 2011 Yohann CERDAN <cerdanyohann@yahoo.fr>
+# (c) 2012 Yohann CERDAN <cerdanyohann@yahoo.fr>
 # All rights reserved
 #
 # This program is free software : you can redistribute it and/or modify
