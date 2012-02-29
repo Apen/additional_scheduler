@@ -4,7 +4,8 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$tasks = array('savewebsite', 'translationupdate', 'exec');
+require_once(t3lib_extMgm::extPath('additional_scheduler') . 'classes/class.tx_additionalscheduler_utils.php');
+$tasks = tx_additionalscheduler_utils::getTasksList();
 
 foreach ($tasks as $task) {
 	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_additionalscheduler_' . $task] = array(

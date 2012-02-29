@@ -12,8 +12,12 @@
 			<label index="task.translationupdate.description">Update the TYPO3 translations</label>
 			<label index="task.exec.name">Exec a SH script</label>
 			<label index="task.exec.description">Exec a SH script</label>
+			<label index="task.clearcache.name">Clear caches</label>
+			<label index="task.clearcache.description">Clear caches</label>
 			<label index="savedir">Full path of the save directory (/aaa/bbb/ccc/)</label>
-			<label index="execdir">Full path of the SH script (/aaa/bbb/ccc/ddd.sh or relative to the website : typo3/cli_dispatch.phpsh xxx)</label>
+			<label index="execdir">Full path of the SH script (/aaa/bbb/ccc/ddd.sh or relative to the website :
+				typo3/cli_dispatch.phpsh xxx)
+			</label>
 			<label index="savedirerror">Specify a correct save directory (existing and writable directory)</label>
 			<label index="execdirerror">Specify a correct SH script directory (existing and executable file)</label>
 			<label index="email">Email</label>
@@ -29,8 +33,12 @@
 			<label index="task.translationupdate.description">Mettre à jour les traductions</label>
 			<label index="task.exec.name">Exécuter un script SH</label>
 			<label index="task.exec.description">Exécuter un script SH</label>
+			<label index="task.clearcache.name">Vider les caches</label>
+			<label index="task.clearcache.description">Vider les caches</label>
 			<label index="savedir">Chemin complet du répertoire de sauvegarde (/aaa/bbb/ccc/)</label>
-			<label index="execdir">Chemin complet du script SH (/aaa/bbb/ccc/ddd.sh ou relatif au site : typo3/cli_dispatch.phpsh xxx)</label>
+			<label index="execdir">Chemin complet du script SH (/aaa/bbb/ccc/ddd.sh ou relatif au site : typo3/cli_dispatch.phpsh
+				xxx)
+			</label>
 			<label index="savedirerror">Spécifier un répertoire de sauvegarde correct (qui existe et qui est inscriptible)</label>
 			<label index="execdirerror">Spécifier un chemin de script SH correct (qui existe et qui est executable)</label>
 			<label index="email">Email</label>

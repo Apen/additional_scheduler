@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 CERDAN Yohann (cerdanyohann@yahoo.fr)
+ *  (c) 2012 CERDAN Yohann (cerdanyohann@yahoo.fr)
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
