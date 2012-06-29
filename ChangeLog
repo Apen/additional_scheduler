@@ -1,3 +1,5 @@
+2012-04-14 CERDAN Yohann  <cerdanyohann@yahoo.fr>
+	* add a "clear typo3temp" task to empty directories with files older than x days. Many thanks to Achim Schmeer for his support.
 2012-02-29 CERDAN Yohann  <cerdanyohann@yahoo.fr>
 	* add a "clear caches" task (thanks to Stefano Cecere)
 	* small refactoring

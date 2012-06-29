@@ -58,7 +58,7 @@ class tx_additionalscheduler_translationupdate extends tx_scheduler_Task
 			require_once(PATH_site . 'typo3/sysext/em/classes/extensions/class.tx_em_extensions_details.php');
 			require_once(PATH_site . 'typo3/sysext/em/classes/tools/class.tx_em_tools_xmlhandler.php');
 			require_once(PATH_site . 'typo3/sysext/em/classes/settings/class.tx_em_settings.php');
-			$this->em = t3lib_div::makeInstance('tx_em_Extensions_List');
+			$this->em       = t3lib_div::makeInstance('tx_em_Extensions_List');
 			$this->settings = t3lib_div::makeInstance('tx_em_Settings');
 		}
 	}
@@ -79,9 +79,24 @@ class tx_additionalscheduler_translationupdate extends tx_scheduler_Task
 		if (t3lib_div::int_from_ver(TYPO3_version) <= 4005000) {
 			return $this->em->updateTranslation($extKey, $lang, $mirrorURL);
 		} else {
-			$this->terConnection = t3lib_div::makeInstance('tx_em_Connection_Ter');
-			$translation = t3lib_div::makeInstance('tx_em_Translations', $this);
-			return $translation->updateTranslation($extKey, $lang, $mirrorURL);
+			$this->terConnection = t3lib_div::makeInstance('tx_em_Connection_Ter', $this);
+			if ($this->isTranslated($extKey, $lang, $mirrorURL) === TRUE) {
+				$translation = t3lib_div::makeInstance('tx_em_Translations', $this);
+				return $translation->updateTranslation($extKey, $lang, $mirrorURL);
+			} else {
+				return NULL;
+			}
+		}
+	}
+
+	public function isTranslated($extKey, $lang, $mirrorURL) {
+		$extPath = t3lib_div::strtolower($extKey);
+		$mirrorURL .= $extPath{0} . '/' . $extPath{1} . '/' . $extPath . '-l10n/' . $extPath . '-l10n-' . $lang . '.zip';
+		$l10n = @file_get_contents($mirrorURL);
+		if ($l10n !== FALSE) {
+			return TRUE;
+		} else {
+			return FALSE;
 		}
 	}
 
@@ -91,7 +106,7 @@ class tx_additionalscheduler_translationupdate extends tx_scheduler_Task
 	 * This additional information is used - for example - in the Scheduler's BE module
 	 * This method should be implemented in most task classes
 	 *
-	 * @return	string	Information to display
+	 * @return    string    Information to display
 	 */
 
 	public function getAdditionalInformation() {
