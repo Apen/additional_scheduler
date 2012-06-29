@@ -13,7 +13,8 @@
 			<label index="task.exec.name">Exec a SH script</label>
 			<label index="task.exec.description">Exec a SH script</label>
 			<label index="task.clearcache.name">Clear caches</label>
-			<label index="task.clearcache.description">Clear caches</label>
+			<label index="task.cleart3temp.name">Clear typo3temp</label>
+			<label index="task.cleart3temp.description">Clear typo3temp</label>
 			<label index="savedir">Full path of the save directory (/aaa/bbb/ccc/)</label>
 			<label index="execdir">Full path of the SH script (/aaa/bbb/ccc/ddd.sh or relative to the website :
 				typo3/cli_dispatch.phpsh xxx)
@@ -23,6 +24,9 @@
 			<label index="email">Email</label>
 			<label index="emailfrom">Email FROM</label>
 			<label index="lang">Langs (comma list)</label>
+			<label index="nbdays">Older than this number of days</label>
+			<label index="dirfilter">Skip this files/directories with a regexp (can be empty for all). Ex: (llxml|rtehtmlarea)</label>
+			<label index="nbdayserror">Specify a number of days</label>
 			<label index="langerror">Specify at most one lang</label>
 			<label index="mustbeexecutable">The script %s must be executable</label>
 		</languageKey>
@@ -35,6 +39,8 @@
 			<label index="task.exec.description">Exécuter un script SH</label>
 			<label index="task.clearcache.name">Vider les caches</label>
 			<label index="task.clearcache.description">Vider les caches</label>
+			<label index="task.cleart3temp.name">Vider typo3temp</label>
+			<label index="task.cleart3temp.description">Vider typo3temp</label>
 			<label index="savedir">Chemin complet du répertoire de sauvegarde (/aaa/bbb/ccc/)</label>
 			<label index="execdir">Chemin complet du script SH (/aaa/bbb/ccc/ddd.sh ou relatif au site : typo3/cli_dispatch.phpsh
 				xxx)
@@ -45,6 +51,9 @@
 			<label index="emailfrom">Email FROM</label>
 			<label index="lang">Langues (liste à virgules)</label>
 			<label index="langerror">Spécifier au moins une langue</label>
+			<label index="nbdays">Plus vieux que ce nombre de jours</label>
+			<label index="dirfilter">Passer ces fichiers/répertoires à l'aide d'une regexp (peut être vide pour tous). Ex: (llxml|rtehtmlarea)</label>
+			<label index="nbdayserror">Spécifier un nombre de jours</label>
 			<label index="mustbeexecutable">Le script %s doit etre executable</label>
 		</languageKey>
 	</data>
