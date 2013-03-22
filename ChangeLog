@@ -1,3 +1,5 @@
+2013-03-23 CERDAN Yohann  <cerdanyohann@yahoo.fr>
+	* add a new feature to send result of mysql query in mail (with html template)
 2012-04-14 CERDAN Yohann  <cerdanyohann@yahoo.fr>
 	* add a "clear typo3temp" task to empty directories with files older than x days. Many thanks to Achim Schmeer for his support.
 2012-02-29 CERDAN Yohann  <cerdanyohann@yahoo.fr>

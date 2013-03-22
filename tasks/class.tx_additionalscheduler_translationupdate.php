@@ -49,7 +49,7 @@ class tx_additionalscheduler_translationupdate extends tx_scheduler_Task
 
 	public function initEM() {
 		require_once(PATH_site . 'typo3/template.php');
-		if (t3lib_div::int_from_ver(TYPO3_version) <= 4005000) {
+		if (tx_additionalscheduler_utils::intFromVer(TYPO3_version) <= 4005000) {
 			require_once(PATH_site . 'typo3/mod/tools/em/class.em_index.php');
 			$this->em = t3lib_div::makeInstance('SC_mod_tools_em_index');
 			$this->em->init();
@@ -58,14 +58,14 @@ class tx_additionalscheduler_translationupdate extends tx_scheduler_Task
 			require_once(PATH_site . 'typo3/sysext/em/classes/extensions/class.tx_em_extensions_details.php');
 			require_once(PATH_site . 'typo3/sysext/em/classes/tools/class.tx_em_tools_xmlhandler.php');
 			require_once(PATH_site . 'typo3/sysext/em/classes/settings/class.tx_em_settings.php');
-			$this->em       = t3lib_div::makeInstance('tx_em_Extensions_List');
+			$this->em = t3lib_div::makeInstance('tx_em_Extensions_List');
 			$this->settings = t3lib_div::makeInstance('tx_em_Settings');
 		}
 	}
 
 	public function getMirrorURL() {
 		global $TYPO3_CONF_VARS;
-		if (t3lib_div::int_from_ver(TYPO3_version) <= 4005000) {
+		if (tx_additionalscheduler_utils::intFromVer(TYPO3_version) <= 4005000) {
 			$this->em->MOD_SETTINGS['mirrorListURL'] = $TYPO3_CONF_VARS['EXT']['em_mirrorListURL'];
 			return $this->em->getMirrorURL();
 		} else {
@@ -76,7 +76,7 @@ class tx_additionalscheduler_translationupdate extends tx_scheduler_Task
 	public function updateTranslation($extKey, $lang) {
 		//$mirrorURL = $this->getMirrorURL();
 		$mirrorURL = 'http://typo3.org/fileadmin/ter/';
-		if (t3lib_div::int_from_ver(TYPO3_version) <= 4005000) {
+		if (tx_additionalscheduler_utils::intFromVer(TYPO3_version) <= 4005000) {
 			return $this->em->updateTranslation($extKey, $lang, $mirrorURL);
 		} else {
 			$this->terConnection = t3lib_div::makeInstance('tx_em_Connection_Ter', $this);
