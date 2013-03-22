@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-	<meta type="array">
-		<type>module</type>
-		<description>Language labels for module 'Additional scheduler'</description>
-	</meta>
-	<data type="array">
-		<languageKey index="default" type="array">
-			<label index="task.savewebsite.name">Backup a website</label>
-			<label index="task.savewebsite.description">Full backup with DB + files</label>
-			<label index="task.translationupdate.name">Update the TYPO3 translations</label>
-			<label index="task.translationupdate.description">Update the TYPO3 translations</label>
-			<label index="task.exec.name">Exec a SH script</label>
-			<label index="task.exec.description">Exec a SH script</label>
-			<label index="task.clearcache.name">Clear caches</label>
-			<label index="task.cleart3temp.name">Clear typo3temp</label>
-			<label index="task.cleart3temp.description">Clear typo3temp</label>
-			<label index="savedir">Full path of the save directory (/aaa/bbb/ccc/)</label>
-			<label index="execdir">Full path of the SH script (/aaa/bbb/ccc/ddd.sh or relative to the website :
-				typo3/cli_dispatch.phpsh xxx)
-			</label>
-			<label index="savedirerror">Specify a correct save directory (existing and writable directory)</label>
-			<label index="execdirerror">Specify a correct SH script directory (existing and executable file)</label>
-			<label index="email">Email</label>
-			<label index="emailfrom">Email FROM</label>
-			<label index="lang">Langs (comma list)</label>
-			<label index="nbdays">Older than this number of days</label>
-			<label index="dirfilter">Skip this files/directories with a regexp (can be empty for all). Ex: (llxml|rtehtmlarea)</label>
-			<label index="nbdayserror">Specify a number of days</label>
-			<label index="langerror">Specify at most one lang</label>
-			<label index="mustbeexecutable">The script %s must be executable</label>
-		</languageKey>
-		<languageKey index="fr" type="array">
-			<label index="task.savewebsite.name">Sauvegarder un site</label>
-			<label index="task.savewebsite.description">Sauvegarde complète avec BD + fichiers</label>
-			<label index="task.translationupdate.name">Mettre à jour les traductions</label>
-			<label index="task.translationupdate.description">Mettre à jour les traductions</label>
-			<label index="task.exec.name">Exécuter un script SH</label>
-			<label index="task.exec.description">Exécuter un script SH</label>
-			<label index="task.clearcache.name">Vider les caches</label>
-			<label index="task.clearcache.description">Vider les caches</label>
-			<label index="task.cleart3temp.name">Vider typo3temp</label>
-			<label index="task.cleart3temp.description">Vider typo3temp</label>
-			<label index="savedir">Chemin complet du répertoire de sauvegarde (/aaa/bbb/ccc/)</label>
-			<label index="execdir">Chemin complet du script SH (/aaa/bbb/ccc/ddd.sh ou relatif au site : typo3/cli_dispatch.phpsh
-				xxx)
-			</label>
-			<label index="savedirerror">Spécifier un répertoire de sauvegarde correct (qui existe et qui est inscriptible)</label>
-			<label index="execdirerror">Spécifier un chemin de script SH correct (qui existe et qui est executable)</label>
-			<label index="email">Email</label>
-			<label index="emailfrom">Email FROM</label>
-			<label index="lang">Langues (liste à virgules)</label>
-			<label index="langerror">Spécifier au moins une langue</label>
-			<label index="nbdays">Plus vieux que ce nombre de jours</label>
-			<label index="dirfilter">Passer ces fichiers/répertoires à l'aide d'une regexp (peut être vide pour tous). Ex: (llxml|rtehtmlarea)</label>
-			<label index="nbdayserror">Spécifier un nombre de jours</label>
-			<label index="mustbeexecutable">Le script %s doit etre executable</label>
-		</languageKey>
-	</data>
+    <meta type="array">
+        <type>module</type>
+        <description>Language labels for module 'Additional scheduler'</description>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="task.savewebsite.name">Backup a website</label>
+            <label index="task.savewebsite.description">Full backup with DB + files</label>
+            <label index="task.translationupdate.name">Update the TYPO3 translations</label>
+            <label index="task.translationupdate.description">Update the TYPO3 translations</label>
+            <label index="task.exec.name">Exec a SH script</label>
+            <label index="task.exec.description">Exec a SH script</label>
+            <label index="task.execquery.name">Exec a SQL query</label>
+            <label index="task.execquery.description">Exec a SQL query</label>
+            <label index="task.clearcache.name">Clear caches</label>
+            <label index="task.cleart3temp.name">Clear typo3temp</label>
+            <label index="task.cleart3temp.description">Clear typo3temp</label>
+            <label index="savedir">Full path of the save directory (/aaa/bbb/ccc/)</label>
+            <label index="execdir">Full path of the SH script (/aaa/bbb/ccc/ddd.sh or relative to the website : typo3/cli_dispatch.phpsh xxx)</label>
+            <label index="query">SQL query</label>
+            <label index="savedirerror">Specify a correct save directory (existing and writable directory)</label>
+            <label index="execdirerror">Specify a correct SH script directory (existing and executable file)</label>
+            <label index="email">Email</label>
+            <label index="emailfrom">Email FROM</label>
+            <label index="emailtemplate">Email HTML template (relative to the site root, example in additional_scheduler/res/templates/execquery.html)</label>
+            <label index="lang">Langs (comma list)</label>
+            <label index="nbdays">Older than this number of days</label>
+            <label index="dirfilter">Skip this files/directories with a regexp (can be empty for all). Ex: (llxml|rtehtmlarea)</label>
+            <label index="nbdayserror">Specify a number of days</label>
+            <label index="langerror">Specify at most one lang</label>
+            <label index="mustbeexecutable">The script %s must be executable</label>
+        </languageKey>
+        <languageKey index="fr" type="array">
+            <label index="task.savewebsite.name">Sauvegarder un site</label>
+            <label index="task.savewebsite.description">Sauvegarde complète avec BD + fichiers</label>
+            <label index="task.translationupdate.name">Mettre à jour les traductions</label>
+            <label index="task.translationupdate.description">Mettre à jour les traductions</label>
+            <label index="task.exec.name">Exécuter un script SH</label>
+            <label index="task.exec.description">Exécuter un script SH</label>
+            <label index="task.execquery.name">Exécuter une requête SQL</label>
+            <label index="task.execquery.description">Exécuter une requête SQL</label>
+            <label index="task.clearcache.name">Vider les caches</label>
+            <label index="task.clearcache.description">Vider les caches</label>
+            <label index="task.cleart3temp.name">Vider typo3temp</label>
+            <label index="task.cleart3temp.description">Vider typo3temp</label>
+            <label index="savedir">Chemin complet du répertoire de sauvegarde (/aaa/bbb/ccc/)</label>
+            <label index="execdir">Chemin complet du script SH (/aaa/bbb/ccc/ddd.sh ou relatif au site : typo3/cli_dispatch.phpsh xxx)</label>
+            <label index="query">Requête SQL</label>
+            <label index="savedirerror">Spécifier un répertoire de sauvegarde correct (qui existe et qui est inscriptible)</label>
+            <label index="execdirerror">Spécifier un chemin de script SH correct (qui existe et qui est executable)</label>
+            <label index="email">Email</label>
+            <label index="emailfrom">Email FROM</label>
+            <label index="emailtemplate">Template HTML du mail (relatif à la racine du site,  example dans additional_scheduler/res/templates/execquery.html)</label>
+            <label index="lang">Langues (liste à virgules)</label>
+            <label index="langerror">Spécifier au moins une langue</label>
+            <label index="nbdays">Plus vieux que ce nombre de jours</label>
+            <label index="dirfilter">Passer ces fichiers/répertoires à l'aide d'une regexp (peut être vide pour tous). Ex: (llxml|rtehtmlarea)</label>
+            <label index="nbdayserror">Spécifier un nombre de jours</label>
+            <label index="mustbeexecutable">Le script %s doit etre executable</label>
+        </languageKey>
+    </data>
 </T3locallang>

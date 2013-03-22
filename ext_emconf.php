@@ -12,15 +12,15 @@
 
 $EM_CONF[$_EXTKEY] = array (
 	'title' => 'Useful tasks in scheduler module',
-	'description' => 'Useful tasks in the scheduler module : full backup, update translations, exec SH script with reports...',
+	'description' => 'Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...',
 	'category' => 'misc',
 	'shy' => 0,
-	'version' => '1.0.7',
+	'version' => '1.0.8',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
 	'loadOrder' => '',
-	'TYPO3_version' => '4.3.0-4.6.99',
+	'TYPO3_version' => '4.3.0-6.0.99',
 	'PHP_version' => '5.0.0-0.0.0',
 	'module' => '',
 	'state' => 'stable',

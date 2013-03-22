@@ -1,6 +1,7 @@
 <?php
 
 require_once(t3lib_extMgm::extPath('additional_scheduler') . 'classes/class.tx_additionalscheduler_utils.php');
+require_once(t3lib_extMgm::extPath('additional_scheduler') . 'classes/class.tx_additionalscheduler_templating.php');
 
 $tasks = tx_additionalscheduler_utils::getTasksList();
 $loadArray = array();

@@ -23,6 +23,14 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * tx_additionalscheduler_utils
+ * Class with some utils functions
+ *
+ * @author     Yohann CERDAN <cerdanyohann@yahoo.fr>
+ * @package    TYPO3
+ * @subpackage additional_scheduler
+ */
 class tx_additionalscheduler_utils
 {
 	/**
@@ -32,7 +40,12 @@ class tx_additionalscheduler_utils
 	 */
 
 	public function getTasksList() {
-		$tasks = array('savewebsite', 'translationupdate', 'exec', 'clearcache', 'cleart3temp');
+		$tasks = array('savewebsite', 'exec', 'execquery', 'clearcache', 'cleart3temp');
+
+		if (self::intFromVer(TYPO3_version) < 6000000) {
+			$tasks[] = 'translationupdate';
+		}
+
 		return $tasks;
 	}
 
@@ -46,7 +59,7 @@ class tx_additionalscheduler_utils
 		if ($useSwiftMailer) {
 			// new TYPO3 swiftmailer code
 			$mail = t3lib_div::makeInstance('t3lib_mail_Message');
-			$mail->setTo(array($to));
+			$mail->setTo(explode(',', $to));
 			$mail->setSubject($subject);
 			$mail->setCharset($charset);
 			$mail->setFrom(array($fromEmail => $fromName));
@@ -120,6 +133,21 @@ class tx_additionalscheduler_utils
 
 			return $mail->sendtheMail();
 		}
+	}
+
+	/**
+	 * Returns an integer from a three part version number, eg '4.12.3' -> 4012003
+	 *
+	 * @param    string $verNumberStr  number on format x.x.x
+	 * @return   integer   Integer version of version number (where each part can count to 999)
+	 */
+	public function intFromVer($verNumberStr) {
+		$verParts = explode('.', $verNumberStr);
+		return intval(
+			(int)$verParts[0] . str_pad((int)$verParts[1], 3, '0', STR_PAD_LEFT) . str_pad(
+				(int)$verParts[2], 3, '0', STR_PAD_LEFT
+			)
+		);
 	}
 }
 
