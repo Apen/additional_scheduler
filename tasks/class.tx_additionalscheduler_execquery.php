@@ -34,6 +34,7 @@ class tx_additionalscheduler_execquery extends tx_scheduler_Task
 
 	public function execute() {
 		require_once(PATH_site . 'typo3conf/ext/additional_scheduler/classes/class.tx_additionalscheduler_utils.php');
+        require_once(PATH_site . 'typo3conf/ext/additional_scheduler/classes/class.tx_additionalscheduler_templating.php');
 
 		// templating
 		$template = new tx_additionalscheduler_templating();

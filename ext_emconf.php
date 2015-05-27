@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "additional_scheduler".
  *
- * Auto generated 06-12-2015 16:31
+ * Auto generated 06-12-2015 16:32
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next
@@ -15,13 +15,13 @@ $EM_CONF[$_EXTKEY] = array (
 	'description' => 'Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...',
 	'category' => 'misc',
 	'shy' => true,
-	'version' => '1.0.10',
+	'version' => '1.0.11',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
 	'loadOrder' => '',
 	'TYPO3_version' => '4.3.0-6.2.99',
-	'PHP_version' => '5.0.0-5.5.99',
+	'PHP_version' => '5.0.0-5.6.99',
 	'module' => '',
 	'state' => 'stable',
 	'uploadfolder' => true,
