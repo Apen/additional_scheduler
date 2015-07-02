@@ -171,7 +171,7 @@ db_size=$(mysql -h$typo_db_host -u$typo_db_username -p$typo_db_password -D$typo_
 # save file .tar.gz
 if [ "$path_save" != "" ]
 then
-	filename=$path_save
+	filename=$path_save'export_'$typo_db'-'$day_date'.tar.gz'
 else
 	filename='export_'$typo_db'-'$day_date'.tar.gz'
 fi
