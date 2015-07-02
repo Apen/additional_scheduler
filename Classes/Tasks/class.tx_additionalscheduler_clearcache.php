@@ -1,8 +1,9 @@
 <?php
+
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 CERDAN Yohann (cerdanyohann@yahoo.fr)
+ *  (c) 2015 CERDAN Yohann (cerdanyohann@yahoo.fr)
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -21,24 +22,21 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 
-class tx_additionalscheduler_clearcache extends tx_scheduler_Task
-{
-
-	/**
-	 * Executes the commit task and returns TRUE if the execution was
-	 * succesfull
-	 *
-	 * @return	boolean	returns TRUE on success, FALSE on failure
-	 */
-
-	public function execute() {
-		$GLOBALS['BE_USER']->user['admin'] = 1;
-		$tce = t3lib_div::makeInstance('t3lib_TCEmain');
-		$tce->start(Array(), Array());
-		$tce->clear_cacheCmd('all');
-		return TRUE;
-	}
+    /**
+     * Executes the commit task and returns TRUE if the execution was
+     * succesfull
+     *
+     * @return    boolean    returns TRUE on success, FALSE on failure
+     */
+    public function execute() {
+        $GLOBALS['BE_USER']->user['admin'] = 1;
+        $tce = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+        $tce->start(Array(), Array());
+        $tce->clear_cacheCmd('all');
+        return TRUE;
+    }
 
 }
 

@@ -24,7 +24,7 @@
             <label index="execdirerror">Specify a correct SH script directory (existing and executable file)</label>
             <label index="email">Email</label>
             <label index="emailfrom">Email FROM</label>
-            <label index="emailtemplate">Email HTML template (relative to the site root, example in additional_scheduler/res/templates/execquery.html)</label>
+            <label index="emailtemplate">Email HTML template (relative to the site root, example in typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html)</label>
             <label index="lang">Langs (comma list)</label>
             <label index="nbdays">Older than this number of days</label>
             <label index="dirfilter">Skip this files/directories with a regexp (can be empty for all). Ex: (llxml|rtehtmlarea)</label>
@@ -52,7 +52,7 @@
             <label index="execdirerror">Spécifier un chemin de script SH correct (qui existe et qui est executable)</label>
             <label index="email">Email</label>
             <label index="emailfrom">Email FROM</label>
-            <label index="emailtemplate">Template HTML du mail (relatif à la racine du site,  example dans additional_scheduler/res/templates/execquery.html)</label>
+            <label index="emailtemplate">Template HTML du mail (relatif à la racine du site,  example dans typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html)</label>
             <label index="lang">Langues (liste à virgules)</label>
             <label index="langerror">Spécifier au moins une langue</label>
             <label index="nbdays">Plus vieux que ce nombre de jours</label>

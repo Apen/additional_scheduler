@@ -1,8 +1,11 @@
 <?php
+
+namespace Sng\Additionalscheduler;
+
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 CERDAN Yohann (cerdanyohann@yahoo.fr)
+ *  (c) 2015 CERDAN Yohann (cerdanyohann@yahoo.fr)
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,19 +25,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class tx_additionalscheduler_clearcache_fields implements tx_scheduler_AdditionalFieldProvider
-{
-
-	public function getAdditionalFields(array &$taskInfo, $task, tx_scheduler_Module $parentObject) {
-	}
-
-	public function validateAdditionalFields(array &$submittedData, tx_scheduler_Module $parentObject) {
-		return TRUE;
-	}
-
-	public function saveAdditionalFields(array $submittedData, tx_scheduler_Task $task) {
-	}
+abstract class AdditionalFieldProviderInterface implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface {
 
 }
-
-?>
