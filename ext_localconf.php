@@ -5,6 +5,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 require_once(t3lib_extMgm::extPath('additional_scheduler') . 'Classes/Utils.php');
+require_once(t3lib_extMgm::extPath('additional_scheduler') . 'Classes/AdditionalFieldProviderInterface.php');
 $tasks = \Sng\Additionalscheduler\Utils::getTasksList();
 
 foreach ($tasks as $task) {

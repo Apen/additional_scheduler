@@ -2,6 +2,7 @@
 
 require_once(t3lib_extMgm::extPath('additional_scheduler') . 'Classes/Utils.php');
 require_once(t3lib_extMgm::extPath('additional_scheduler') . 'Classes/Templating.php');
+require_once(t3lib_extMgm::extPath('additional_scheduler') . 'Classes/AdditionalFieldProviderInterface.php');
 
 $tasks = \Sng\Additionalscheduler\Utils::getTasksList();
 $loadArray = array();
