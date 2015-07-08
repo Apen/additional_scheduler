@@ -22,7 +22,7 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class tx_additionalscheduler_cleart3temp_fields extends Sng\Additionalscheduler\AdditionalFieldProviderInterface {
+class tx_additionalscheduler_cleart3temp_fields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface {
 
     public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject) {
         if (empty($taskInfo['additionalscheduler_nbdays'])) {
