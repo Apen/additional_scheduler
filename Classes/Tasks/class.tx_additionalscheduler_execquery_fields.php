@@ -42,14 +42,6 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
             }
         }
 
-        if (empty($taskInfo['additionalscheduler_exec_emailfrom'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_emailfrom'] = $task->emailfrom;
-            } else {
-                $taskInfo['additionalscheduler_exec_emailfrom'] = '';
-            }
-        }
-
         if (empty($taskInfo['additionalscheduler_exec_emailtemplate'])) {
             if ($parentObject->CMD == 'edit') {
                 $taskInfo['additionalscheduler_exec_emailtemplate'] = $task->emailtemplate;
@@ -78,15 +70,6 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
             'cshLabel' => $fieldID
         );
 
-        $fieldID = 'task_emailfrom';
-        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_emailfrom]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_emailfrom'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
-            'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:emailfrom',
-            'cshKey'   => 'additional_scheduler',
-            'cshLabel' => $fieldID
-        );
-
         $fieldID = 'task_emailtemplate';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_emailtemplate]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_emailtemplate'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
@@ -111,7 +94,6 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
     public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task) {
         $task->query = $submittedData['additionalscheduler_exec_query'];
         $task->email = $submittedData['additionalscheduler_exec_email'];
-        $task->emailfrom = $submittedData['additionalscheduler_exec_emailfrom'];
         $task->emailtemplate = $submittedData['additionalscheduler_exec_emailtemplate'];
     }
 

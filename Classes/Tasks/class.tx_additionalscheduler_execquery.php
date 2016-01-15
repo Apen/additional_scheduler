@@ -22,9 +22,11 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
+class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+{
 
-    public function execute() {
+    public function execute()
+    {
         require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
         require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Templating.php');
 
@@ -80,11 +82,11 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
             $mailSubject = $matches[1];
         }
 
-        if (empty($this->email) !== TRUE) {
-            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailcontent, 'html', $this->emailfrom, $this->emailfrom, 'utf-8');
+        if (empty($this->email) !== true) {
+            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailcontent, 'html', 'utf-8');
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -96,7 +98,8 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
      * @return    string    Information to display
      */
 
-    public function getAdditionalInformation() {
+    public function getAdditionalInformation()
+    {
         return substr($this->query, 0, 30);
     }
 

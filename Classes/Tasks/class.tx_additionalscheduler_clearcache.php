@@ -22,7 +22,8 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
+class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+{
 
     /**
      * Executes the commit task and returns TRUE if the execution was
@@ -30,12 +31,13 @@ class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\Abstra
      *
      * @return    boolean    returns TRUE on success, FALSE on failure
      */
-    public function execute() {
+    public function execute()
+    {
         $GLOBALS['BE_USER']->user['admin'] = 1;
         $tce = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
-        $tce->start(Array(), Array());
+        $tce->start(array(), array());
         $tce->clear_cacheCmd('all');
-        return TRUE;
+        return true;
     }
 
 }
