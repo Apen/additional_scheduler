@@ -22,7 +22,8 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
+class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+{
 
     /**
      * Executes the commit task and returns TRUE if the execution was
@@ -30,7 +31,8 @@ class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      *
      * @return    boolean    returns TRUE on success, FALSE on failure
      */
-    public function execute() {
+    public function execute()
+    {
         require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
 
         // exec SH
@@ -47,11 +49,11 @@ class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:task.exec.name');
         $mailBody = $cmd . LF . LF . $return;
 
-        if (empty($this->email) !== TRUE) {
-            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', $this->emailfrom, $this->emailfrom, 'utf-8');
+        if (empty($this->email) !== true) {
+            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -62,7 +64,8 @@ class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      *
      * @return    string    Information to display
      */
-    public function getAdditionalInformation() {
+    public function getAdditionalInformation()
+    {
         return $this->path;
     }
 

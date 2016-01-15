@@ -22,9 +22,11 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
+class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+{
 
-    public function execute() {
+    public function execute()
+    {
         require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
 
         // exec SH
@@ -37,14 +39,15 @@ class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\Abstr
         $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:task.savewebsite.name');
         $mailBody = $cmd . LF . LF . $return;
 
-        if (empty($this->email) !== TRUE) {
-            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', $this->emailfrom, $this->emailfrom, 'utf-8');
+        if (empty($this->email) !== true) {
+            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
         }
 
-        return TRUE;
+        return true;
     }
 
-    public function getAdditionalInformation() {
+    public function getAdditionalInformation()
+    {
         return $this->path;
     }
 

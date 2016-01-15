@@ -43,14 +43,6 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
             }
         }
 
-        if (empty($taskInfo['additionalscheduler_savewebsite_emailfrom'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_savewebsite_emailfrom'] = $task->emailfrom;
-            } else {
-                $taskInfo['additionalscheduler_savewebsite_emailfrom'] = '';
-            }
-        }
-
         $additionalFields = array();
 
         $fieldID = 'task_path';
@@ -67,15 +59,6 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:email',
-            'cshKey'   => 'additional_scheduler',
-            'cshLabel' => $fieldID
-        );
-
-        $fieldID = 'task_emailfrom';
-        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_emailfrom]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_emailfrom'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
-            'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:emailfrom',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -102,7 +85,6 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
     public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task) {
         $task->path = $submittedData['additionalscheduler_savewebsite_path'];
         $task->email = $submittedData['additionalscheduler_savewebsite_email'];
-        $task->emailfrom = $submittedData['additionalscheduler_savewebsite_emailfrom'];
     }
 
 }

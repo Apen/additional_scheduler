@@ -5,7 +5,7 @@ namespace Sng\Additionalscheduler;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2015 CERDAN Yohann (cerdanyohann@yahoo.fr)
+ *  (c) 2016 CERDAN Yohann (cerdanyohann@yahoo.fr)
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,6 +25,7 @@ namespace Sng\Additionalscheduler;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-abstract class AdditionalFieldProviderInterface implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface {
+abstract class AdditionalFieldProviderInterface implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
+{
 
 }
