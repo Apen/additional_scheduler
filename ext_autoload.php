@@ -14,7 +14,6 @@ foreach ($tasks as $task) {
     $loadArray['tx_additionalscheduler_' . $task . '_fields'] = $extensionPath . 'Classes/Tasks/class.tx_additionalscheduler_' . $task . '_fields.php';
 }
 
-\TYPO3\CMS\Core\Utility\DebugUtility::debug($loadArray);
 return $loadArray;
 
 ?>
