@@ -69,7 +69,8 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
             $result = false;
         }
         // check script is executable
-        if (is_executable($submittedData['additionalscheduler_exec_path']) === false) {
+        preg_match('/^(.*?\..*?)\s.*?$/', $submittedData['additionalscheduler_exec_path'], $matches);
+        if (!empty($matches) && is_executable($matches[1]) === false) {
             $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }

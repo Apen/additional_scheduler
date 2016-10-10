@@ -68,7 +68,7 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
             $return .= '</table>';
             $GLOBALS['TYPO3_DB']->sql_free_result($res);
         } else {
-            $return .= 'SQL : ' . $this->query;
+            $return .= 'SQL : ' . htmlspecialchars($this->query);
         }
 
         $markersArray['###MAIL_CONTENT###'] = $return;
