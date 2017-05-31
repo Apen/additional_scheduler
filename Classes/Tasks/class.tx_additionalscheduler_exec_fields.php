@@ -1,27 +1,18 @@
 <?php
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2015 CERDAN Yohann (cerdanyohann@yahoo.fr)
- *  All rights reserved
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
+
 class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
 {
 
@@ -69,8 +60,11 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
             $result = false;
         }
         // check script is executable
-        preg_match('/^(.*?\..*?)\s.*?$/', $submittedData['additionalscheduler_exec_path'], $matches);
-        if (!empty($matches) && is_executable($matches[1]) === false) {
+        $script = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $submittedData['additionalscheduler_exec_path']);
+        if ($script[0]{0} != '/') {
+            $script[0] = PATH_site . $script[0];
+        }
+        if (!empty($script[0]) && is_executable($script[0]) === false) {
             $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }

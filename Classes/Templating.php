@@ -2,28 +2,21 @@
 
 namespace Sng\Additionalscheduler;
 
-    /***************************************************************
-     *  Copyright notice
-     *
-     *  (c) 2016 CERDAN Yohann (cerdanyohann@yahoo.fr)
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 2 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+
+use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class provides methods to generate the templates reports
@@ -43,9 +36,6 @@ class Templating
      */
     public function __construct()
     {
-        if (\Sng\Additionalscheduler\Utils::intFromVer(TYPO3_version) < 6002000) {
-            require_once(PATH_t3lib . 'class.\TYPO3\CMS\Core\Html\HtmlParser.php');
-        }
     }
 
     /**
@@ -142,13 +132,9 @@ class Templating
      */
     protected function substituteMarkerArray($template, $marker)
     {
-        if (TYPO3_branch === '4.1' || TYPO3_branch === '4.0') {
-            return str_replace(array_keys($marker), array_values($marker), $template);
-        } else {
-            return \TYPO3\CMS\Core\Html\HtmlParser::substituteMarkerArray($template, $marker);
-        }
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+        return $templateService->substituteMarkerArray($template, $marker, '', false, false);
     }
-
 
     /**
      * Replaces a subpart in a template with content. This is just a wrapper method
@@ -161,9 +147,9 @@ class Templating
      */
     protected function substituteSubpart($template, $subpart, $replace)
     {
-        return \TYPO3\CMS\Core\Html\HtmlParser::substituteSubpart($template, $subpart, $replace);
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+        return $templateService->substituteSubpart($template, $subpart, $replace, true, false);
     }
-
 
     /**
      * Gets a subpart from a template. This is just a wrapper around the getSubpart
@@ -175,7 +161,8 @@ class Templating
      */
     protected function getSubpart($template, $subpart)
     {
-        return \TYPO3\CMS\Core\Html\HtmlParser::getSubpart($template, $subpart);
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+        return $templateService->getSubpart($template, $subpart);
     }
 
     /**
