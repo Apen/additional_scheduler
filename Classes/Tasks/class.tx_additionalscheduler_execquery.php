@@ -93,7 +93,4 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
     {
         return substr($this->query, 0, 30);
     }
-
 }
-
-?>

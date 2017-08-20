@@ -76,7 +76,4 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
         $task->path = $submittedData['additionalscheduler_exec_path'];
         $task->email = $submittedData['additionalscheduler_exec_email'];
     }
-
 }
-
-?>

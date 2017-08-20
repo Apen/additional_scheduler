@@ -59,7 +59,4 @@ class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     {
         return $this->path;
     }
-
 }
-
-?>

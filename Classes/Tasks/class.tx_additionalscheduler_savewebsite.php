@@ -41,7 +41,4 @@ class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\Abstr
     {
         return $this->path;
     }
-
 }
-
-?>

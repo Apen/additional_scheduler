@@ -15,5 +15,3 @@ foreach ($tasks as $task) {
 }
 
 return $loadArray;
-
-?>

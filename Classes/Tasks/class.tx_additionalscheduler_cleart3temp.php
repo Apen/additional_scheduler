@@ -13,7 +13,8 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
+class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+{
     protected $stats = array();
 
     /**
@@ -25,7 +26,8 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
      *
      * @return boolean    Returns true on successful execution, false on error
      */
-    public function execute() {
+    public function execute()
+    {
         $this->stats['nbfiles'] = 0;
         $this->stats['nbfilessize'] = 0;
         $this->stats['nbfilesdeleted'] = 0;
@@ -40,7 +42,7 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
             echo 'Nb directories: ' . $this->stats['nbdirectories'] . LF;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -50,8 +52,9 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
      * @param $nbdays
      * @return bool
      */
-    public function emptyDirectory($dirname, $nbdays) {
-        if ((is_dir($dirname)) && (($dir_handle = opendir($dirname)) !== FALSE)) {
+    public function emptyDirectory($dirname, $nbdays)
+    {
+        if ((is_dir($dirname)) && (($dir_handle = opendir($dirname)) !== false)) {
             while ($file = readdir($dir_handle)) {
                 if ($file != "." && $file != "..") {
                     $absoluteFileName = $dirname . "/" . $file;
@@ -61,7 +64,7 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
                         $this->stats['nbfilessize'] += $size;
                         if ((time() - filemtime($absoluteFileName)) >= ($nbdays * 86400)) {
                             if (is_writable($absoluteFileName)) {
-                                if (empty($this->dirfilter) === TRUE) {
+                                if (empty($this->dirfilter) === true) {
                                     $this->stats['nbfilesdeleted']++;
                                     $this->stats['nbfilesdeletedsize'] += $size;
                                     @unlink($absoluteFileName);
@@ -85,9 +88,9 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
                 }
             }
             closedir($dir_handle);
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -99,10 +102,8 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
      *
      * @return    string    Information to display
      */
-    public function getAdditionalInformation() {
+    public function getAdditionalInformation()
+    {
         return $this->nbdays . ' days';
     }
-
 }
-
-?>
