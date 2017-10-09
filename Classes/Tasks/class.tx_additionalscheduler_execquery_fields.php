@@ -93,5 +93,3 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
     }
 
 }
-
-?>

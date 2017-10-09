@@ -32,5 +32,3 @@ class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\Abstra
     }
 
 }
-
-?>

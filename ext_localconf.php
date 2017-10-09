@@ -23,5 +23,3 @@ foreach ($tasks as $task) {
         'additionalFields' => 'tx_additionalscheduler_' . $task . '_fields'
     );
 }
-
-?>

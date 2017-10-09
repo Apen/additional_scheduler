@@ -78,5 +78,3 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
     }
 
 }
-
-?>

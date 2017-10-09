@@ -30,5 +30,3 @@ class tx_additionalscheduler_clearcache_fields extends \Sng\Additionalscheduler\
     }
 
 }
-
-?>

@@ -82,5 +82,3 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
     }
 
 }
-
-?>
