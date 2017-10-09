@@ -1,0 +1,25 @@
+{
+  "name": "apen/additional_scheduler",
+  "type": "typo3-cms-extension",
+  "description": "Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...",
+  "keywords": [
+    "TYPO3"
+  ],
+  "authors": [
+    {
+      "name": "Yohann Cerdan",
+      "email": "yohann@site-ngo.fr",
+      "role": "Developer",
+      "homepage": "www.site-ngo.fr"
+    }
+  ],
+  "license": "GPL-2.0+",
+  "require": {
+    "typo3/cms-core": "6^||7^||8^"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sng\\Additionalscheduler\\": "Classes"
+    }
+  }
+}
