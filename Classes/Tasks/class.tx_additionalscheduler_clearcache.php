@@ -30,7 +30,4 @@ class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\Abstra
         $tce->clear_cacheCmd('all');
         return true;
     }
-
 }
-
-?>

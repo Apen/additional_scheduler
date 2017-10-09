@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
+    die('Access denied.');
 }
 
 $extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('additional_scheduler');
@@ -23,5 +23,3 @@ foreach ($tasks as $task) {
         'additionalFields' => 'tx_additionalscheduler_' . $task . '_fields'
     );
 }
-
-?>

@@ -78,10 +78,11 @@ class Utils
         $verParts = explode('.', $verNumberStr);
         return intval(
             (int)$verParts[0] . str_pad((int)$verParts[1], 3, '0', STR_PAD_LEFT) . str_pad(
-                (int)$verParts[2], 3, '0', STR_PAD_LEFT
+                (int)$verParts[2],
+                3,
+                '0',
+                STR_PAD_LEFT
             )
         );
     }
 }
-
-?>

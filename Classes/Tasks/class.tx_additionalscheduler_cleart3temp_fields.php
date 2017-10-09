@@ -68,5 +68,3 @@ class tx_additionalscheduler_cleart3temp_fields extends \Sng\Additionalscheduler
         $task->dirfilter = $submittedData['additionalscheduler_dirfilter'];
     }
 }
-
-?>

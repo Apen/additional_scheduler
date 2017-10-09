@@ -80,7 +80,4 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
         $task->path = $submittedData['additionalscheduler_savewebsite_path'];
         $task->email = $submittedData['additionalscheduler_savewebsite_email'];
     }
-
 }
-
-?>

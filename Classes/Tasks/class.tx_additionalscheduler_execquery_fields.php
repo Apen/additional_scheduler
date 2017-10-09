@@ -91,7 +91,4 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
         $task->email = $submittedData['additionalscheduler_exec_email'];
         $task->emailtemplate = $submittedData['additionalscheduler_exec_emailtemplate'];
     }
-
 }
-
-?>

@@ -28,7 +28,4 @@ class tx_additionalscheduler_clearcache_fields extends \Sng\Additionalscheduler\
     public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
     {
     }
-
 }
-
-?>
