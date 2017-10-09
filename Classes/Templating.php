@@ -176,5 +176,3 @@ class Templating
         return preg_replace('/^[\t\s\r]*\n+/m', '', $content);
     }
 }
-
-?>

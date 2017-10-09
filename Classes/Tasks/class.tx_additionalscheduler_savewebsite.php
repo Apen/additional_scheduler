@@ -43,5 +43,3 @@ class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\Abstr
     }
 
 }
-
-?>
