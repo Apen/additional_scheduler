@@ -10,12 +10,13 @@
       "name": "Yohann Cerdan",
       "email": "yohann@site-ngo.fr",
       "role": "Developer",
-      "homepage": "www.site-ngo.fr"
+      "homepage": "http://www.site-ngo.fr"
     }
   ],
   "license": "GPL-2.0+",
   "require": {
-    "typo3/cms-core": "6^||7^||8^"
+    "php": ">=7.0.0 <7.3",
+    "typo3/cms-core": "^6||^7||^8"
   },
   "autoload": {
     "psr-4": {
