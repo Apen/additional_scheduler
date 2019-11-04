@@ -3,16 +3,10 @@
 namespace Sng\Additionalscheduler;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
@@ -126,8 +120,8 @@ class Templating
      * around the \TYPO3\CMS\Core\Html\HtmlParser::substituteMarkerArray method. However, this
      * method is only available from TYPO3 4.2.
      *
-     * @param  string $template The template
-     * @param  array  $marker   The markers that are to be replaced
+     * @param string $template The template
+     * @param array  $marker   The markers that are to be replaced
      * @return string           The template with replaced markers
      */
     protected function substituteMarkerArray($template, $marker)
@@ -140,9 +134,9 @@ class Templating
      * Replaces a subpart in a template with content. This is just a wrapper method
      * around the substituteSubpart method of the \TYPO3\CMS\Core\Html\HtmlParser class.
      *
-     * @param  string $template The tempalte
-     * @param  string $subpart  The subpart name
-     * @param  string $replace  The subpart content
+     * @param string $template The tempalte
+     * @param string $subpart  The subpart name
+     * @param string $replace  The subpart content
      * @return string           The template with replaced subpart.
      */
     protected function substituteSubpart($template, $subpart, $replace)
@@ -155,8 +149,8 @@ class Templating
      * Gets a subpart from a template. This is just a wrapper around the getSubpart
      * method of the \TYPO3\CMS\Core\Html\HtmlParser class.
      *
-     * @param  string $template The template
-     * @param  string $subpart  The subpart name
+     * @param string $template The template
+     * @param string $subpart  The subpart name
      * @return string           The subpart
      */
     protected function getSubpart($template, $subpart)
@@ -168,7 +162,7 @@ class Templating
     /**
      * Clean a template string (remove blank lines...)
      *
-     * @param  string $content
+     * @param string $content
      * @return mixed
      */
     protected function cleanTemplate($content)
