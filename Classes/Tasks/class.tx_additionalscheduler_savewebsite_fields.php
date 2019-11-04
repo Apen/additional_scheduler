@@ -35,7 +35,7 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_path]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_path'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:savedir',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedir',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -44,7 +44,7 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_email'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:email',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:email',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -57,13 +57,13 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
         $result = true;
         // check dir is writable
         if ((empty($submittedData['additionalscheduler_savewebsite_path'])) || (is_writable($submittedData['additionalscheduler_savewebsite_path']) === false)) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }
         // check save script is executable
         $saveScript = PATH_site . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
         if (is_executable($saveScript) === false) {
-            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:mustbeexecutable'), $saveScript), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $saveScript), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }
         return $result;

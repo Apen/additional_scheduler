@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-11-04T16:38:49Z">
+		<header>
+			<type>module</type>
+			<description>Language labels for module 'Additional scheduler'</description>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+			<trans-unit id="dirfilter">
+				<source><![CDATA[Skip this files/directories with a regexp (can be empty for all). Ex: (llxml|rtehtmlarea)]]></source>
+			</trans-unit>
+			<trans-unit id="email">
+				<source><![CDATA[Email]]></source>
+			</trans-unit>
+			<trans-unit id="emailfrom">
+				<source><![CDATA[Email FROM]]></source>
+			</trans-unit>
+			<trans-unit id="emailtemplate">
+				<source><![CDATA[Email HTML template (relative to the site root, example in typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html)]]></source>
+			</trans-unit>
+			<trans-unit id="execdir">
+				<source><![CDATA[Full path of the SH script (/aaa/bbb/ccc/ddd.sh or relative to the website : typo3/cli_dispatch.phpsh xxx)]]></source>
+			</trans-unit>
+			<trans-unit id="execdirerror">
+				<source><![CDATA[Specify a correct SH script directory (existing and executable file)]]></source>
+			</trans-unit>
+			<trans-unit id="lang">
+				<source><![CDATA[Langs (comma list)]]></source>
+			</trans-unit>
+			<trans-unit id="langerror">
+				<source><![CDATA[Specify at most one lang]]></source>
+			</trans-unit>
+			<trans-unit id="mustbeexecutable">
+				<source><![CDATA[The script %s must be executable]]></source>
+			</trans-unit>
+			<trans-unit id="nbdays">
+				<source><![CDATA[Older than this number of days]]></source>
+			</trans-unit>
+			<trans-unit id="nbdayserror">
+				<source><![CDATA[Specify a number of days]]></source>
+			</trans-unit>
+			<trans-unit id="query">
+				<source><![CDATA[SQL query]]></source>
+			</trans-unit>
+			<trans-unit id="savedir">
+				<source><![CDATA[Full path of the save directory (/aaa/bbb/ccc/)]]></source>
+			</trans-unit>
+			<trans-unit id="savedirerror">
+				<source><![CDATA[Specify a correct save directory (existing and writable directory)]]></source>
+			</trans-unit>
+			<trans-unit id="task.clearcache.name">
+				<source><![CDATA[Clear caches]]></source>
+			</trans-unit>
+			<trans-unit id="task.cleart3temp.description">
+				<source><![CDATA[Clear typo3temp]]></source>
+			</trans-unit>
+			<trans-unit id="task.cleart3temp.name">
+				<source><![CDATA[Clear typo3temp]]></source>
+			</trans-unit>
+			<trans-unit id="task.exec.description">
+				<source><![CDATA[Exec a SH script]]></source>
+			</trans-unit>
+			<trans-unit id="task.exec.name">
+				<source><![CDATA[Exec a SH script]]></source>
+			</trans-unit>
+			<trans-unit id="task.execquery.description">
+				<source><![CDATA[Exec a SQL query]]></source>
+			</trans-unit>
+			<trans-unit id="task.execquery.name">
+				<source><![CDATA[Exec a SQL query]]></source>
+			</trans-unit>
+			<trans-unit id="task.savewebsite.description">
+				<source><![CDATA[Full backup with DB + files]]></source>
+			</trans-unit>
+			<trans-unit id="task.savewebsite.name">
+				<source><![CDATA[Backup a website]]></source>
+			</trans-unit>
+			<trans-unit id="task.translationupdate.description">
+				<source><![CDATA[Update the TYPO3 translations]]></source>
+			</trans-unit>
+			<trans-unit id="task.translationupdate.name">
+				<source><![CDATA[Update the TYPO3 translations]]></source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
