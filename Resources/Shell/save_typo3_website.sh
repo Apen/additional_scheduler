@@ -144,7 +144,7 @@ then
 	typo_db=$(grep "'database' => *" $path_localconf | sed -e "s/\s*'database'\s*=>\s*'\(.*\)'\s*,/\1/");
 	# v8
 	if [ -z "$typo_db_username" ]
-	then
+	then 
 		typo_db_username=$(grep "'user' => *" $path_localconf | sed -e "s/\s*'user'\s*=>\s*'\(.*\)'\s*,/\1/");
 	fi
 	if [ -z "$typo_db" ]
