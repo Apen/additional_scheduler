@@ -1,10 +1,10 @@
 <?php
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF['additional_scheduler'] = array(
     'title'            => 'Useful tasks in scheduler module',
     'description'      => 'Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...',
     'category'         => 'misc',
-    'version'          => '1.2.5',
+    'version'          => '1.3.0-dev',
     'state'            => 'stable',
     'uploadfolder'     => false,
     'createDirs'       => '',
@@ -14,7 +14,7 @@ $EM_CONF[$_EXTKEY] = array(
     'author_company'   => '',
     'constraints'      => array(
         'depends'   => array(
-            'typo3' => '6.2.0-8.7.99',
+            'typo3' => '8.7.0-9.5.99',
         ),
         'conflicts' => array(),
         'suggests'  => array(),
