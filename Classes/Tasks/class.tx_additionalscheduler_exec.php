@@ -18,8 +18,6 @@ class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     public function execute()
     {
-        require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
-
         // exec SH
         if (substr($this->path, 0, 1) == '/') {
             $cmd = $this->path;
