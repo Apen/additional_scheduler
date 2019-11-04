@@ -7,13 +7,16 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
 
     public function execute()
     {
-        require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
-        require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Templating.php');
+
+        $this->query = preg_replace('/\r\n/', ' ', $this->query);
 
         // templating
         $template = new \Sng\Additionalscheduler\Templating();
@@ -25,13 +28,14 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
         $markersArray = array();
 
         // exec query
-        $res = $GLOBALS['TYPO3_DB']->sql_query($this->query);
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('additional_scheduler');
+        $res = $queryBuilder->getConnection()->executeQuery($this->query);
         $return = '';
 
         if (preg_match('/SELECT.*?FROM/i', $this->query, $matches)) {
             $i = 0;
             $return .= '<table>';
-            while ($item = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+            while ($item = $res->fetch()) {
                 if ($i === 0) {
                     $return .= '<thead>';
                     $return .= '<tr>';
@@ -51,7 +55,6 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
             }
             $return .= '</tbody>';
             $return .= '</table>';
-            $GLOBALS['TYPO3_DB']->sql_free_result($res);
         } else {
             $return .= 'SQL : ' . htmlspecialchars($this->query);
         }
