@@ -1,4 +1,4 @@
-additional_scheduler : Useful tasks in scheduler module
+# additional_scheduler : Useful tasks in scheduler module
 =======================================================
 >  Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...
 
