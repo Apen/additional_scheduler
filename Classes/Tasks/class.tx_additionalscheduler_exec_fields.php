@@ -31,7 +31,7 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_path]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_path'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:execdir',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:execdir',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -39,7 +39,7 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_email'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:email',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:email',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -50,7 +50,7 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
     {
         $result = true;
         if (empty($submittedData['additionalscheduler_exec_path'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }
         // check script is executable
@@ -59,7 +59,7 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
             $script[0] = PATH_site . $script[0];
         }
         if (!empty($script[0]) && is_executable($script[0]) === false) {
-            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }
         return $result;

@@ -43,7 +43,7 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
         $fieldCode = '<textarea name="tx_scheduler[additionalscheduler_exec_query]" id="' . $fieldID . '" cols="50" rows="10" />' . $taskInfo['additionalscheduler_exec_query'] . '</textarea>';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:query',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:query',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -52,7 +52,7 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_email'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:email',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:email',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -61,7 +61,7 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_emailtemplate]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_emailtemplate'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:emailtemplate',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:emailtemplate',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -73,7 +73,7 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
     {
         $result = true;
         if (empty($submittedData['additionalscheduler_exec_query'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }
         return $result;

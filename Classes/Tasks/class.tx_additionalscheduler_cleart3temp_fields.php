@@ -31,7 +31,7 @@ class tx_additionalscheduler_cleart3temp_fields extends \Sng\Additionalscheduler
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_nbdays]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_nbdays'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:nbdays',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:nbdays',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -39,7 +39,7 @@ class tx_additionalscheduler_cleart3temp_fields extends \Sng\Additionalscheduler
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_dirfilter]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_dirfilter'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:dirfilter',
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:dirfilter',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -50,7 +50,7 @@ class tx_additionalscheduler_cleart3temp_fields extends \Sng\Additionalscheduler
     {
         $result = true;
         if (!isset($submittedData['additionalscheduler_nbdays'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:nbdayserror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:nbdayserror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
             $result = false;
         }
         return $result;

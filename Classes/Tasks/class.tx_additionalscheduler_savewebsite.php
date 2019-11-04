@@ -21,7 +21,7 @@ class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\Abstr
 
         // mail
         $mailTo = $this->email;
-        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:task.savewebsite.name');
+        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.savewebsite.name');
         $mailBody = $cmd . LF . LF . $return;
 
         if (empty($this->email) !== true) {

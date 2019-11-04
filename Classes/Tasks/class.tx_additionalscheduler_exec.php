@@ -29,7 +29,7 @@ class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         // mail
         $mailTo = $this->email;
-        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:task.exec.name');
+        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.exec.name');
         $mailBody = $cmd . LF . LF . $return;
 
         if (empty($this->email) !== true) {

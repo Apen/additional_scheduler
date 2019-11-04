@@ -65,7 +65,7 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
 
         // mail
         $mailTo = $this->email;
-        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:task.execquery.name');
+        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.execquery.name');
         if (!empty($matches[1])) {
             $mailSubject = $matches[1];
         }
