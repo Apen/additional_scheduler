@@ -21,6 +21,14 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
             }
         }
 
+        if (empty($taskInfo['additionalscheduler_exec_subject'])) {
+            if ($parentObject->CMD == 'edit') {
+                $taskInfo['additionalscheduler_exec_subject'] = $task->subject;
+            } else {
+                $taskInfo['additionalscheduler_exec_subject'] = '';
+            }
+        }
+
         if (empty($taskInfo['additionalscheduler_savewebsite_email'])) {
             if ($parentObject->CMD == 'edit') {
                 $taskInfo['additionalscheduler_savewebsite_email'] = $task->email;
@@ -28,6 +36,7 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
                 $taskInfo['additionalscheduler_savewebsite_email'] = '';
             }
         }
+
 
         $additionalFields = array();
 
@@ -39,7 +48,14 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
-
+        $fieldID = 'task_subject';
+        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_subject]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_subject'] . '" size="50" />';
+        $additionalFields[$fieldID] = array(
+            'code'     => $fieldCode,
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:subject',
+            'cshKey'   => 'additional_scheduler',
+            'cshLabel' => $fieldID
+        );
         $fieldID = 'task_email';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_email'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
@@ -73,6 +89,8 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
     {
         $task->path = $submittedData['additionalscheduler_savewebsite_path'];
         $task->email = $submittedData['additionalscheduler_savewebsite_email'];
+        $task->subject = $submittedData['additionalscheduler_savewebsite_subject'];
+
     }
 
 }

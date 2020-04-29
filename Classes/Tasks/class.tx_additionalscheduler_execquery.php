@@ -7,10 +7,11 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Sng\Additionalscheduler\BaseEmailTask;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class tx_additionalscheduler_execquery extends BaseEmailTask
 {
 
     public function execute()
@@ -65,10 +66,11 @@ class tx_additionalscheduler_execquery extends \TYPO3\CMS\Scheduler\Task\Abstrac
 
         // mail
         $mailTo = $this->email;
-        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.execquery.name');
-        if (!empty($matches[1])) {
-            $mailSubject = $matches[1];
-        }
+
+        // we make sure  $matches has a value for index 1
+        $matches += [1 => false];
+        $mailSubject = $this->subject ?: $matches[1] ?: $this->getDefaultSubject('execquery');
+
 
         if (empty($this->email) !== true) {
             \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailcontent, 'html', 'utf-8');

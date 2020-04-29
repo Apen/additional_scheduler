@@ -21,6 +21,14 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
             }
         }
 
+        if (empty($taskInfo['additionalscheduler_exec_subject'])) {
+            if ($parentObject->CMD == 'edit') {
+                $taskInfo['additionalscheduler_exec_subject'] = $task->subject;
+            } else {
+                $taskInfo['additionalscheduler_exec_subject'] = '';
+            }
+        }
+
         if (empty($taskInfo['additionalscheduler_exec_email'])) {
             if ($parentObject->CMD == 'edit') {
                 $taskInfo['additionalscheduler_exec_email'] = $task->email;
@@ -48,6 +56,15 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
             'cshLabel' => $fieldID
         );
 
+        $fieldID = 'task_subject';
+        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_subject]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_subject'] . '" size="50" />';
+        $additionalFields[$fieldID] = array(
+            'code'     => $fieldCode,
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:subject',
+            'cshKey'   => 'additional_scheduler',
+            'cshLabel' => $fieldID
+        );
+
         $fieldID = 'task_email';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_email'] . '" size="50" />';
         $additionalFields[$fieldID] = array(
@@ -56,6 +73,8 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
+
+
 
         $fieldID = 'task_emailtemplate';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_emailtemplate]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_emailtemplate'] . '" size="50" />';
@@ -83,6 +102,7 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
     {
         $task->query = $submittedData['additionalscheduler_exec_query'];
         $task->email = $submittedData['additionalscheduler_exec_email'];
+        $task->subject = $submittedData['additionalscheduler_exec_subject'];
         $task->emailtemplate = $submittedData['additionalscheduler_exec_emailtemplate'];
     }
 
