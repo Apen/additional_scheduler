@@ -7,7 +7,9 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+use Sng\Additionalscheduler\BaseEmailTask;
+
+class tx_additionalscheduler_exec extends BaseEmailTask
 {
 
     /**
@@ -29,7 +31,7 @@ class tx_additionalscheduler_exec extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         // mail
         $mailTo = $this->email;
-        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.exec.name');
+        $mailSubject = $this->subject ?: $this->getDefaultSubject('exec');
         $mailBody = $cmd . LF . LF . $return;
 
         if (empty($this->email) !== true) {

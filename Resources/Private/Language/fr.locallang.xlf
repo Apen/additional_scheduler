@@ -15,6 +15,10 @@
 				<source><![CDATA[Email]]></source>
 				<target><![CDATA[Email]]></target>
 			</trans-unit>
+			<trans-unit id="subject" approved="yes">
+				<source><![CDATA[Subject]]></source>
+				<target><![CDATA[Objet]]></target>
+			</trans-unit>
 			<trans-unit id="emailfrom" approved="yes">
 				<source><![CDATA[Email FROM]]></source>
 				<target><![CDATA[Email FROM]]></target>
