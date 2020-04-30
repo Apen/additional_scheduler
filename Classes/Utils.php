@@ -9,6 +9,10 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MailUtility;
+
 /**
  * tx_additionalscheduler_utils
  * Class with some utils functions
@@ -26,7 +30,7 @@ class Utils
      */
     public static function getTasksList()
     {
-        return array('savewebsite', 'exec', 'execquery', 'clearcache', 'cleart3temp');
+        return array('savewebsite', 'exec', 'execquery', 'clearcache', 'cleart3temp','query2csv');
     }
 
     /**
@@ -42,17 +46,21 @@ class Utils
      */
     public static function sendEmail($to, $subject, $message, $type = 'plain', $charset = 'utf-8', $files = array())
     {
-        $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
         $mail->setTo(explode(',', $to));
         $mail->setSubject($subject);
         $mail->setCharset($charset);
-        $from = \TYPO3\CMS\Core\Utility\MailUtility::getSystemFrom();
+        $from = MailUtility::getSystemFrom();
         $mail->setFrom($from);
         $mail->setReplyTo($from);
         // add Files
         if (!empty($files)) {
-            foreach ($files as $file) {
-                $mail->attach(Swift_Attachment::fromPath($file));
+            foreach ($files as $fileName => $path) {
+                $attachment = \Swift_Attachment::fromPath($path);
+                if (is_string($fileName)) {
+                    $attachment->setFilename($fileName);
+                }
+                $mail->attach($attachment);
             }
         }
         // add Plain
@@ -69,4 +77,3 @@ class Utils
 
 }
 
-?>

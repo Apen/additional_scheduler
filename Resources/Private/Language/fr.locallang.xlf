@@ -13,11 +13,32 @@
 			</trans-unit>
 			<trans-unit id="email" approved="yes">
 				<source><![CDATA[Email]]></source>
-				<target><![CDATA[Email]]></target>
+				<target><![CDATA[Addresses courriel]]></target>
 			</trans-unit>
 			<trans-unit id="subject" approved="yes">
 				<source><![CDATA[Subject]]></source>
-				<target><![CDATA[Objet]]></target>
+				<target><![CDATA[Objet du courriel]]></target>
+			</trans-unit>
+			<trans-unit id="body" approved="yes">
+				<target><![CDATA[Corps du courriel (format texte, pas de HTML)]]></target>
+			</trans-unit>
+			<trans-unit id="filename" approved="yes">
+				<target><![CDATA[Nom du fichier joint]]></target>
+			</trans-unit>
+			<trans-unit id="noDatetimeFlag">
+				<target><![CDATA[Ne pas ajouter la date dans le nom de fichier]]></target>
+			</trans-unit>
+			<trans-unit id="noHeader">
+				<target><![CDATA[Ne pas ajouter les en-têtes de colonne]]></target>
+			</trans-unit>
+			<trans-unit id="delimiter" approved="yes">
+				<target><![CDATA[Champs délimités par]]></target>
+			</trans-unit>
+			<trans-unit id="enclosure" approved="yes">
+				<target><![CDATA[Champs encadrés par]]></target>
+			</trans-unit>
+			<trans-unit id="escape" approved="yes">
+				<target><![CDATA[Caractère d'échappement]]></target>
 			</trans-unit>
 			<trans-unit id="emailfrom" approved="yes">
 				<source><![CDATA[Email FROM]]></source>
@@ -56,8 +77,10 @@
 				<target><![CDATA[Spécifier un nombre de jours]]></target>
 			</trans-unit>
 			<trans-unit id="query" approved="yes">
-				<source><![CDATA[SQL query]]></source>
 				<target><![CDATA[Requête SQL]]></target>
+			</trans-unit>
+			<trans-unit id="query.error.required" approved="yes">
+				<target><![CDATA[Le champ « requête SQL » est obligatoire]]></target>
 			</trans-unit>
 			<trans-unit id="savedir" approved="yes">
 				<source><![CDATA[Full path of the save directory (/aaa/bbb/ccc/)]]></source>
@@ -94,6 +117,9 @@
 			<trans-unit id="task.execquery.description" approved="yes">
 				<source><![CDATA[Exec a SQL query]]></source>
 				<target><![CDATA[Exécuter une requête SQL]]></target>
+			</trans-unit>
+			<trans-unit id="task.query2csv.name" approved="yes">
+				<target><![CDATA[Envoi d'un fichier CSV par courriel]]></target>
 			</trans-unit>
 			<trans-unit id="task.execquery.name" approved="yes">
 				<source><![CDATA[Exec a SQL query]]></source>
