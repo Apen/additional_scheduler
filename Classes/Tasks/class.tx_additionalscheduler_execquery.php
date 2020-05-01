@@ -13,10 +13,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class tx_additionalscheduler_execquery extends BaseEmailTask
 {
-
     public function execute()
     {
-
         $this->query = preg_replace('/\r\n/', ' ', $this->query);
 
         // templating
@@ -26,7 +24,7 @@ class tx_additionalscheduler_execquery extends BaseEmailTask
         } else {
             $template->initTemplate('typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html');
         }
-        $markersArray = array();
+        $markersArray = [];
 
         // exec query
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('additional_scheduler');
@@ -71,7 +69,6 @@ class tx_additionalscheduler_execquery extends BaseEmailTask
         $matches += [1 => false];
         $mailSubject = $this->subject ?: $matches[1] ?: $this->getDefaultSubject('execquery');
 
-
         if (empty($this->email) !== true) {
             \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailcontent, 'html', 'utf-8');
         }
@@ -92,5 +89,4 @@ class tx_additionalscheduler_execquery extends BaseEmailTask
     {
         return substr($this->query, 0, 30);
     }
-
 }

@@ -9,10 +9,8 @@
 
 class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
 {
-
     public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
     {
-
         if (empty($taskInfo['additionalscheduler_savewebsite_path'])) {
             if ($parentObject->CMD == 'edit') {
                 $taskInfo['additionalscheduler_savewebsite_path'] = $task->path;
@@ -37,33 +35,32 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
             }
         }
 
-
-        $additionalFields = array();
+        $additionalFields = [];
 
         $fieldID = 'task_path';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_path]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_path'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedir',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
         $fieldID = 'task_subject';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_subject]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_subject'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:subject',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
         $fieldID = 'task_email';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_savewebsite_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_savewebsite_email'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:email',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
 
         return $additionalFields;
     }
@@ -90,7 +87,5 @@ class tx_additionalscheduler_savewebsite_fields extends \Sng\Additionalscheduler
         $task->path = $submittedData['additionalscheduler_savewebsite_path'];
         $task->email = $submittedData['additionalscheduler_savewebsite_email'];
         $task->subject = $submittedData['additionalscheduler_savewebsite_subject'];
-
     }
-
 }

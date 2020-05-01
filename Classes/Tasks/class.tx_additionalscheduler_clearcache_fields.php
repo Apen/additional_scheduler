@@ -9,7 +9,6 @@
 
 class tx_additionalscheduler_clearcache_fields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
 {
-
     public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
     {
     }
@@ -22,5 +21,4 @@ class tx_additionalscheduler_clearcache_fields extends \Sng\Additionalscheduler\
     public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
     {
     }
-
 }

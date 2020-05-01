@@ -11,7 +11,6 @@ use Sng\Additionalscheduler\BaseEmailTask;
 
 class tx_additionalscheduler_savewebsite extends BaseEmailTask
 {
-
     public function execute()
     {
         require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
@@ -37,5 +36,4 @@ class tx_additionalscheduler_savewebsite extends BaseEmailTask
     {
         return $this->path;
     }
-
 }

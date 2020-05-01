@@ -14,15 +14,14 @@ class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\Abstra
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
-     * @return    boolean    returns TRUE on success, FALSE on failure
+     * @return    bool    returns TRUE on success, FALSE on failure
      */
     public function execute()
     {
         $GLOBALS['BE_USER']->user['admin'] = 1;
         $tce = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
-        $tce->start(array(), array());
+        $tce->start([], []);
         $tce->clear_cacheCmd('all');
         return true;
     }
-
 }

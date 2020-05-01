@@ -16,7 +16,7 @@ class tx_additionalscheduler_exec extends BaseEmailTask
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
-     * @return    boolean    returns TRUE on success, FALSE on failure
+     * @return    bool    returns TRUE on success, FALSE on failure
      */
     public function execute()
     {
@@ -53,5 +53,4 @@ class tx_additionalscheduler_exec extends BaseEmailTask
     {
         return $this->path;
     }
-
 }
