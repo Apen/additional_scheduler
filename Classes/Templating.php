@@ -11,6 +11,7 @@ namespace Sng\Additionalscheduler;
 
 use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 
 /**
  * This class provides methods to generate the templates reports
@@ -25,29 +26,22 @@ class Templating
     public $templateContent;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Loads a template file
      *
-     * @param string  $templateFile
-     * @param bool $debug
+     * @param string $templateFile
+     * @param bool   $debug
      * @return bool
      */
     public function initTemplate($templateFile, $debug = false)
     {
-        $templateAbsPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($templateFile);
+        $templateAbsPath = GeneralUtility::getFileAbsFileName($templateFile);
         if ($templateAbsPath !== null) {
-            $this->templateContent = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL($templateAbsPath);
-            if ($debug === true) {
+            $this->templateContent = GeneralUtility::getURL($templateAbsPath);
+            if ($debug) {
                 if ($this->templateContent === null) {
-                    \TYPO3\CMS\Core\Utility\DebugUtility::debug('Check the path template or the rights', 'Error');
+                    DebugUtility::debug('Check the path template or the rights', 'Error');
                 }
-                \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->templateContent, 'Content of ' . $templateFile);
+                DebugUtility::debug($this->templateContent, 'Content of ' . $templateFile);
             }
             return true;
         }
@@ -57,9 +51,9 @@ class Templating
     /**
      * Template rendering for subdatas and principal datas
      *
-     * @param array   $templateMarkers
-     * @param string  $templateSection
-     * @param bool $debug
+     * @param array  $templateMarkers
+     * @param string $templateSection
+     * @param bool   $debug
      * @return string HTML code
      */
     public function renderAllTemplate($templateMarkers, $templateSection, $debug = false)
@@ -74,8 +68,8 @@ class Templating
             return false;
         }
 
-        if ($debug === true) {
-            \TYPO3\CMS\Core\Utility\DebugUtility::debug($templateMarkers, 'Markers for ' . $templateSection);
+        if ($debug) {
+            DebugUtility::debug($templateMarkers, 'Markers for ' . $templateSection);
         }
 
         $content = '';
@@ -108,9 +102,7 @@ class Templating
             }
         }
 
-        $content = $this->substituteMarkerArray($subParts, $templateMarkers);
-
-        return $content;
+        return $this->substituteMarkerArray($subParts, $templateMarkers);
     }
 
     /**
@@ -165,6 +157,6 @@ class Templating
      */
     protected function cleanTemplate($content)
     {
-        return preg_replace('/^[\t\s\r]*\n+/m', '', $content);
+        return preg_replace('#^[\t\s\r]*\n+#m', '', $content);
     }
 }

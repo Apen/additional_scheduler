@@ -9,11 +9,13 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MailUtility;
+
 /**
  * tx_additionalscheduler_utils
  * Class with some utils functions
- *
- * @author     Yohann CERDAN <cerdanyohann@yahoo.fr>
  */
 class Utils
 {
@@ -40,11 +42,12 @@ class Utils
      */
     public static function sendEmail($to, $subject, $message, $type = 'plain', $charset = 'utf-8', $files = [])
     {
-        $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
         $mail->setTo(explode(',', $to));
         $mail->setSubject($subject);
         $mail->setCharset($charset);
-        $from = \TYPO3\CMS\Core\Utility\MailUtility::getSystemFrom();
+
+        $from = MailUtility::getSystemFrom();
         $mail->setFrom($from);
         $mail->setReplyTo($from);
         // add Files
@@ -54,11 +57,11 @@ class Utils
             }
         }
         // add Plain
-        if ($type == 'plain') {
+        if ($type === 'plain') {
             $mail->addPart($message, 'text/plain');
         }
         // add HTML
-        if ($type == 'html') {
+        if ($type === 'html') {
             $mail->setBody($message, 'text/html');
         }
         // send

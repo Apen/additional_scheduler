@@ -9,7 +9,11 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class ClearcacheTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+class ClearcacheTask extends AbstractTask
 {
 
     /**
@@ -21,7 +25,7 @@ class ClearcacheTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     public function execute()
     {
         $GLOBALS['BE_USER']->user['admin'] = 1;
-        $tce = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+        $tce = GeneralUtility::makeInstance(DataHandler::class);
         $tce->start([], []);
         $tce->clear_cacheCmd('all');
         return true;

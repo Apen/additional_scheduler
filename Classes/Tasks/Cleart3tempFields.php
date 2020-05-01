@@ -9,23 +9,20 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class Cleart3tempFields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
+use Sng\Additionalscheduler\AdditionalFieldProviderInterface;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
+class Cleart3tempFields extends AdditionalFieldProviderInterface
 {
-    public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
+    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
     {
         if (empty($taskInfo['additionalscheduler_nbdays'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_nbdays'] = $task->nbdays;
-            } else {
-                $taskInfo['additionalscheduler_nbdays'] = '';
-            }
+            $taskInfo['additionalscheduler_nbdays'] = $parentObject->CMD == 'edit' ? $task->nbdays : '';
         }
         if (empty($taskInfo['additionalscheduler_dirfilter'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_dirfilter'] = $task->dirfilter;
-            } else {
-                $taskInfo['additionalscheduler_dirfilter'] = '';
-            }
+            $taskInfo['additionalscheduler_dirfilter'] = $parentObject->CMD == 'edit' ? $task->dirfilter : '';
         }
         $additionalFields = [];
         $fieldID = 'task_nbdays';
@@ -47,17 +44,17 @@ class Cleart3tempFields extends \Sng\Additionalscheduler\AdditionalFieldProvider
         return $additionalFields;
     }
 
-    public function validateAdditionalFields(array &$submittedData, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
+    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
         if (!isset($submittedData['additionalscheduler_nbdays'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:nbdayserror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:nbdayserror'), FlashMessage::ERROR);
             $result = false;
         }
         return $result;
     }
 
-    public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         $task->nbdays = $submittedData['additionalscheduler_nbdays'];
         $task->dirfilter = $submittedData['additionalscheduler_dirfilter'];

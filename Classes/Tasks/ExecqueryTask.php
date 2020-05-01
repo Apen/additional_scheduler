@@ -12,9 +12,12 @@ namespace Sng\Additionalscheduler\Tasks;
 use Sng\Additionalscheduler\BaseEmailTask;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Sng\Additionalscheduler\Templating;
+use Sng\Additionalscheduler\Utils;
 
 class ExecqueryTask extends BaseEmailTask
 {
+    public $emailtemplate;
     /**
      * @var string
      */
@@ -22,10 +25,10 @@ class ExecqueryTask extends BaseEmailTask
 
     public function execute()
     {
-        $this->query = preg_replace('/\r\n/', ' ', $this->query);
+        $this->query = preg_replace('#\r\n#', ' ', $this->query);
 
         // templating
-        $template = new \Sng\Additionalscheduler\Templating();
+        $template = new Templating();
         if (!empty($this->emailtemplate)) {
             $template->initTemplate($this->emailtemplate);
         } else {
@@ -38,7 +41,7 @@ class ExecqueryTask extends BaseEmailTask
         $res = $queryBuilder->getConnection()->executeQuery($this->query);
         $return = '';
 
-        if (preg_match('/SELECT.*?FROM/i', $this->query, $matches)) {
+        if (preg_match('#SELECT.*?FROM#i', $this->query, $matches)) {
             $i = 0;
             $return .= '<table>';
             while ($item = $res->fetch()) {
@@ -53,7 +56,7 @@ class ExecqueryTask extends BaseEmailTask
                     $return .= '<tbody>';
                 }
                 $return .= '<tr>';
-                foreach ($item as $itemKey => $itemValue) {
+                foreach ($item as $itemValue) {
                     $return .= '<td>' . $itemValue . '</td>';
                 }
                 $return .= '</tr>';
@@ -67,7 +70,7 @@ class ExecqueryTask extends BaseEmailTask
 
         $markersArray['###MAIL_CONTENT###'] = $return;
         $mailcontent = $template->renderAllTemplate($markersArray, '###EMAIl_TEMPLATE###');
-        preg_match('/<title\>(.*?)<\/title>/', $mailcontent, $matches);
+        preg_match('#<title\>(.*?)<\/title>#', $mailcontent, $matches);
 
         // mail
         $mailTo = $this->email;
@@ -76,8 +79,8 @@ class ExecqueryTask extends BaseEmailTask
         $matches += [1 => false];
         $mailSubject = $this->subject ?: $matches[1] ?: $this->getDefaultSubject('execquery');
 
-        if (empty($this->email) !== true) {
-            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailcontent, 'html', 'utf-8');
+        if (!empty($this->email)) {
+            Utils::sendEmail($mailTo, $mailSubject, $mailcontent, 'html', 'utf-8');
         }
 
         return true;
@@ -89,9 +92,8 @@ class ExecqueryTask extends BaseEmailTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return    string    Information to display
+     * @return       string    Information to display
      */
-
     public function getAdditionalInformation()
     {
         return substr($this->query, 0, 30);

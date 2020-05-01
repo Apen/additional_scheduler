@@ -10,6 +10,7 @@ namespace Sng\Additionalscheduler\Tasks;
  */
 
 use Sng\Additionalscheduler\BaseEmailTask;
+use Sng\Additionalscheduler\Utils;
 
 class ExecTask extends BaseEmailTask
 {
@@ -23,16 +24,11 @@ class ExecTask extends BaseEmailTask
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
-     * @return    bool    returns TRUE on success, FALSE on failure
+     * @return       bool    returns TRUE on success, FALSE on failure
      */
     public function execute()
     {
-        // exec SH
-        if (substr($this->path, 0, 1) == '/') {
-            $cmd = $this->path;
-        } else {
-            $cmd = PATH_site . $this->path;
-        }
+        $cmd = substr($this->path, 0, 1) === '/' ? $this->path : PATH_site . $this->path;
 
         $return = shell_exec($cmd . ' 2>&1');
 
@@ -41,8 +37,8 @@ class ExecTask extends BaseEmailTask
         $mailSubject = $this->subject ?: $this->getDefaultSubject('exec');
         $mailBody = $cmd . LF . LF . $return;
 
-        if (empty($this->email) !== true) {
-            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
+        if (!empty($this->email)) {
+            Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
         }
 
         return true;
@@ -54,7 +50,7 @@ class ExecTask extends BaseEmailTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return    string    Information to display
+     * @return       string    Information to display
      */
     public function getAdditionalInformation()
     {

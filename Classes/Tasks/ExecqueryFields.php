@@ -9,40 +9,29 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class ExecqueryFields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
+use Sng\Additionalscheduler\AdditionalFieldProviderInterface;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
+class ExecqueryFields extends AdditionalFieldProviderInterface
 {
-    public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
+    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
     {
         if (empty($taskInfo['additionalscheduler_exec_query'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_query'] = $task->query;
-            } else {
-                $taskInfo['additionalscheduler_exec_query'] = '';
-            }
+            $taskInfo['additionalscheduler_exec_query'] = $parentObject->CMD == 'edit' ? $task->query : '';
         }
 
         if (empty($taskInfo['additionalscheduler_exec_subject'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_subject'] = $task->subject;
-            } else {
-                $taskInfo['additionalscheduler_exec_subject'] = '';
-            }
+            $taskInfo['additionalscheduler_exec_subject'] = $parentObject->CMD == 'edit' ? $task->subject : '';
         }
 
         if (empty($taskInfo['additionalscheduler_exec_email'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_email'] = $task->email;
-            } else {
-                $taskInfo['additionalscheduler_exec_email'] = '';
-            }
+            $taskInfo['additionalscheduler_exec_email'] = $parentObject->CMD == 'edit' ? $task->email : '';
         }
 
         if (empty($taskInfo['additionalscheduler_exec_emailtemplate'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_emailtemplate'] = $task->emailtemplate;
-            } else {
-                $taskInfo['additionalscheduler_exec_emailtemplate'] = '';
-            }
+            $taskInfo['additionalscheduler_exec_emailtemplate'] = $parentObject->CMD == 'edit' ? $task->emailtemplate : '';
         }
 
         $additionalFields = [];
@@ -86,17 +75,17 @@ class ExecqueryFields extends \Sng\Additionalscheduler\AdditionalFieldProviderIn
         return $additionalFields;
     }
 
-    public function validateAdditionalFields(array &$submittedData, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
+    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
         if (empty($submittedData['additionalscheduler_exec_query'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
             $result = false;
         }
         return $result;
     }
 
-    public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         $task->query = $submittedData['additionalscheduler_exec_query'];
         $task->email = $submittedData['additionalscheduler_exec_email'];

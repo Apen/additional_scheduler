@@ -9,32 +9,26 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class ExecFields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
+use Sng\Additionalscheduler\AdditionalFieldProviderInterface;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
+class ExecFields extends AdditionalFieldProviderInterface
 {
-    public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
+    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
     {
         if (empty($taskInfo['additionalscheduler_exec_path'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_path'] = $task->path;
-            } else {
-                $taskInfo['additionalscheduler_exec_path'] = '';
-            }
+            $taskInfo['additionalscheduler_exec_path'] = $parentObject->CMD == 'edit' ? $task->path : '';
         }
 
         if (empty($taskInfo['additionalscheduler_exec_subject'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_subject'] = $task->subject;
-            } else {
-                $taskInfo['additionalscheduler_exec_subject'] = '';
-            }
+            $taskInfo['additionalscheduler_exec_subject'] = $parentObject->CMD == 'edit' ? $task->subject : '';
         }
 
         if (empty($taskInfo['additionalscheduler_exec_email'])) {
-            if ($parentObject->CMD == 'edit') {
-                $taskInfo['additionalscheduler_exec_email'] = $task->email;
-            } else {
-                $taskInfo['additionalscheduler_exec_email'] = '';
-            }
+            $taskInfo['additionalscheduler_exec_email'] = $parentObject->CMD == 'edit' ? $task->email : '';
         }
         $additionalFields = [];
         $fieldID = 'task_path';
@@ -64,26 +58,26 @@ class ExecFields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterfa
         return $additionalFields;
     }
 
-    public function validateAdditionalFields(array &$submittedData, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
+    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
         if (empty($submittedData['additionalscheduler_exec_path'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
             $result = false;
         }
         // check script is executable
-        $script = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $submittedData['additionalscheduler_exec_path']);
+        $script = GeneralUtility::trimExplode(' ', $submittedData['additionalscheduler_exec_path']);
         if ($script[0]{0} != '/') {
             $script[0] = PATH_site . $script[0];
         }
-        if (!empty($script[0]) && is_executable($script[0]) === false) {
-            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+        if (!empty($script[0]) && !is_executable($script[0])) {
+            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), FlashMessage::ERROR);
             $result = false;
         }
         return $result;
     }
 
-    public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         $task->path = $submittedData['additionalscheduler_exec_path'];
         $task->email = $submittedData['additionalscheduler_exec_email'];

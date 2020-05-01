@@ -9,7 +9,7 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use  TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 abstract class BaseEmailTask extends AbstractTask
 {
