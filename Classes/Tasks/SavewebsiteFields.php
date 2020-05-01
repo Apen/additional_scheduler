@@ -69,7 +69,7 @@ class SavewebsiteFields extends AdditionalFieldProviderInterface
             $result = false;
         }
         // check save script is executable
-        $saveScript = PATH_site . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
+        $saveScript = \Sng\Additionalscheduler\Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
         if (!is_executable($saveScript)) {
             $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $saveScript), FlashMessage::ERROR);
             $result = false;

@@ -28,7 +28,7 @@ class ExecTask extends BaseEmailTask
      */
     public function execute()
     {
-        $cmd = substr($this->path, 0, 1) === '/' ? $this->path : PATH_site . $this->path;
+        $cmd = substr($this->path, 0, 1) === '/' ? $this->path : \Sng\Additionalscheduler\Utils::getPathSite() . $this->path;
 
         $return = shell_exec($cmd . ' 2>&1');
 
