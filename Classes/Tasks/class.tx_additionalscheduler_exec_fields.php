@@ -19,6 +19,15 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
                 $taskInfo['additionalscheduler_exec_path'] = '';
             }
         }
+
+        if (empty($taskInfo['additionalscheduler_exec_subject'])) {
+            if ($parentObject->CMD == 'edit') {
+                $taskInfo['additionalscheduler_exec_subject'] = $task->subject;
+            } else {
+                $taskInfo['additionalscheduler_exec_subject'] = '';
+            }
+        }
+
         if (empty($taskInfo['additionalscheduler_exec_email'])) {
             if ($parentObject->CMD == 'edit') {
                 $taskInfo['additionalscheduler_exec_email'] = $task->email;
@@ -32,6 +41,14 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
         $additionalFields[$fieldID] = array(
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:execdir',
+            'cshKey'   => 'additional_scheduler',
+            'cshLabel' => $fieldID
+        );
+        $fieldID = 'task_subject';
+        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_subject]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_subject'] . '" size="50" />';
+        $additionalFields[$fieldID] = array(
+            'code'     => $fieldCode,
+            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:subject',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
         );
@@ -69,6 +86,8 @@ class tx_additionalscheduler_exec_fields extends \Sng\Additionalscheduler\Additi
     {
         $task->path = $submittedData['additionalscheduler_exec_path'];
         $task->email = $submittedData['additionalscheduler_exec_email'];
+        $task->subject = $submittedData['additionalscheduler_exec_subject'];
+
     }
 
 }
