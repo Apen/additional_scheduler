@@ -1,10 +1,10 @@
 <?php
 
-$EM_CONF['additional_scheduler'] = array(
+$EM_CONF['additional_scheduler'] = [
     'title'            => 'Useful tasks in scheduler module',
     'description'      => 'Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...',
     'category'         => 'misc',
-    'version'          => '1.3.2',
+    'version'          => '1.4.0-dev',
     'state'            => 'stable',
     'uploadfolder'     => false,
     'createDirs'       => '',
@@ -12,11 +12,11 @@ $EM_CONF['additional_scheduler'] = array(
     'author'           => 'CERDAN Yohann',
     'author_email'     => 'cerdanyohann@yahoo.fr',
     'author_company'   => '',
-    'constraints'      => array(
-        'depends'   => array(
-            'typo3' => '8.7.0-9.5.99',
-        ),
-        'conflicts' => array(),
-        'suggests'  => array(),
-    ),
-);
+    'constraints'      => [
+        'depends'   => [
+            'typo3' => '8.7.0-10.4.99',
+        ],
+        'conflicts' => [],
+        'suggests'  => [],
+    ],
+];
