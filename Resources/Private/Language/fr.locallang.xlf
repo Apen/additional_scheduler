@@ -141,6 +141,9 @@
 				<source><![CDATA[Update the TYPO3 translations]]></source>
 				<target><![CDATA[Mettre à jour les traductions]]></target>
 			</trans-unit>
+            <trans-unit id="task.fixmigrationto1_4.name">
+                <target><![CDATA[Réparer la migration à la version 1.4 (si vous avez des tâches en erreur après la mise à jour)]]></target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>
