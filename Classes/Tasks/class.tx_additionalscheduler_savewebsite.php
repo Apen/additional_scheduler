@@ -7,7 +7,9 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+use Sng\Additionalscheduler\BaseEmailTask;
+
+class tx_additionalscheduler_savewebsite extends BaseEmailTask
 {
 
     public function execute()
@@ -21,8 +23,8 @@ class tx_additionalscheduler_savewebsite extends \TYPO3\CMS\Scheduler\Task\Abstr
 
         // mail
         $mailTo = $this->email;
-        $mailSubject = '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.savewebsite.name');
         $mailBody = $cmd . LF . LF . $return;
+        $mailSubject = $this->subject ?: $this->getDefaultSubject('savewebsite');
 
         if (empty($this->email) !== true) {
             \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');

@@ -13,6 +13,9 @@
 			<trans-unit id="email">
 				<source><![CDATA[Email]]></source>
 			</trans-unit>
+			<trans-unit id="subject">
+				<source><![CDATA[Subject]]></source>
+			</trans-unit>
 			<trans-unit id="emailfrom">
 				<source><![CDATA[Email FROM]]></source>
 			</trans-unit>
