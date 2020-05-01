@@ -1,5 +1,7 @@
 <?php
 
+namespace Sng\Additionalscheduler\Tasks;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -7,10 +9,21 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\AbstractTask
-{
+use Sng\Additionalscheduler\Utils;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
-    protected $stats = array();
+class Cleart3tempTask extends AbstractTask
+{
+    public $dirfilter;
+    /**
+     * @var array
+     */
+    protected $stats = [];
+
+    /**
+     * @var int
+     */
+    public $nbdays;
 
     /**
      * This is the main method that is called when a task is executed
@@ -19,7 +32,7 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
      * to be handled and logged by the client implementations.
      * Should return true on successful execution, false on error.
      *
-     * @return boolean    Returns true on successful execution, false on error
+     * @return bool    Returns true on successful execution, false on error
      */
     public function execute()
     {
@@ -29,7 +42,7 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
         $this->stats['nbfilesdeletedsize'] = 0;
         $this->stats['nbdirectories'] = 0;
 
-        $this->emptyDirectory(PATH_site . 'typo3temp', $this->nbdays);
+        $this->emptyDirectory(Utils::getPathSite() . 'typo3temp', $this->nbdays);
 
         if (defined('TYPO3_cliMode') && TYPO3_cliMode) {
             echo 'Nb files: ' . $this->stats['nbfiles'] . ' (' . $this->stats['nbfilessize'] . ' ko)' . LF;
@@ -51,15 +64,15 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
     {
         if ((is_dir($dirname)) && (($dir_handle = opendir($dirname)) !== false)) {
             while ($file = readdir($dir_handle)) {
-                if ($file != "." && $file != "..") {
-                    $absoluteFileName = $dirname . "/" . $file;
+                if ($file !== '.' && $file !== '..') {
+                    $absoluteFileName = $dirname . '/' . $file;
                     if (!is_dir($absoluteFileName)) {
                         $size = round(filesize($absoluteFileName) / 1024);
                         $this->stats['nbfiles']++;
                         $this->stats['nbfilessize'] += $size;
                         if ((time() - filemtime($absoluteFileName)) >= ($nbdays * 86400)) {
                             if (is_writable($absoluteFileName)) {
-                                if (empty($this->dirfilter) === true) {
+                                if (empty($this->dirfilter)) {
                                     $this->stats['nbfilesdeleted']++;
                                     $this->stats['nbfilesdeletedsize'] += $size;
                                     @unlink($absoluteFileName);
@@ -68,13 +81,11 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
                                         $this->stats['nbfilesdeleted']++;
                                         $this->stats['nbfilesdeletedsize'] += $size;
                                         @unlink($absoluteFileName);
-                                    } else {
-                                        // dont delete files with this mask
                                     }
+                                    // dont delete files with this mask
                                 }
-                            } else {
-                                // cannot delete files
                             }
+                            // cannot delete files
                         }
                     } else {
                         $this->stats['nbdirectories']++;
@@ -84,9 +95,8 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
             }
             closedir($dir_handle);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -95,11 +105,10 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return    string    Information to display
+     * @return       string    Information to display
      */
     public function getAdditionalInformation()
     {
         return $this->nbdays . ' days';
     }
-
 }

@@ -200,7 +200,7 @@ echo "Date               : $day_date"
 echo "Website size       : $dir_size"
 echo "Size of the DB     : "$db_size"M"
 echo "TYPO3 version      : $typo_version"
-echo "PATH_site          : "$(pwd)
+echo "Path               : "$(pwd)
 echo "Tar file           : $filename"
 echo "SQL file           : $filenamesql"
 echo "-----------------------------------------------------------------------"

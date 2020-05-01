@@ -1,4 +1,5 @@
 <?php
+namespace Sng\Additionalscheduler\Tasks;
 
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
@@ -8,16 +9,18 @@
  */
 
 use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
-class tx_additionalscheduler_query2csv_fields extends  BaseAdditionalFieldProvider
+class Query2csvFields extends  BaseAdditionalFieldProvider
 {
+
 
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:query.error.required'), \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:query.error.required'), FlashMessage::ERROR);
             $result = false;
         }
         return $result;
