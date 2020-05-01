@@ -9,10 +9,8 @@
 
 class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
 {
-
     public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
     {
-
         if (empty($taskInfo['additionalscheduler_exec_query'])) {
             if ($parentObject->CMD == 'edit') {
                 $taskInfo['additionalscheduler_exec_query'] = $task->query;
@@ -45,45 +43,43 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
             }
         }
 
-        $additionalFields = array();
+        $additionalFields = [];
 
         $fieldID = 'task_path';
         $fieldCode = '<textarea name="tx_scheduler[additionalscheduler_exec_query]" id="' . $fieldID . '" cols="50" rows="10" />' . $taskInfo['additionalscheduler_exec_query'] . '</textarea>';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:query',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
 
         $fieldID = 'task_subject';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_subject]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_subject'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:subject',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
 
         $fieldID = 'task_email';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_email'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:email',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
-
-
+        ];
 
         $fieldID = 'task_emailtemplate';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_emailtemplate]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_emailtemplate'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:emailtemplate',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
 
         return $additionalFields;
     }
@@ -105,5 +101,4 @@ class tx_additionalscheduler_execquery_fields extends \Sng\Additionalscheduler\A
         $task->subject = $submittedData['additionalscheduler_exec_subject'];
         $task->emailtemplate = $submittedData['additionalscheduler_exec_emailtemplate'];
     }
-
 }

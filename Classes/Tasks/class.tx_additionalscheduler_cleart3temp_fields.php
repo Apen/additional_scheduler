@@ -9,7 +9,6 @@
 
 class tx_additionalscheduler_cleart3temp_fields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
 {
-
     public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
     {
         if (empty($taskInfo['additionalscheduler_nbdays'])) {
@@ -26,23 +25,23 @@ class tx_additionalscheduler_cleart3temp_fields extends \Sng\Additionalscheduler
                 $taskInfo['additionalscheduler_dirfilter'] = '';
             }
         }
-        $additionalFields = array();
+        $additionalFields = [];
         $fieldID = 'task_nbdays';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_nbdays]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_nbdays'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:nbdays',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
         $fieldID = 'task_dirfilter';
         $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_dirfilter]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_dirfilter'] . '" size="50" />';
-        $additionalFields[$fieldID] = array(
+        $additionalFields[$fieldID] = [
             'code'     => $fieldCode,
             'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:dirfilter',
             'cshKey'   => 'additional_scheduler',
             'cshLabel' => $fieldID
-        );
+        ];
         return $additionalFields;
     }
 

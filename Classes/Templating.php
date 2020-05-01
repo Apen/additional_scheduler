@@ -16,14 +16,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * This class provides methods to generate the templates reports
  *
  * @author         CERDAN Yohann <cerdanyohann@yahoo.fr>
- * @package        TYPO3
  */
 class Templating
 {
     /**
      * Template object for frontend functions
      */
-    public $templateContent = null;
+    public $templateContent;
 
     /**
      * Constructor
@@ -36,8 +35,8 @@ class Templating
      * Loads a template file
      *
      * @param string  $templateFile
-     * @param boolean $debug
-     * @return boolean
+     * @param bool $debug
+     * @return bool
      */
     public function initTemplate($templateFile, $debug = false)
     {
@@ -51,9 +50,8 @@ class Templating
                 \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->templateContent, 'Content of ' . $templateFile);
             }
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -61,7 +59,7 @@ class Templating
      *
      * @param array   $templateMarkers
      * @param string  $templateSection
-     * @param boolean $debug
+     * @param bool $debug
      * @return string HTML code
      */
     public function renderAllTemplate($templateMarkers, $templateSection, $debug = false)

@@ -9,8 +9,7 @@
 
 class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
-
-    protected $stats = array();
+    protected $stats = [];
 
     /**
      * This is the main method that is called when a task is executed
@@ -19,7 +18,7 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
      * to be handled and logged by the client implementations.
      * Should return true on successful execution, false on error.
      *
-     * @return boolean    Returns true on successful execution, false on error
+     * @return bool    Returns true on successful execution, false on error
      */
     public function execute()
     {
@@ -51,8 +50,8 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
     {
         if ((is_dir($dirname)) && (($dir_handle = opendir($dirname)) !== false)) {
             while ($file = readdir($dir_handle)) {
-                if ($file != "." && $file != "..") {
-                    $absoluteFileName = $dirname . "/" . $file;
+                if ($file != '.' && $file != '..') {
+                    $absoluteFileName = $dirname . '/' . $file;
                     if (!is_dir($absoluteFileName)) {
                         $size = round(filesize($absoluteFileName) / 1024);
                         $this->stats['nbfiles']++;
@@ -68,13 +67,11 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
                                         $this->stats['nbfilesdeleted']++;
                                         $this->stats['nbfilesdeletedsize'] += $size;
                                         @unlink($absoluteFileName);
-                                    } else {
-                                        // dont delete files with this mask
                                     }
+                                    // dont delete files with this mask
                                 }
-                            } else {
-                                // cannot delete files
                             }
+                            // cannot delete files
                         }
                     } else {
                         $this->stats['nbdirectories']++;
@@ -84,9 +81,8 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
             }
             closedir($dir_handle);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -101,5 +97,4 @@ class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\Abstr
     {
         return $this->nbdays . ' days';
     }
-
 }

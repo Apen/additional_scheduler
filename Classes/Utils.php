@@ -14,8 +14,6 @@ namespace Sng\Additionalscheduler;
  * Class with some utils functions
  *
  * @author     Yohann CERDAN <cerdanyohann@yahoo.fr>
- * @package    TYPO3
- * @subpackage additional_scheduler
  */
 class Utils
 {
@@ -26,7 +24,7 @@ class Utils
      */
     public static function getTasksList()
     {
-        return array('savewebsite', 'exec', 'execquery', 'clearcache', 'cleart3temp');
+        return ['savewebsite', 'exec', 'execquery', 'clearcache', 'cleart3temp'];
     }
 
     /**
@@ -40,7 +38,7 @@ class Utils
      * @param string $charset
      * @param array  $files
      */
-    public static function sendEmail($to, $subject, $message, $type = 'plain', $charset = 'utf-8', $files = array())
+    public static function sendEmail($to, $subject, $message, $type = 'plain', $charset = 'utf-8', $files = [])
     {
         $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
         $mail->setTo(explode(',', $to));
@@ -66,7 +64,4 @@ class Utils
         // send
         $mail->send();
     }
-
 }
-
-?>
