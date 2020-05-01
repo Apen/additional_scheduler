@@ -50,7 +50,7 @@ class Utils
         // add Files
         if (!empty($files)) {
             foreach ($files as $file) {
-                $mail->attach(Swift_Attachment::fromPath($file));
+                $mail->attach(\Swift_Attachment::fromPath($file));
             }
         }
         // add Plain

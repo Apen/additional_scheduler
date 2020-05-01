@@ -13,6 +13,11 @@ use Sng\Additionalscheduler\BaseEmailTask;
 
 class SavewebsiteTask extends BaseEmailTask
 {
+    /**
+     * @var string
+     */
+    public $path;
+
     public function execute()
     {
         require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');

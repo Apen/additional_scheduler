@@ -15,6 +15,11 @@ class ExecTask extends BaseEmailTask
 {
 
     /**
+     * @var string
+     */
+    public $path;
+
+    /**
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *

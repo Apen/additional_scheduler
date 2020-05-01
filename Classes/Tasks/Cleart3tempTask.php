@@ -11,7 +11,15 @@ namespace Sng\Additionalscheduler\Tasks;
 
 class Cleart3tempTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
+    /**
+     * @var array
+     */
     protected $stats = [];
+
+    /**
+     * @var int
+     */
+    public $nbdays;
 
     /**
      * This is the main method that is called when a task is executed
