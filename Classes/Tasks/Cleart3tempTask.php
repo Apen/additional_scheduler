@@ -1,5 +1,7 @@
 <?php
 
+namespace Sng\Additionalscheduler\Tasks;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -7,7 +9,7 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class tx_additionalscheduler_cleart3temp extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class Cleart3tempTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
     protected $stats = [];
 

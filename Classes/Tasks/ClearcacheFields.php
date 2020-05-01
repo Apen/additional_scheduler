@@ -1,5 +1,7 @@
 <?php
 
+namespace Sng\Additionalscheduler\Tasks;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -7,7 +9,7 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class tx_additionalscheduler_clearcache_fields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
+class ClearcacheFields extends \Sng\Additionalscheduler\AdditionalFieldProviderInterface
 {
     public function getAdditionalFields(array &$taskInfo, $task, \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $parentObject)
     {

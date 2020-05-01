@@ -1,5 +1,7 @@
 <?php
 
+namespace Sng\Additionalscheduler\Tasks;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -7,14 +9,14 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class ClearcacheTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 {
 
     /**
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
-     * @return    bool    returns TRUE on success, FALSE on failure
+     * @return bool
      */
     public function execute()
     {

@@ -24,7 +24,7 @@ class Utils
      */
     public static function getTasksList()
     {
-        return ['savewebsite', 'exec', 'execquery', 'clearcache', 'cleart3temp'];
+        return ['Savewebsite', 'Exec', 'Execquery', 'Clearcache', 'Cleart3temp'];
     }
 
     /**
