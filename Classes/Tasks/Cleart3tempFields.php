@@ -48,7 +48,7 @@ class Cleart3tempFields extends AdditionalFieldProviderInterface
     {
         $result = true;
         if (!isset($submittedData['additionalscheduler_nbdays'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:nbdayserror'), FlashMessage::ERROR);
+            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:nbdayserror'), FlashMessage::ERROR);
             $result = false;
         }
         return $result;

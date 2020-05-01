@@ -79,7 +79,7 @@ class ExecqueryFields extends AdditionalFieldProviderInterface
     {
         $result = true;
         if (empty($submittedData['additionalscheduler_exec_query'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
+            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
             $result = false;
         }
         return $result;

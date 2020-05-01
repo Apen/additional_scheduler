@@ -65,13 +65,13 @@ class SavewebsiteFields extends AdditionalFieldProviderInterface
         $result = true;
         // check dir is writable
         if ((empty($submittedData['additionalscheduler_savewebsite_path'])) || (!is_writable($submittedData['additionalscheduler_savewebsite_path']))) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
+            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
             $result = false;
         }
         // check save script is executable
         $saveScript = \Sng\Additionalscheduler\Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
         if (!is_executable($saveScript)) {
-            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $saveScript), FlashMessage::ERROR);
+            $this->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $saveScript), FlashMessage::ERROR);
             $result = false;
         }
         return $result;
