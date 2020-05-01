@@ -51,29 +51,47 @@ class Utils
      */
     public static function sendEmail($to, $subject, $message, $type = 'plain', $charset = 'utf-8', $files = [])
     {
-        $mail = GeneralUtility::makeInstance(MailMessage::class);
-        $mail->setTo(explode(',', $to));
-        $mail->setSubject($subject);
-        $mail->setCharset($charset);
-
         $from = MailUtility::getSystemFrom();
-        $mail->setFrom($from);
-        $mail->setReplyTo($from);
-        // add Files
-        if (!empty($files)) {
-            foreach ($files as $file) {
-                $mail->attach(\Swift_Attachment::fromPath($file));
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+        if (version_compare(TYPO3_version, '10.4.0', '>=')) {
+            $mail
+                ->from(new \Symfony\Component\Mime\Address($from[0]))
+                ->to(new \Symfony\Component\Mime\Address($to))
+                ->subject($subject);
+            if ($type === 'plain') {
+                $mail->text($message);
+            } else {
+                $mail->html($message);
             }
+            if (!empty($files)) {
+                foreach ($files as $file) {
+                    $mail->attachFromPath($file);
+                }
+            }
+            $mail->send();
+        } else {
+            $mail->setTo(explode(',', $to));
+            $mail->setSubject($subject);
+            $mail->setCharset($charset);
+
+            $mail->setFrom($from);
+            $mail->setReplyTo($from);
+            // add Files
+            if (!empty($files)) {
+                foreach ($files as $file) {
+                    $mail->attach(\Swift_Attachment::fromPath($file));
+                }
+            }
+            // add Plain
+            if ($type === 'plain') {
+                $mail->addPart($message, 'text/plain');
+            }
+            // add HTML
+            if ($type === 'html') {
+                $mail->setBody($message, 'text/html');
+            }
+            // send
+            $mail->send();
         }
-        // add Plain
-        if ($type === 'plain') {
-            $mail->addPart($message, 'text/plain');
-        }
-        // add HTML
-        if ($type === 'html') {
-            $mail->setBody($message, 'text/html');
-        }
-        // send
-        $mail->send();
     }
 }

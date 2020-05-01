@@ -62,7 +62,7 @@ class ExecFields extends AdditionalFieldProviderInterface
     {
         $result = true;
         if (empty($submittedData['additionalscheduler_exec_path'])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
+            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
             $result = false;
         }
         // check script is executable
@@ -71,7 +71,7 @@ class ExecFields extends AdditionalFieldProviderInterface
             $script[0] = \Sng\Additionalscheduler\Utils::getPathSite() . $script[0];
         }
         if (!empty($script[0]) && !is_executable($script[0])) {
-            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), FlashMessage::ERROR);
+            $this->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), FlashMessage::ERROR);
             $result = false;
         }
         return $result;
