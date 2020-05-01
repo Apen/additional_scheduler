@@ -1,5 +1,7 @@
 <?php
 
+namespace Sng\Additionalscheduler\Tasks;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -9,7 +11,7 @@
 
 use Sng\Additionalscheduler\BaseEmailTask;
 
-class tx_additionalscheduler_savewebsite extends BaseEmailTask
+class SavewebsiteTask extends BaseEmailTask
 {
     public function execute()
     {
