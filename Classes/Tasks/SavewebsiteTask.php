@@ -21,11 +21,11 @@ class SavewebsiteTask extends BaseEmailTask
 
     public function execute()
     {
-        require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
+        require_once(\Sng\Additionalscheduler\Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
 
         // exec SH
-        $saveScript = PATH_site . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
-        $cmd = $saveScript . ' -p ' . PATH_site . ' -o ' . $this->path . ' -f';
+        $saveScript = \Sng\Additionalscheduler\Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
+        $cmd = $saveScript . ' -p ' . \Sng\Additionalscheduler\Utils::getPathSite() . ' -o ' . $this->path . ' -f';
         $return = shell_exec($cmd . ' 2>&1');
 
         // mail

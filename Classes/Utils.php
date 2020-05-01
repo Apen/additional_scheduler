@@ -9,6 +9,7 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MailUtility;
@@ -27,6 +28,14 @@ class Utils
     public static function getTasksList()
     {
         return ['Savewebsite', 'Exec', 'Execquery', 'Clearcache', 'Cleart3temp'];
+    }
+
+    /**
+     * @return string
+     */
+    public static function getPathSite()
+    {
+        return Environment::getPublicPath() . '/';
     }
 
     /**

@@ -67,8 +67,8 @@ class ExecFields extends AdditionalFieldProviderInterface
         }
         // check script is executable
         $script = GeneralUtility::trimExplode(' ', $submittedData['additionalscheduler_exec_path']);
-        if ($script[0]{0} != '/') {
-            $script[0] = PATH_site . $script[0];
+        if (substr($script[0], 0, 1) != '/') {
+            $script[0] = \Sng\Additionalscheduler\Utils::getPathSite() . $script[0];
         }
         if (!empty($script[0]) && !is_executable($script[0])) {
             $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), FlashMessage::ERROR);
