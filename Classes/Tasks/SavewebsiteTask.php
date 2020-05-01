@@ -9,6 +9,7 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Sng\Additionalscheduler\Utils;
 use Sng\Additionalscheduler\BaseEmailTask;
 
 class SavewebsiteTask extends BaseEmailTask
@@ -32,8 +33,8 @@ class SavewebsiteTask extends BaseEmailTask
         $mailBody = $cmd . LF . LF . $return;
         $mailSubject = $this->subject ?: $this->getDefaultSubject('savewebsite');
 
-        if (empty($this->email) !== true) {
-            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
+        if (!empty($this->email)) {
+            Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
         }
 
         return true;

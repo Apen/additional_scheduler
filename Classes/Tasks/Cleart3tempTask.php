@@ -9,8 +9,11 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class Cleart3tempTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
+class Cleart3tempTask extends AbstractTask
 {
+    public $dirfilter;
     /**
      * @var array
      */
@@ -60,7 +63,7 @@ class Cleart3tempTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     {
         if ((is_dir($dirname)) && (($dir_handle = opendir($dirname)) !== false)) {
             while ($file = readdir($dir_handle)) {
-                if ($file != '.' && $file != '..') {
+                if ($file !== '.' && $file !== '..') {
                     $absoluteFileName = $dirname . '/' . $file;
                     if (!is_dir($absoluteFileName)) {
                         $size = round(filesize($absoluteFileName) / 1024);
@@ -68,7 +71,7 @@ class Cleart3tempTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                         $this->stats['nbfilessize'] += $size;
                         if ((time() - filemtime($absoluteFileName)) >= ($nbdays * 86400)) {
                             if (is_writable($absoluteFileName)) {
-                                if (empty($this->dirfilter) === true) {
+                                if (empty($this->dirfilter)) {
                                     $this->stats['nbfilesdeleted']++;
                                     $this->stats['nbfilesdeletedsize'] += $size;
                                     @unlink($absoluteFileName);
@@ -101,7 +104,7 @@ class Cleart3tempTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return    string    Information to display
+     * @return       string    Information to display
      */
     public function getAdditionalInformation()
     {
