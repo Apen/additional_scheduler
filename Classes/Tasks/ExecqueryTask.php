@@ -15,6 +15,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ExecqueryTask extends BaseEmailTask
 {
+    /**
+     * @var string
+     */
+    public $query;
+
     public function execute()
     {
         $this->query = preg_replace('/\r\n/', ' ', $this->query);

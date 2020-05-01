@@ -13,6 +13,17 @@ use  TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 abstract class BaseEmailTask extends AbstractTask
 {
+
+    /**
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @var string
+     */
+    public $subject;
+
     protected function getDefaultSubject($task)
     {
         return '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.' . $task . '.name');
