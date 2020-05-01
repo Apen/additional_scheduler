@@ -1,5 +1,7 @@
 <?php
 
+namespace Sng\Additionalscheduler\Tasks;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -7,18 +9,23 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Sng\Additionalscheduler\Utils;
 use Sng\Additionalscheduler\BaseEmailTask;
 
-class tx_additionalscheduler_savewebsite extends BaseEmailTask
+class SavewebsiteTask extends BaseEmailTask
 {
+    /**
+     * @var string
+     */
+    public $path;
 
     public function execute()
     {
-        require_once(PATH_site . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
+        require_once(Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
 
         // exec SH
-        $saveScript = PATH_site . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
-        $cmd = $saveScript . ' -p ' . PATH_site . ' -o ' . $this->path . ' -f';
+        $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
+        $cmd = $saveScript . ' -p ' . Utils::getPathSite() . ' -o ' . $this->path . ' -f';
         $return = shell_exec($cmd . ' 2>&1');
 
         // mail
@@ -26,8 +33,8 @@ class tx_additionalscheduler_savewebsite extends BaseEmailTask
         $mailBody = $cmd . LF . LF . $return;
         $mailSubject = $this->subject ?: $this->getDefaultSubject('savewebsite');
 
-        if (empty($this->email) !== true) {
-            \Sng\Additionalscheduler\Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
+        if (!empty($this->email)) {
+            Utils::sendEmail($mailTo, $mailSubject, $mailBody, 'plain', 'utf-8');
         }
 
         return true;
@@ -37,5 +44,4 @@ class tx_additionalscheduler_savewebsite extends BaseEmailTask
     {
         return $this->path;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+namespace Sng\Additionalscheduler\Tasks;
 
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
@@ -13,7 +14,7 @@ use Sng\Additionalscheduler\Utils;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class tx_additionalscheduler_query2csv extends BaseEmailTask
+class Query2csvTask extends BaseEmailTask
 {
 
     public function execute()
@@ -32,7 +33,7 @@ class tx_additionalscheduler_query2csv extends BaseEmailTask
         ;
         $filename = str_replace('.csv', '', $this->filename);
         if (!$this->noDatetimeFlag) {
-            $filename .= date('-Y-m-d_hi');
+            $filename .= date('-Y-m-d_Hi');
         }
         $filename .= '.csv';
         if (empty($this->email) !== true) {

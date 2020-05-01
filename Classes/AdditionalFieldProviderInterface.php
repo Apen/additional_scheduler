@@ -11,5 +11,4 @@ namespace Sng\Additionalscheduler;
 
 abstract class AdditionalFieldProviderInterface implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
 {
-
 }

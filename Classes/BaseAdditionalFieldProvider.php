@@ -20,7 +20,11 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 abstract class BaseAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
 {
-
+    /**
+     * plugin namespace, mainly to compute formfield names
+     * @see BaseAdditionalFieldProvider::getFieldName()
+     * @var string
+     */
     protected $pluginNS = 'additionalscheduler';
 
     /**

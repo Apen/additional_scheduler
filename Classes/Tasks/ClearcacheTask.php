@@ -1,5 +1,7 @@
 <?php
 
+namespace Sng\Additionalscheduler\Tasks;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -7,22 +9,25 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class tx_additionalscheduler_clearcache extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+class ClearcacheTask extends AbstractTask
 {
 
     /**
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
-     * @return    boolean    returns TRUE on success, FALSE on failure
+     * @return bool
      */
     public function execute()
     {
         $GLOBALS['BE_USER']->user['admin'] = 1;
-        $tce = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
-        $tce->start(array(), array());
+        $tce = GeneralUtility::makeInstance(DataHandler::class);
+        $tce->start([], []);
         $tce->clear_cacheCmd('all');
         return true;
     }
-
 }
