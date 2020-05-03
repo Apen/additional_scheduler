@@ -1,6 +1,6 @@
 <?php
 
-namespace Sng\Additionalscheduler\Tasks;
+namespace Sng\Additionalscheduler\Command;
 
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
@@ -9,18 +9,17 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\BaseEmailTask;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use Sng\Additionalscheduler\Templating;
-use Sng\Additionalscheduler\Utils;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use \TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 
-class FixMigrationTo1_4Task extends AbstractTask
+class AdditionalSchedulerCommandController extends CommandController
 {
-    public function execute()
+
+    public function fixUpdateTo1_4Command()
     {
 
+        $log = [];
         // exec query
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('additional_scheduler');
         $namespace = 'Sng\\Additionalscheduler\\Tasks\\';
@@ -33,16 +32,23 @@ class FixMigrationTo1_4Task extends AbstractTask
                      'tx_additionalscheduler_savewebsite' => 'SavewebsiteTask',
                      'tx_additionalscheduler_query2csv' => 'Query2csvTask',
                  ] as $oldName => $newName) {
+            $log[] = 'Renaming '.$oldName. ' to '.$newName;
+            $log[] = "----------------------------------------------------------------------------\n";
             $query = sprintf($queryTpl, $this->getSerializedName($oldName)
                 , addslashes($this->getSerializedName($namespace.$newName)));
-           $queryBuilder->getConnection()->executeQuery($query);
+            $log[] = 'SQL query : ' ;
+            $log[] = $query ;
+            $log[] = "\n";
+            $stmt = $queryBuilder->getConnection()->executeQuery($query);
+            $log[] = $stmt->rowCount(). " rows updated\n";
         }
+        return implode("\n", $log);
 
-        return true;
     }
 
     protected function getSerializedName($str)
     {
         return 'O:'.strlen($str).':"'.$str.'"';
     }
+
 }
