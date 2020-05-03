@@ -41,7 +41,9 @@ class Utils
      */
     public static function getPathSite()
     {
-        return Environment::getPublicPath() . '/';
+        return method_exists('Environment', 'getPublicPath')
+            ? Environment::getPublicPath() . '/'
+            : PATH_site;
     }
 
     /**
