@@ -40,7 +40,7 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
      */
-    protected function getTaskNS()
+    protected function getTaskNs()
     {
         return 'savewebsite';
     }

@@ -23,7 +23,7 @@ class ClearcacheFields extends BaseAdditionalFieldProvider
      * Task namespace, mainly to compute formfield names
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
-     */protected function getTaskNS()
+     */protected function getTaskNs()
     {
         return 'clearcache';
     }
