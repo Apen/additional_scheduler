@@ -19,7 +19,7 @@ class ExecqueryFields extends BaseAdditionalFieldProvider
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
-            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
+            $this->addMessage('savedirerror', FlashMessage::ERROR, $parentObject);
             $result = false;
         }
         return $result;

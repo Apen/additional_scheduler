@@ -155,4 +155,16 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
                 : '';
         }
     }
+
+    /**
+     * Shortcut to add error message
+     * @param $trKey - the translation key in localang
+     * @param $alert
+     * @param SchedulerModuleController $parentObject
+     */
+    protected function addMessage(string $trKey, $alert, SchedulerModuleController $parentObject)
+    {
+        $message  = $GLOBALS['LANG']->sL($this->locallangPath.':'.$trKey);
+        return $parentObject->addMessage($message, $alert);
+    }
 }

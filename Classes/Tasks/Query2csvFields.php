@@ -29,7 +29,7 @@ class Query2csvFields extends  BaseAdditionalFieldProvider
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
-            $parentObject->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:query.error.required'), FlashMessage::ERROR);
+            $this->addMessage('query.error.required', FlashMessage::ERROR, $parentObject);
             $result = false;
         }
         return $result;
