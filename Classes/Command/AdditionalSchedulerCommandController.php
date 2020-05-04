@@ -24,7 +24,7 @@ class AdditionalSchedulerCommandController extends CommandController
      * Rename old classes in tx_scheduler_task to fit with the new ones in version 1.4
      * @return string
      */
-    public function fixUpdateTo1_4Command()
+    public function fixUpdateTo14Command()
     {
 
         $log = [];
