@@ -1,22 +1,45 @@
 <?php
 
-
 namespace Sng\Additionalscheduler\Manager;
 
+/*
+ * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class CsvExportManager
+ * @author Marc Munos
+ * @package Sng\Additionalscheduler\Manager
+ */
 class CsvExportManager extends QueryExportManager
 {
 
+    /**
+     * @var string
+     */
     protected $delimiter;
+    /**
+     * @var  string
+     */
     protected $enclosure;
+    /**
+     * @var  string
+     */
     protected $escape;
+    /**
+     * @var bool  string
+     */
     protected $noHeader = false;
 
     /**
-     * @param mixed $noHeader
+     * @param $noHeader bool
+     * @return $this
      */
     public function setNoHeader($noHeader)
     {
@@ -25,7 +48,8 @@ class CsvExportManager extends QueryExportManager
     }
 
     /**
-     * @param mixed $delimiter
+     * @param $delimiter string
+     * @return $this
      */
     public function setDelimiter($delimiter)
     {
@@ -34,7 +58,8 @@ class CsvExportManager extends QueryExportManager
     }
 
     /**
-     * @param mixed $enclosure
+     * @param $enclosure string
+     * @return $this
      */
     public function setEnclosure($enclosure)
     {
@@ -43,7 +68,8 @@ class CsvExportManager extends QueryExportManager
     }
 
     /**
-     * @param mixed $escape
+     * @param $escape string
+     * @return $this
      */
     public function setEscape($escape)
     {
@@ -51,8 +77,11 @@ class CsvExportManager extends QueryExportManager
         return $this;
     }
 
-
-
+    /**
+     * Create a temporary csv file and return its path
+     * @param $filename
+     * @return sring - the path to the csv file
+     */
     public function renderFile($filename)
     {
         $temp = tempnam(sys_get_temp_dir(), $filename);

@@ -13,9 +13,18 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 
+/**
+ * Class AdditionalSchedulerCommandController
+ * @author Marc Munos
+ * @package Sng\Additionalscheduler\Command
+ */
 class AdditionalSchedulerCommandController extends CommandController
 {
 
+    /**
+     * Rename old classes in tx_scheduler_task to fit with the new ones in version 1.4
+     * @return string
+     */
     public function fixUpdateTo1_4Command()
     {
 
@@ -46,6 +55,10 @@ class AdditionalSchedulerCommandController extends CommandController
 
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     protected function getSerializedName($str)
     {
         return 'O:'.strlen($str).':"'.$str.'"';
