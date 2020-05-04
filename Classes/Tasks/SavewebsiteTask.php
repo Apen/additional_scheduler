@@ -21,11 +21,10 @@ class SavewebsiteTask extends BaseEmailTask
 
     public function execute()
     {
-        require_once(Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
-
         // exec SH
         $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
-        $cmd = $saveScript . ' -p ' . Utils::getPathSite() . ' -o ' . $this->path . ' -f';
+        $cmd = $saveScript . ' -p ' . Utils::getPathSite() . ' -o ' . $this->savedir . ' -f';
+
         $return = shell_exec($cmd . ' 2>&1');
 
         // mail
@@ -42,6 +41,6 @@ class SavewebsiteTask extends BaseEmailTask
 
     public function getAdditionalInformation()
     {
-        return $this->path;
+        return $this->savedir;
     }
 }
