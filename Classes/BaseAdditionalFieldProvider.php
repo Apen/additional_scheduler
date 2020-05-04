@@ -16,7 +16,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class BaseAdditionalFieldProvider
- * @author Marc Munos
  * @package Sng\Additionalscheduler
  */
 abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface

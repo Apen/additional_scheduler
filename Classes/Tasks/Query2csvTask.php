@@ -15,7 +15,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class Query2csvTask
- * @author Marc Munos
  * @package Sng\Additionalscheduler\Tasks
  */
 class Query2csvTask extends BaseEmailTask

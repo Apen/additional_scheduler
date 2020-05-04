@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class CsvExportManager
- * @author Marc Munos
  * @package Sng\Additionalscheduler\Manager
  */
 class CsvExportManager extends QueryExportManager

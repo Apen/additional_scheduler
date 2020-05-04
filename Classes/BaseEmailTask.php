@@ -13,7 +13,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class BaseEmailTask
- * @author Marc Munos
  * @package Sng\Additionalscheduler
  */
 abstract class BaseEmailTask extends AbstractTask

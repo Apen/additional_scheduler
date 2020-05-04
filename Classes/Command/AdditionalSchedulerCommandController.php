@@ -15,7 +15,6 @@ use \TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 
 /**
  * Class AdditionalSchedulerCommandController
- * @author Marc Munos
  * @package Sng\Additionalscheduler\Command
  */
 class AdditionalSchedulerCommandController extends CommandController
