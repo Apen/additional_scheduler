@@ -1,16 +1,13 @@
 <?php
 
-use Sng\Additionalscheduler\Command\AdditionalSchedulerCommandController;
-use Sng\Additionalscheduler\Utils;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use Vendor\ExtKey\Command\SimpleCommandController;
+
 
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-$extensionPath = ExtensionManagementUtility::extPath('additional_scheduler');
-$tasks = Utils::getTasksList();
+$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('additional_scheduler');
+$tasks = \Sng\Additionalscheduler\Utils::getTasksList();
 
 foreach ($tasks as $task) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['Sng\\Additionalscheduler\\Tasks\\' . $task . 'Task'] = [
@@ -23,5 +20,5 @@ foreach ($tasks as $task) {
 
 if (TYPO3_MODE === 'BE') {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers']['additional_scheduler-additional_scheduler'] =
-        AdditionalSchedulerCommandController::class;
+        \Sng\Additionalscheduler\Command\AdditionalSchedulerCommandController::class;
 }
