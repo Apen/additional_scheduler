@@ -14,7 +14,6 @@ use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 /**
  * Class Query2csvFields
- * @author Marc Munos
  * @package Sng\Additionalscheduler\Tasks
  */
 class Query2csvFields extends  BaseAdditionalFieldProvider

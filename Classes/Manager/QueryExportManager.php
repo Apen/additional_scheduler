@@ -15,7 +15,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class QueryExportManager
- * @author Marc Munos
  * @package Sng\Additionalscheduler\Manager
  */
 class QueryExportManager
