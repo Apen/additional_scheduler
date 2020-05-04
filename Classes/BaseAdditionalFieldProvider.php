@@ -40,7 +40,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      * @see BaseAdditionalFieldProvider::getFieldName()
      * @return string
      */
-    abstract protected function getTaskNS();
+    abstract protected function getTaskNs();
 
     /**
      * Code template repository
@@ -85,7 +85,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      */
     protected function getFieldName($field)
     {
-        return implode('_', [$this->pluginNS, $this->getTaskNS(), $field]);
+        return implode('_', [$this->pluginNS, $this->getTaskNs(), $field]);
     }
 
     /**

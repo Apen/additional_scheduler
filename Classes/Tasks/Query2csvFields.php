@@ -64,7 +64,7 @@ class Query2csvFields extends  BaseAdditionalFieldProvider
     /**
      * @return string
      */
-    protected function getTaskNS()
+    protected function getTaskNs()
     {
         return 'query2csv';
     }

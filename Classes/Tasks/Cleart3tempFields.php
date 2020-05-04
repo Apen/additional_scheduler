@@ -32,7 +32,7 @@ class Cleart3tempFields extends BaseAdditionalFieldProvider
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
      */
-    protected function getTaskNS()
+    protected function getTaskNs()
     {
         return 'cleart3temp';
 
