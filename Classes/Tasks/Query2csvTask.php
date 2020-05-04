@@ -11,12 +11,19 @@ namespace Sng\Additionalscheduler\Tasks;
 use Sng\Additionalscheduler\BaseEmailTask;
 use Sng\Additionalscheduler\Manager\CsvExportManager;
 use Sng\Additionalscheduler\Utils;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class Query2csvTask
+ * @author Marc Munos
+ * @package Sng\Additionalscheduler\Tasks
+ */
 class Query2csvTask extends BaseEmailTask
 {
 
+    /**
+     * @return bool
+     */
     public function execute()
     {
 

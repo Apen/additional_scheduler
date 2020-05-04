@@ -12,10 +12,19 @@ use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
+/**
+ * Class Query2csvFields
+ * @author Marc Munos
+ * @package Sng\Additionalscheduler\Tasks
+ */
 class Query2csvFields extends  BaseAdditionalFieldProvider
 {
 
-
+    /**
+     * @param array $submittedData
+     * @param SchedulerModuleController $parentObject
+     * @return bool
+     */
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
@@ -53,6 +62,9 @@ class Query2csvFields extends  BaseAdditionalFieldProvider
         ];
     }
 
+    /**
+     * @return string
+     */
     protected function getTaskNS()
     {
         return 'query2csv';

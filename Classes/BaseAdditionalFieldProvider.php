@@ -3,22 +3,23 @@
 namespace Sng\Additionalscheduler;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
+use \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
-abstract class BaseAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
+
+/**
+ * Class BaseAdditionalFieldProvider
+ * @author Marc Munos
+ * @package Sng\Additionalscheduler
+ */
+abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
 {
     /**
      * plugin namespace, mainly to compute formfield names
@@ -26,6 +27,14 @@ abstract class BaseAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addit
      * @var string
      */
     protected $pluginNS = 'additionalscheduler';
+
+    /**
+     * The locallang path
+     * @see BaseAdditionalFieldProvider::addMessage()
+     * @var string
+     */
+    protected $locallangPath = 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf';
+
 
     /**
      * Task namespace, mainly to compute formfield names
@@ -118,6 +127,11 @@ abstract class BaseAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addit
         return $additionalFields;
     }
 
+    /**
+     * @param array $taskInfo
+     * @param AbstractTask $task
+     * @param SchedulerModuleController $parentObject
+     */
     protected function initFields(&$taskInfo, $task, SchedulerModuleController $parentObject)
     {
         foreach ($this->getFields() as $field => $data) {
@@ -129,6 +143,10 @@ abstract class BaseAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Addit
         }
     }
 
+    /**
+     * @param array $submittedData
+     * @param AbstractTask $task
+     */
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         foreach (array_keys($this->getFields()) as $field) {
