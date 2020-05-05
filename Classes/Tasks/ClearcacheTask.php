@@ -10,8 +10,8 @@ namespace Sng\Additionalscheduler\Tasks;
  */
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 class ClearcacheTask extends AbstractTask
 {

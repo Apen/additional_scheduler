@@ -9,78 +9,66 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\AdditionalFieldProviderInterface;
-use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
+use Sng\Additionalscheduler\Utils;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
-class ExecFields extends AdditionalFieldProviderInterface
+class ExecFields extends BaseAdditionalFieldProvider
 {
-    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
-    {
-        if (empty($taskInfo['additionalscheduler_exec_path'])) {
-            $taskInfo['additionalscheduler_exec_path'] = $parentObject->CMD == 'edit' ? $task->path : '';
-        }
-
-        if (empty($taskInfo['additionalscheduler_exec_subject'])) {
-            $taskInfo['additionalscheduler_exec_subject'] = $parentObject->CMD == 'edit' ? $task->subject : '';
-        }
-
-        if (empty($taskInfo['additionalscheduler_exec_email'])) {
-            $taskInfo['additionalscheduler_exec_email'] = $parentObject->CMD == 'edit' ? $task->email : '';
-        }
-        $additionalFields = [];
-        $fieldID = 'task_path';
-        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_path]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_path'] . '" size="50" />';
-        $additionalFields[$fieldID] = [
-            'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:execdir',
-            'cshKey'   => 'additional_scheduler',
-            'cshLabel' => $fieldID
-        ];
-        $fieldID = 'task_subject';
-        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_subject]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_subject'] . '" size="50" />';
-        $additionalFields[$fieldID] = [
-            'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:subject',
-            'cshKey'   => 'additional_scheduler',
-            'cshLabel' => $fieldID
-        ];
-        $fieldID = 'task_email';
-        $fieldCode = '<input type="text" name="tx_scheduler[additionalscheduler_exec_email]" id="' . $fieldID . '" value="' . $taskInfo['additionalscheduler_exec_email'] . '" size="50" />';
-        $additionalFields[$fieldID] = [
-            'code'     => $fieldCode,
-            'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:email',
-            'cshKey'   => 'additional_scheduler',
-            'cshLabel' => $fieldID
-        ];
-        return $additionalFields;
-    }
-
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
-        if (empty($submittedData['additionalscheduler_exec_path'])) {
-            $this->addMessage($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:savedirerror'), FlashMessage::ERROR);
+        $pathFieldName = $this->getFieldName('execdir');
+        if (empty($submittedData[$pathFieldName])) {
+            $this->addMessage('execdirerror', FlashMessage::ERROR, $parentObject);
             $result = false;
         }
         // check script is executable
-        $script = GeneralUtility::trimExplode(' ', $submittedData['additionalscheduler_exec_path']);
-        if (substr($script[0], 0, 1) != '/') {
-            $script[0] = \Sng\Additionalscheduler\Utils::getPathSite() . $script[0];
+        $script = GeneralUtility::trimExplode(' ', $submittedData[$pathFieldName]);
+        if (substr($script[0], 0, 1) !== '/') {
+            $script[0] = Utils::getPathSite() . $script[0];
         }
         if (!empty($script[0]) && !is_executable($script[0])) {
-            $this->addMessage(sprintf($GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:mustbeexecutable'), $submittedData['additionalscheduler_exec_path']), FlashMessage::ERROR);
+            $this->addMessage(sprintf(
+                $GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'),
+                $submittedData['additionalscheduler_exec_path']
+            ), FlashMessage::ERROR, $parentObject);
             $result = false;
         }
         return $result;
     }
 
-    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
+    /**
+     * Task namespace, mainly to compute formfield names
+     *
+     * @return string
+     * @see BaseAdditionalFieldProvider::getFieldName()
+     */
+    protected function getTaskNs()
     {
-        $task->path = $submittedData['additionalscheduler_exec_path'];
-        $task->email = $submittedData['additionalscheduler_exec_email'];
-        $task->subject = $submittedData['additionalscheduler_exec_subject'];
+        return 'exec';
+    }
+
+    /**
+     * Fields structure
+     * keys are field's names, values are formfield data
+     * eg
+     * [
+     *   'foo' => 'input',
+     *   'bar' => ['code' => 'input', 'extraAttributes' => 'class="baz"', 'default' => 'biz'],
+     * ]
+     * By implementing this method, fields will be auto-added to the form
+     *
+     * @return array
+     */
+    protected function getFields()
+    {
+        return [
+            'execdir' => 'input',
+            'subject' => 'input',
+            'email'   => 'input',
+        ];
     }
 }

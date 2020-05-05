@@ -9,11 +9,12 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\Utils;
 use Sng\Additionalscheduler\BaseEmailTask;
+use Sng\Additionalscheduler\Utils;
 
 class SavewebsiteTask extends BaseEmailTask
 {
+    public $savedir;
     /**
      * @var string
      */
@@ -21,11 +22,10 @@ class SavewebsiteTask extends BaseEmailTask
 
     public function execute()
     {
-        require_once(\Sng\Additionalscheduler\Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Classes/Utils.php');
-
         // exec SH
-        $saveScript = \Sng\Additionalscheduler\Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
-        $cmd = $saveScript . ' -p ' . \Sng\Additionalscheduler\Utils::getPathSite() . ' -o ' . $this->path . ' -f';
+        $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
+        $cmd = $saveScript . ' -p ' . Utils::getPathSite() . ' -o ' . $this->savedir . ' -f';
+
         $return = shell_exec($cmd . ' 2>&1');
 
         // mail
@@ -42,6 +42,6 @@ class SavewebsiteTask extends BaseEmailTask
 
     public function getAdditionalInformation()
     {
-        return $this->path;
+        return $this->savedir;
     }
 }
