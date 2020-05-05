@@ -17,10 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MailUtility;
 
 /**
- * tx_additionalscheduler_utils
  * Class with some utils functions
- *
- * @author     Yohann CERDAN <cerdanyohann@yahoo.fr>
  */
 class Utils
 {
@@ -94,11 +91,11 @@ class Utils
                 }
             }
             // add Plain
-            if ($type == 'plain') {
+            if ($type === 'plain') {
                 $mail->addPart($message, 'text/plain');
             }
             // add HTML
-            if ($type == 'html') {
+            if ($type === 'html') {
                 $mail->setBody($message, 'text/html');
             }
             // send

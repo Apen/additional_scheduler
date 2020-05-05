@@ -1,4 +1,5 @@
 <?php
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -20,11 +21,51 @@ class Query2csvTask extends BaseEmailTask
 {
 
     /**
+     * @var string
+     */
+    public $query;
+
+    /**
+     * @var string
+     */
+    public $delimiter;
+
+    /**
+     * @var string
+     */
+    public $enclosure;
+
+    /**
+     * @var string
+     */
+    public $escape;
+
+    /**
+     * @var int
+     */
+    public $noHeader;
+
+    /**
+     * @var string
+     */
+    public $filename;
+
+    /**
+     * @var int
+     */
+    public $noDatetimeFlag;
+
+    /**
+     * @var string
+     */
+    public $body;
+
+    /**
      * @return bool
      */
     public function execute()
     {
-        $this->query = preg_replace('/\r\n/', ' ', $this->query);
+        $this->query = preg_replace('#\r\n#', ' ', $this->query);
 
         $mailSubject = $this->subject ?: $this->getDefaultSubject('query2csv');
         $path = GeneralUtility::makeInstance(CsvExportManager::class)
@@ -33,14 +74,13 @@ class Query2csvTask extends BaseEmailTask
             ->setEnclosure($this->enclosure)
             ->setEscape($this->escape)
             ->setNoHeader($this->noHeader)
-            ->renderFile($this->filename)
-        ;
+            ->renderFile($this->filename);
         $filename = str_replace('.csv', '', $this->filename);
-        if (!$this->noDatetimeFlag) {
+        if ($this->noDatetimeFlag === 0) {
             $filename .= date('-Y-m-d_Hi');
         }
         $filename .= '.csv';
-        if (empty($this->email) !== true) {
+        if (!empty($this->email)) {
             Utils::sendEmail($this->email, $mailSubject, $this->body, 'plain', 'utf-8', [$filename => $path]);
         }
         unlink($path);

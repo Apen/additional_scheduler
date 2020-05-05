@@ -32,7 +32,7 @@ class Cleart3tempTask extends AbstractTask
      * to be handled and logged by the client implementations.
      * Should return true on successful execution, false on error.
      *
-     * @return bool    Returns true on successful execution, false on error
+     * @return bool
      */
     public function execute()
     {
@@ -105,7 +105,7 @@ class Cleart3tempTask extends AbstractTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return       string    Information to display
+     * @return string
      */
     public function getAdditionalInformation()
     {

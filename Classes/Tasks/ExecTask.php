@@ -24,7 +24,7 @@ class ExecTask extends BaseEmailTask
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
-     * @return       bool    returns TRUE on success, FALSE on failure
+     * @return bool
      */
     public function execute()
     {
@@ -50,7 +50,7 @@ class ExecTask extends BaseEmailTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return       string    Information to display
+     * @return string
      */
     public function getAdditionalInformation()
     {
