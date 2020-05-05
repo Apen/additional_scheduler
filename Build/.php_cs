@@ -1,5 +1,9 @@
 <?php
 
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('Build')
+    ->in(__DIR__ . '/../');
+
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setUsingCache(false)
@@ -47,4 +51,5 @@ return PhpCsFixer\Config::create()
         'single_quote' => true,
         'whitespace_after_comma_in_array' => true,
         'single_line_after_imports' => true,
-    ]);
+    ])
+    ->setFinder($finder);
