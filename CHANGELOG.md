@@ -1,6 +1,7 @@
-Latest release : 1.4.0 (2020-05-01 19:36:49 +0200)
+Latest release : 1.5.0 (2020-05-05 22:06:31 +0200)
 
 
+* 1.5.0 (2020-05-05 22:06:31 +0200) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.4.0...1.5.0)
 * 1.4.0 (2020-05-01 19:36:49 +0200) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.3.2...1.4.0)
 * 1.3.2 (2019-11-04 17:25:19 +0100) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.3.1...1.3.2)
 * 1.3.1 (2019-11-04 17:07:31 +0100) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.3.0...1.3.1)
