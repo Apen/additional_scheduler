@@ -9,6 +9,7 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Sng\Additionalscheduler\Utils;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 class Cleart3tempTask extends AbstractTask
@@ -41,7 +42,7 @@ class Cleart3tempTask extends AbstractTask
         $this->stats['nbfilesdeletedsize'] = 0;
         $this->stats['nbdirectories'] = 0;
 
-        $this->emptyDirectory(\Sng\Additionalscheduler\Utils::getPathSite() . 'typo3temp', $this->nbdays);
+        $this->emptyDirectory(Utils::getPathSite() . 'typo3temp', $this->nbdays);
 
         if (defined('TYPO3_cliMode') && TYPO3_cliMode) {
             echo 'Nb files: ' . $this->stats['nbfiles'] . ' (' . $this->stats['nbfilessize'] . ' ko)' . LF;
