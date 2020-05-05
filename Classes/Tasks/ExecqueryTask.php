@@ -17,12 +17,19 @@ use Sng\Additionalscheduler\Utils;
 
 class ExecqueryTask extends BaseEmailTask
 {
+
+    /**
+     * @var string
+     */
     public $emailtemplate;
     /**
      * @var string
      */
     public $query;
 
+    /**
+     * @return bool
+     */
     public function execute()
     {
         $this->query = preg_replace('#\r\n#', ' ', $this->query);

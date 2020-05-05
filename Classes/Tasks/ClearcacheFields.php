@@ -9,22 +9,38 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\AdditionalFieldProviderInterface;
+use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
-use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
-class ClearcacheFields extends AdditionalFieldProviderInterface
+class ClearcacheFields extends BaseAdditionalFieldProvider
 {
-    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
-    {
-    }
-
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         return true;
     }
 
-    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
+    /**
+     * Task namespace, mainly to compute formfield names
+     * @return string
+     * @see BaseAdditionalFieldProvider::getFieldName()
+     */protected function getTaskNs()
     {
+        return 'clearcache';
+    }
+
+    /**
+     * Fields structure
+     * keys are field's names, values are formfield data
+     * eg
+     * [
+     *   'foo' => 'input',
+     *   'bar' => ['code' => 'input', 'extraAttributes' => 'class="baz"', 'default' => 'biz'],
+     * ]
+     * By implementing this method, fields will be auto-added to the form
+     * @return array
+     */
+    protected function getFields()
+    {
+        return [];
     }
 }
