@@ -9,8 +9,8 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\Utils;
 use Sng\Additionalscheduler\BaseEmailTask;
+use Sng\Additionalscheduler\Utils;
 
 class SavewebsiteTask extends BaseEmailTask
 {

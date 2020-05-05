@@ -10,10 +10,10 @@ namespace Sng\Additionalscheduler\Tasks;
  */
 
 use Sng\Additionalscheduler\BaseEmailTask;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Sng\Additionalscheduler\Templating;
 use Sng\Additionalscheduler\Utils;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ExecqueryTask extends BaseEmailTask
 {

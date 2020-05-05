@@ -21,8 +21,6 @@ use TYPO3\CMS\Core\Utility\MailUtility;
  * Class with some utils functions
  *
  * @author     Yohann CERDAN <cerdanyohann@yahoo.fr>
- * @package    TYPO3
- * @subpackage additional_scheduler
  */
 class Utils
 {
@@ -33,7 +31,7 @@ class Utils
      */
     public static function getTasksList()
     {
-        return ['Savewebsite', 'Exec', 'Execquery', 'Clearcache', 'Cleart3temp', 'Query2csv',];
+        return ['Savewebsite', 'Exec', 'Execquery', 'Clearcache', 'Cleart3temp', 'Query2csv'];
     }
 
     /**
@@ -107,6 +105,4 @@ class Utils
             $mail->send();
         }
     }
-
 }
-

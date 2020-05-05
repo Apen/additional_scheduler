@@ -9,14 +9,11 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
-use Sng\Additionalscheduler\Utils;
-use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 class SavewebsiteFields extends BaseAdditionalFieldProvider
 {
-
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
@@ -29,7 +26,7 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
         // check save script is executable
         $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
         if (!is_executable($saveScript)) {
-            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL($this->locallangPath.':mustbeexecutable'), $saveScript), FlashMessage::ERROR);
+            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'), $saveScript), FlashMessage::ERROR);
             $result = false;
         }
         return $result;

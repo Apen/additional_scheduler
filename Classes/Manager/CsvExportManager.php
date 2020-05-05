@@ -9,12 +9,8 @@ namespace Sng\Additionalscheduler\Manager;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
  * Class CsvExportManager
- * @package Sng\Additionalscheduler\Manager
  */
 class CsvExportManager extends QueryExportManager
 {
@@ -84,7 +80,7 @@ class CsvExportManager extends QueryExportManager
     public function renderFile($filename)
     {
         $temp = tempnam(sys_get_temp_dir(), $filename);
-        $handle = fopen($temp, "w");
+        $handle = fopen($temp, 'w');
         $addHeader = !$this->noHeader;
         $this->parseResultSet(function ($row) use ($handle,$addHeader) {
             static $first = true;
@@ -98,7 +94,4 @@ class CsvExportManager extends QueryExportManager
         fclose($handle);
         return $temp;
     }
-
-
-
 }

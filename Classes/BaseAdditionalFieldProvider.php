@@ -9,14 +9,12 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
+use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
-
 /**
  * Class BaseAdditionalFieldProvider
- * @package Sng\Additionalscheduler
  */
 abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
 {
@@ -34,7 +32,6 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      */
     protected $locallangPath = 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf';
 
-
     /**
      * Task namespace, mainly to compute formfield names
      * @see BaseAdditionalFieldProvider::getFieldName()
@@ -48,7 +45,8 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      *
      * @return array
      */
-    protected function getCodeTemplates() {
+    protected function getCodeTemplates()
+    {
         return [
             'input' => [
                 'code'=> '<input type="text" name="tx_scheduler[%name%]" id="%id%" value="%value%" %extraAttributes% />',
@@ -97,7 +95,6 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      */
     public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
     {
-
         $this->initFields($taskInfo, $task, $parentObject);
         $additionalFields = [];
         $codeTemplates = $this->getCodeTemplates();
@@ -106,7 +103,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
             $extraAttributes = isset($data['extraAttributes'])
                 ? $data['extraAttributes']
                 : $codeTemplates[$templateName]['extraAttributes'];
-            $fieldID = 'task_'.$field;
+            $fieldID = 'task_' . $field;
             $value = $taskInfo[$this->getFieldName($field)];
             $tr = [
                 '%name%' => $this->getFieldName($field),
@@ -116,12 +113,12 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
             ];
             // escape data in tag attributes (in case value contains quotes), then add extra attributes
             $tr = array_map('htmlspecialchars', $tr) + ['%extraAttributes%' => $extraAttributes];
-            $additionalFields[$fieldID] = array(
+            $additionalFields[$fieldID] = [
                 'code'     => strtr($codeTemplates[$templateName]['code'], $tr),
-                'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:'.$field,
+                'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:' . $field,
                 'cshKey'   => 'additional_scheduler',
                 'cshLabel' => $fieldID
-            );
+            ];
         }
         return $additionalFields;
     }
@@ -163,7 +160,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      */
     protected function addMessage(string $trKey, $alert, SchedulerModuleController $parentObject)
     {
-        $message  = $GLOBALS['LANG']->sL($this->locallangPath.':'.$trKey);
+        $message  = $GLOBALS['LANG']->sL($this->locallangPath . ':' . $trKey);
         return $parentObject->addMessage($message, $alert);
     }
 }

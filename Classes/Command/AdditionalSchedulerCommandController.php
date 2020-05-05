@@ -11,11 +11,10 @@ namespace Sng\Additionalscheduler\Command;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
+use TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
 
 /**
  * Class AdditionalSchedulerCommandController
- * @package Sng\Additionalscheduler\Command
  */
 class AdditionalSchedulerCommandController extends CommandController
 {
@@ -26,7 +25,6 @@ class AdditionalSchedulerCommandController extends CommandController
      */
     public function fixUpdateTo14Command()
     {
-
         $log = [];
         // exec query
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('additional_scheduler');
@@ -40,18 +38,16 @@ class AdditionalSchedulerCommandController extends CommandController
                      'tx_additionalscheduler_savewebsite' => 'SavewebsiteTask',
                      'tx_additionalscheduler_query2csv' => 'Query2csvTask',
                  ] as $oldName => $newName) {
-            $log[] = 'Renaming '.$oldName. ' to '.$newName;
+            $log[] = 'Renaming ' . $oldName . ' to ' . $newName;
             $log[] = "----------------------------------------------------------------------------\n";
-            $query = sprintf($queryTpl, $this->getSerializedName($oldName)
-                , addslashes($this->getSerializedName($namespace.$newName)));
-            $log[] = 'SQL query : ' ;
-            $log[] = $query ;
+            $query = sprintf($queryTpl, $this->getSerializedName($oldName), addslashes($this->getSerializedName($namespace . $newName)));
+            $log[] = 'SQL query : ';
+            $log[] = $query;
             $log[] = "\n";
             $stmt = $queryBuilder->getConnection()->executeQuery($query);
-            $log[] = $stmt->rowCount(). " rows updated\n";
+            $log[] = $stmt->rowCount() . " rows updated\n";
         }
         return implode("\n", $log);
-
     }
 
     /**
@@ -60,7 +56,6 @@ class AdditionalSchedulerCommandController extends CommandController
      */
     protected function getSerializedName($str)
     {
-        return 'O:'.strlen($str).':"'.$str.'"';
+        return 'O:' . strlen($str) . ':"' . $str . '"';
     }
-
 }
