@@ -36,7 +36,7 @@ class Utils
      */
     public static function getPathSite()
     {
-        return method_exists('Environment', 'getPublicPath')
+        return method_exists('TYPO3\\CMS\\Core\\Core\\Environment', 'getPublicPath')
             ? Environment::getPublicPath() . '/'
             : PATH_site;
     }
