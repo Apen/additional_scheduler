@@ -9,11 +9,9 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
-use Sng\Additionalscheduler\Utils;
-use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 class ExecFields extends BaseAdditionalFieldProvider
 {
@@ -31,8 +29,10 @@ class ExecFields extends BaseAdditionalFieldProvider
             $script[0] = Utils::getPathSite() . $script[0];
         }
         if (!empty($script[0]) && !is_executable($script[0])) {
-            $this->addMessage(sprintf($GLOBALS['LANG']->sL($this->locallangPath.':mustbeexecutable'),
-                $submittedData['additionalscheduler_exec_path']), FlashMessage::ERROR);
+            $this->addMessage(sprintf(
+                $GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'),
+                $submittedData['additionalscheduler_exec_path']
+            ), FlashMessage::ERROR);
             $result = false;
         }
         return $result;

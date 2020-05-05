@@ -9,14 +9,11 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
-use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 class Cleart3tempFields extends BaseAdditionalFieldProvider
 {
-
-
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
     {
         $result = true;
@@ -35,7 +32,6 @@ class Cleart3tempFields extends BaseAdditionalFieldProvider
     protected function getTaskNs()
     {
         return 'cleart3temp';
-
     }
 
     /**

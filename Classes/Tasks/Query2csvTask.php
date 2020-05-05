@@ -15,7 +15,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class Query2csvTask
- * @package Sng\Additionalscheduler\Tasks
  */
 class Query2csvTask extends BaseEmailTask
 {
@@ -25,7 +24,6 @@ class Query2csvTask extends BaseEmailTask
      */
     public function execute()
     {
-
         $this->query = preg_replace('/\r\n/', ' ', $this->query);
 
         $mailSubject = $this->subject ?: $this->getDefaultSubject('query2csv');
@@ -48,8 +46,4 @@ class Query2csvTask extends BaseEmailTask
         unlink($path);
         return true;
     }
-
-
-
-
 }
