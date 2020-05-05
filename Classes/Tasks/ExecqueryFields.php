@@ -9,6 +9,7 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 

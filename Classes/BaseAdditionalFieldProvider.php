@@ -99,10 +99,8 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
         $additionalFields = [];
         $codeTemplates = $this->getCodeTemplates();
         foreach ($this->getFields() as $field => $data) {
-            $templateName = isset($data['code']) ? $data['code'] : $data;
-            $extraAttributes = isset($data['extraAttributes'])
-                ? $data['extraAttributes']
-                : $codeTemplates[$templateName]['extraAttributes'];
+            $templateName = $data['code'] ?? $data;
+            $extraAttributes = $data['extraAttributes'] ?? $codeTemplates[$templateName]['extraAttributes'];
             $fieldID = 'task_' . $field;
             $value = $taskInfo[$this->getFieldName($field)];
             $tr = [
@@ -133,7 +131,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
         foreach ($this->getFields() as $field => $data) {
             $name = $this->getFieldName($field);
             if (empty($taskInfo[$name])) {
-                $default = isset($data['default']) ? $data['default'] : '';
+                $default = $data['default'] ?? '';
                 $taskInfo[$name] = $task->$field ?: $default;
             }
         }
@@ -146,9 +144,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         foreach (array_keys($this->getFields()) as $field) {
-            $task->$field = isset($submittedData[$this->getFieldName($field)])
-                ? $submittedData[$this->getFieldName($field)]
-                : '';
+            $task->$field = $submittedData[$this->getFieldName($field)] ?? '';
         }
     }
 

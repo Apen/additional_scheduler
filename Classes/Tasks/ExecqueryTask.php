@@ -99,7 +99,7 @@ class ExecqueryTask extends BaseEmailTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return       string    Information to display
+     * @return string
      */
     public function getAdditionalInformation()
     {

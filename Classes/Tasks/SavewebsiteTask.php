@@ -14,6 +14,7 @@ use Sng\Additionalscheduler\Utils;
 
 class SavewebsiteTask extends BaseEmailTask
 {
+    public $savedir;
     /**
      * @var string
      */

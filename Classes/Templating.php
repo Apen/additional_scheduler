@@ -15,8 +15,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class provides methods to generate the templates reports
- *
- * @author         CERDAN Yohann <cerdanyohann@yahoo.fr>
  */
 class Templating
 {
