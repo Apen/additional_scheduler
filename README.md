@@ -1,19 +1,21 @@
 # additional_scheduler : Useful tasks in scheduler module
 =======================================================
->  Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...
+>  Useful tasks in the scheduler module : full backup, send query result in mail as HTML or CSV, exec SH script with reports...
 
 ## What does it do?
 
 This extension add new process in your scheduler module, for example you can :
 * backup your entire TYPO3 website (with mail report)
 * exec a SH script (with mail report)
-* exec a SQL query (with mail report and old templating)
+* exec a SQL query with data put into a HTML table in an email
+* [NEW in 1.5] exec a SQL query with CSV as mail attachment (with options for separator, escaping, etc.) 
 * clear caches
 * clear files in typo3temp older than x days
 
+
 Do not hesitate to contact me if you have any good ideas.
 
-This extension work with TYPO3 6.2.x-7.6.x.
+This extension work with TYPO3 6.2.x-10.x.
 
 ## Screenshots
 

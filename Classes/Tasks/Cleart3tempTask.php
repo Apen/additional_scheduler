@@ -9,6 +9,7 @@ namespace Sng\Additionalscheduler\Tasks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Sng\Additionalscheduler\Utils;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 class Cleart3tempTask extends AbstractTask
@@ -31,7 +32,7 @@ class Cleart3tempTask extends AbstractTask
      * to be handled and logged by the client implementations.
      * Should return true on successful execution, false on error.
      *
-     * @return bool    Returns true on successful execution, false on error
+     * @return bool
      */
     public function execute()
     {
@@ -41,7 +42,7 @@ class Cleart3tempTask extends AbstractTask
         $this->stats['nbfilesdeletedsize'] = 0;
         $this->stats['nbdirectories'] = 0;
 
-        $this->emptyDirectory(\Sng\Additionalscheduler\Utils::getPathSite() . 'typo3temp', $this->nbdays);
+        $this->emptyDirectory(Utils::getPathSite() . 'typo3temp', $this->nbdays);
 
         if (defined('TYPO3_cliMode') && TYPO3_cliMode) {
             echo 'Nb files: ' . $this->stats['nbfiles'] . ' (' . $this->stats['nbfilessize'] . ' ko)' . LF;
@@ -104,7 +105,7 @@ class Cleart3tempTask extends AbstractTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return       string    Information to display
+     * @return string
      */
     public function getAdditionalInformation()
     {

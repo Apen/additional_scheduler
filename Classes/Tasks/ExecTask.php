@@ -18,17 +18,17 @@ class ExecTask extends BaseEmailTask
     /**
      * @var string
      */
-    public $path;
+    public $execdir;
 
     /**
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
-     * @return       bool    returns TRUE on success, FALSE on failure
+     * @return bool
      */
     public function execute()
     {
-        $cmd = substr($this->path, 0, 1) === '/' ? $this->path : \Sng\Additionalscheduler\Utils::getPathSite() . $this->path;
+        $cmd = substr($this->execdir, 0, 1) === '/' ? $this->execdir : Utils::getPathSite() . $this->execdir;
 
         $return = shell_exec($cmd . ' 2>&1');
 
@@ -50,10 +50,10 @@ class ExecTask extends BaseEmailTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return       string    Information to display
+     * @return string
      */
     public function getAdditionalInformation()
     {
-        return $this->path;
+        return $this->execdir;
     }
 }

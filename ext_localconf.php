@@ -15,3 +15,8 @@ foreach ($tasks as $task) {
         'additionalFields' => 'Sng\\Additionalscheduler\\Tasks\\' . $task . 'Fields'
     ];
 }
+
+if (TYPO3_MODE === 'BE') {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers']['additional_scheduler-additional_scheduler'] =
+        \Sng\Additionalscheduler\Command\AdditionalSchedulerCommandController::class;
+}

@@ -10,19 +10,26 @@ namespace Sng\Additionalscheduler\Tasks;
  */
 
 use Sng\Additionalscheduler\BaseEmailTask;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Sng\Additionalscheduler\Templating;
 use Sng\Additionalscheduler\Utils;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ExecqueryTask extends BaseEmailTask
 {
+
+    /**
+     * @var string
+     */
     public $emailtemplate;
     /**
      * @var string
      */
     public $query;
 
+    /**
+     * @return bool
+     */
     public function execute()
     {
         $this->query = preg_replace('#\r\n#', ' ', $this->query);
@@ -92,7 +99,7 @@ class ExecqueryTask extends BaseEmailTask
      * This additional information is used - for example - in the Scheduler's BE module
      * This method should be implemented in most task classes
      *
-     * @return       string    Information to display
+     * @return string
      */
     public function getAdditionalInformation()
     {
