@@ -80,7 +80,7 @@ Go to the scheduler module and enjoy it.
 
 I was in an interior version of 1.4 and all my tasks are broken, how can i do?
 
-> Run the dedicated migratio command : typo3/sysext/core/bin/typo3 additionalscheduler:fixupdateto14
+> Run the dedicated migration command : typo3/sysext/core/bin/typo3 additionalscheduler:fixupdateto14
 
 
 
