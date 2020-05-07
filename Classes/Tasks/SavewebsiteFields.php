@@ -21,7 +21,7 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
         $result = true;
         // check dir is writable
         $pathFieldName = $this->getFieldName('savedir');
-        if ((empty($submittedData[$pathFieldName])) || (!is_writable($pathFieldName))) {
+        if ((empty($submittedData[$pathFieldName])) || (!is_writable($submittedData[$pathFieldName]))) {
             $this->addMessage('savedirerror', FlashMessage::ERROR, $parentObject);
             $result = false;
         }
