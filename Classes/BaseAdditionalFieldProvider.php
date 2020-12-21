@@ -2,6 +2,7 @@
 
 namespace Sng\Additionalscheduler;
 
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -9,6 +10,8 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -20,6 +23,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
 {
     /**
      * plugin namespace, mainly to compute formfield names
+     *
      * @see BaseAdditionalFieldProvider::getFieldName()
      * @var string
      */
@@ -27,6 +31,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
 
     /**
      * The locallang path
+     *
      * @see BaseAdditionalFieldProvider::addMessage()
      * @var string
      */
@@ -34,8 +39,9 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
 
     /**
      * Task namespace, mainly to compute formfield names
-     * @see BaseAdditionalFieldProvider::getFieldName()
+     *
      * @return string
+     * @see BaseAdditionalFieldProvider::getFieldName()
      */
     abstract protected function getTaskNs();
 
@@ -49,15 +55,15 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
     {
         return [
             'input' => [
-                'code'=> '<input type="text" name="tx_scheduler[%name%]" id="%id%" value="%value%" %extraAttributes% />',
+                'code' => '<input type="text" name="tx_scheduler[%name%]" id="%id%" value="%value%" %extraAttributes% />',
                 'extraAttributes' => 'size="50"',
             ],
             'textarea' => [
-                'code'=> '<textarea name="tx_scheduler[%name%]" id="%id%" %extraAttributes%/>%value%</textarea>',
+                'code' => '<textarea name="tx_scheduler[%name%]" id="%id%" %extraAttributes%/>%value%</textarea>',
                 'extraAttributes' => 'cols="50" rows="10"',
             ],
             'checkbox' => [
-                'code'=> '<input type="checkbox" name="tx_scheduler[%name%]" id="%id%" value="1" %extraAttributes% %checked%/>',
+                'code' => '<input type="checkbox" name="tx_scheduler[%name%]" id="%id%" value="1" %extraAttributes% %checked%/>',
                 'extraAttributes' => '',
             ],
         ];
@@ -72,13 +78,15 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      *   'bar' => ['code' => 'input', 'extraAttributes' => 'class="baz"', 'default' => 'biz'],
      * ]
      * By implementing this method, fields will be auto-added to the form
+     *
      * @return array
      */
     abstract protected function getFields();
 
     /**
      * Compute the fieldname, based on plugin and task namespaces
-     * @param $field
+     *
+     * @param string $field
      * @return string
      */
     protected function getFieldName($field)
@@ -88,8 +96,9 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
 
     /**
      * Auto-add additionnal fields, based on the getFields() implementation
-     * @param array $taskInfo
-     * @param AbstractTask $task
+     *
+     * @param array                     $taskInfo
+     * @param AbstractTask              $task
      * @param SchedulerModuleController $parentObject
      * @return array
      */
@@ -112,9 +121,9 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
             // escape data in tag attributes (in case value contains quotes), then add extra attributes
             $tr = array_map('htmlspecialchars', $tr) + ['%extraAttributes%' => $extraAttributes];
             $additionalFields[$fieldID] = [
-                'code'     => strtr($codeTemplates[$templateName]['code'], $tr),
-                'label'    => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:' . $field,
-                'cshKey'   => 'additional_scheduler',
+                'code' => strtr($codeTemplates[$templateName]['code'], $tr),
+                'label' => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:' . $field,
+                'cshKey' => 'additional_scheduler',
                 'cshLabel' => $fieldID
             ];
         }
@@ -122,8 +131,8 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
     }
 
     /**
-     * @param array $taskInfo
-     * @param AbstractTask $task
+     * @param array                     $taskInfo
+     * @param AbstractTask              $task
      * @param SchedulerModuleController $parentObject
      */
     protected function initFields(&$taskInfo, $task, SchedulerModuleController $parentObject)
@@ -138,7 +147,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
     }
 
     /**
-     * @param array $submittedData
+     * @param array        $submittedData
      * @param AbstractTask $task
      */
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
@@ -150,13 +159,22 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
 
     /**
      * Shortcut to add error message
-     * @param $trKey - the translation key in localang
-     * @param $alert
-     * @param SchedulerModuleController $parentObject
+     *
+     * @param string $trKey - the translation key in localang
+     * @param string $alert
      */
-    protected function addMessage(string $trKey, $alert, SchedulerModuleController $parentObject)
+    protected function addMessage(string $trKey, $alert)
     {
-        $message  = $GLOBALS['LANG']->sL($this->locallangPath . ':' . $trKey);
-        return $parentObject->addMessage($message, $alert);
+        $message = $GLOBALS['LANG']->sL($this->locallangPath . ':' . $trKey);
+        $flashMessage = GeneralUtility::makeInstance(
+            FlashMessage::class,
+            $message,
+            '',
+            $alert,
+            true
+        );
+        $service = GeneralUtility::makeInstance(FlashMessageService::class);
+        $flashMessageQueue = $service->getMessageQueueByIdentifier();
+        $flashMessageQueue->enqueue($flashMessage);
     }
 }
