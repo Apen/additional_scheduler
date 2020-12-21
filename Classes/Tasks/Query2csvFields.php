@@ -1,4 +1,5 @@
 <?php
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -19,7 +20,7 @@ class Query2csvFields extends BaseAdditionalFieldProvider
 {
 
     /**
-     * @param array $submittedData
+     * @param array                     $submittedData
      * @param SchedulerModuleController $parentObject
      * @return bool
      */
@@ -27,7 +28,7 @@ class Query2csvFields extends BaseAdditionalFieldProvider
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
-            $this->addMessage('query.error.required', FlashMessage::ERROR, $parentObject);
+            $this->addMessage('query.error.required', FlashMessage::ERROR);
             $result = false;
         }
         return $result;
@@ -42,6 +43,7 @@ class Query2csvFields extends BaseAdditionalFieldProvider
      *   'bar' => ['code' => 'input', 'extraAttributes' => 'class="baz"],
      * ]
      * By implementing this method, fields will be auto-added to the form
+     *
      * @return array
      */
     protected function getFields()

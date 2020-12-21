@@ -29,10 +29,11 @@ abstract class BaseEmailTask extends AbstractTask
 
     /**
      * Default subject for emails
-     * @param $task
+     *
+     * @param string $task
      * @return string
      */
-    protected function getDefaultSubject($task)
+    protected function getDefaultSubject($task): string
     {
         return '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.' . $task . '.name');
     }

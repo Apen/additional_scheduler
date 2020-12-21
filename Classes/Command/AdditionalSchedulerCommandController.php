@@ -21,6 +21,7 @@ class AdditionalSchedulerCommandController extends CommandController
 
     /**
      * Rename old classes in tx_scheduler_task to fit with the new ones in version 1.4
+     *
      * @return string
      */
     public function fixUpdateTo14Command()
@@ -51,10 +52,10 @@ class AdditionalSchedulerCommandController extends CommandController
     }
 
     /**
-     * @param $str
+     * @param string $str
      * @return string
      */
-    protected function getSerializedName($str)
+    protected function getSerializedName($str): string
     {
         return 'O:' . strlen($str) . ':"' . $str . '"';
     }

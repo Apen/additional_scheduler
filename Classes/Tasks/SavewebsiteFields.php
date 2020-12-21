@@ -22,13 +22,13 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
         // check dir is writable
         $pathFieldName = $this->getFieldName('savedir');
         if ((empty($submittedData[$pathFieldName])) || (!is_writable($submittedData[$pathFieldName]))) {
-            $this->addMessage('savedirerror', FlashMessage::ERROR, $parentObject);
+            $this->addMessage('savedirerror', FlashMessage::ERROR);
             $result = false;
         }
         // check save script is executable
         $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
         if (!is_executable($saveScript)) {
-            $parentObject->addMessage(sprintf($GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'), $saveScript), FlashMessage::ERROR);
+            $this->addMessage(sprintf($GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'), $saveScript), FlashMessage::ERROR);
             $result = false;
         }
         return $result;
@@ -36,6 +36,7 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
 
     /**
      * Task namespace, mainly to compute formfield names
+     *
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
      */
@@ -53,6 +54,7 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
      *   'bar' => ['code' => 'input', 'extraAttributes' => 'class="baz"', 'default' => 'biz'],
      * ]
      * By implementing this method, fields will be auto-added to the form
+     *
      * @return array
      */
     protected function getFields()

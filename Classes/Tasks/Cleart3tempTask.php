@@ -56,8 +56,8 @@ class Cleart3tempTask extends AbstractTask
     /**
      * Delete all files of a directory older than x days
      *
-     * @param $dirname
-     * @param $nbdays
+     * @param string $dirname
+     * @param int $nbdays
      * @return bool
      */
     public function emptyDirectory($dirname, $nbdays)
