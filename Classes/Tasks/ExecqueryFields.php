@@ -19,7 +19,7 @@ class ExecqueryFields extends BaseAdditionalFieldProvider
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
-            $this->addMessage('savedirerror', FlashMessage::ERROR, $parentObject);
+            $this->addMessage('savedirerror', FlashMessage::ERROR);
             $result = false;
         }
         return $result;
@@ -27,6 +27,7 @@ class ExecqueryFields extends BaseAdditionalFieldProvider
 
     /**
      * Task namespace, mainly to compute formfield names
+     *
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
      */
@@ -44,6 +45,7 @@ class ExecqueryFields extends BaseAdditionalFieldProvider
      *   'bar' => ['code' => 'input', 'extraAttributes' => 'class="baz"', 'default' => 'biz'],
      * ]
      * By implementing this method, fields will be auto-added to the form
+     *
      * @return array
      */
     protected function getFields()

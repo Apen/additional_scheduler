@@ -58,12 +58,12 @@ class Templating
     {
         // Check if the template is loaded
         if (!$this->templateContent) {
-            return false;
+            return '';
         }
 
         // Check argument
         if (!is_array($templateMarkers)) {
-            return false;
+            return '';
         }
 
         if ($debug) {

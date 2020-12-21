@@ -22,7 +22,7 @@ class ExecFields extends BaseAdditionalFieldProvider
         $result = true;
         $pathFieldName = $this->getFieldName('execdir');
         if (empty($submittedData[$pathFieldName])) {
-            $this->addMessage('execdirerror', FlashMessage::ERROR, $parentObject);
+            $this->addMessage('execdirerror', FlashMessage::ERROR);
             $result = false;
         }
         // check script is executable
@@ -31,10 +31,13 @@ class ExecFields extends BaseAdditionalFieldProvider
             $script[0] = Utils::getPathSite() . $script[0];
         }
         if (!empty($script[0]) && !is_executable($script[0])) {
-            $this->addMessage(sprintf(
-                $GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'),
-                $submittedData['additionalscheduler_exec_path']
-            ), FlashMessage::ERROR, $parentObject);
+            $this->addMessage(
+                sprintf(
+                    $GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'),
+                    $submittedData['additionalscheduler_exec_path']
+                ),
+                FlashMessage::ERROR
+            );
             $result = false;
         }
         return $result;
@@ -68,7 +71,7 @@ class ExecFields extends BaseAdditionalFieldProvider
         return [
             'execdir' => 'input',
             'subject' => 'input',
-            'email'   => 'input',
+            'email' => 'input',
         ];
     }
 }

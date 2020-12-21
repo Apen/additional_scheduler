@@ -33,7 +33,7 @@ class CsvExportManager extends QueryExportManager
     protected $noHeader = false;
 
     /**
-     * @param $noHeader bool
+     * @param bool $noHeader
      * @return $this
      */
     public function setNoHeader($noHeader)
@@ -43,7 +43,7 @@ class CsvExportManager extends QueryExportManager
     }
 
     /**
-     * @param $delimiter string
+     * @param string $delimiter
      * @return $this
      */
     public function setDelimiter($delimiter)
@@ -53,7 +53,7 @@ class CsvExportManager extends QueryExportManager
     }
 
     /**
-     * @param $enclosure string
+     * @param string $enclosure
      * @return $this
      */
     public function setEnclosure($enclosure)
@@ -63,7 +63,7 @@ class CsvExportManager extends QueryExportManager
     }
 
     /**
-     * @param $escape string
+     * @param string $escape
      * @return $this
      */
     public function setEscape($escape)
@@ -74,15 +74,16 @@ class CsvExportManager extends QueryExportManager
 
     /**
      * Create a temporary csv file and return its path
-     * @param $filename
-     * @return sring - the path to the csv file
+     *
+     * @param string $filename
+     * @return string - the path to the csv file
      */
-    public function renderFile($filename)
+    public function renderFile($filename): string
     {
         $temp = tempnam(sys_get_temp_dir(), $filename);
         $handle = fopen($temp, 'w');
         $addHeader = !$this->noHeader;
-        $this->parseResultSet(function ($row) use ($handle,$addHeader) {
+        $this->parseResultSet(function ($row) use ($handle, $addHeader) {
             static $first = true;
             if ($first && $addHeader) {
                 $cols = array_keys($row);
