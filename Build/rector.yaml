@@ -1,0 +1,26 @@
+parameters:
+  php_version_features: '7.2'
+  auto_import_names: false
+  import_doc_blocks: false
+  import_short_classes: false
+  autoload_paths:
+  exclude_paths:
+    - 'ext_localconf.php'
+    - 'ext_tables.php'
+    - '*/Configuration/'
+    - '*/Build/'
+  sets:
+    - code-quality
+    - coding-style
+    - dead-code
+    - php53
+    - php54
+    - php55
+    - php56
+    - php70
+    - php71
+    - php72
+  exclude_rectors:
+    - Rector\Php71\Rector\FuncCall\CountOnNullRector
+    - Rector\Php71\Rector\BinaryOp\BinaryOpBetweenNumberAndStringRector
+    - Rector\DeadCode\Rector\ClassMethod\RemoveUnusedParameterRector
