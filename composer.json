@@ -23,10 +23,10 @@
     "psr-4": {
       "Sng\\Additionalscheduler\\": "Classes"
     }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "additional_scheduler"
+    }
   }
-    "extra": {
-        "typo3/cms": {
-            "extension-key": "additional_scheduler"
-        }
-    }  
 }
