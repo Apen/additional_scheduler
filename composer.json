@@ -24,4 +24,9 @@
       "Sng\\Additionalscheduler\\": "Classes"
     }
   }
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "additional_scheduler"
+        }
+    }  
 }
