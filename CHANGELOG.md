@@ -1,6 +1,8 @@
-Latest release : 1.5.3 (2020-05-07 14:07:02 +0200)
+Latest release : 1.5.6 (2021-10-20 16:46:52 +0200)
 
-
+* 1.5.6 (2021-10-20 16:46:52 +0200) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.5.5...1.5.6)
+* 1.5.5 (2021-07-05 17:24:53 +0200) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.5.4...1.5.5)
+* 1.5.4 (2020-12-21 10:21:23 +0100) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.5.3...1.5.4)
 * 1.5.3 (2020-05-07 14:07:02 +0200) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.5.2...1.5.3)
 * 1.5.2 (2020-05-06 21:28:52 +0200) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.5.1...1.5.2)
 * 1.5.1 (2020-05-05 22:26:58 +0200) [Full list of changes](https://github.com/Apen/additional_scheduler/compare/1.5.0...1.5.1)
