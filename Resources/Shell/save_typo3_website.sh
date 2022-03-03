@@ -107,7 +107,6 @@ function decodeArgs() {
 				if [ "$1" != "" ]
 				then
 					typo_db_password=$1
-					echo "1: $typo_db_password :2 $1"
 				else
 					echo "The password of the database is missing"
 				fi
