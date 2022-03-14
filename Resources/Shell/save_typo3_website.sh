@@ -72,6 +72,46 @@ function decodeArgs() {
 				fi
 				shift
 			;;
+			"-dbhost")
+				shift
+				if [ "$1" != "" ]
+				then
+					typo_db_host=$1
+				else
+					echo "The hostname of the database is missing"
+				fi
+				shift
+			;;
+			"-dbname")
+				shift
+				if [ "$1" != "" ]
+				then
+					typo_db=$1
+				else
+					echo "The name of the database is missing"
+				fi
+				shift
+			;;
+			"-dbuser")
+				shift
+				if [ "$1" != "" ]
+				then
+					typo_db_username=$1
+				else
+					echo "The username of the database is missing"
+				fi
+				shift
+			;;
+			"-dbpw")
+				shift
+				if [ "$1" != "" ]
+				then
+					typo_db_password=$1
+				else
+					echo "The password of the database is missing"
+				fi
+				shift
+			;;
 			"-sql")
 				shift
 				if [ "$1" != "" ]
@@ -93,6 +133,10 @@ function decodeArgs() {
 				echo "-p <path>   : path of the site root directory"
 				echo "-o <output> : path of the save file directory with final /"
 				echo "-sql <sql>  : filename of the sql file .sql"
+				echo "-dbname     : database name"
+				echo "-dbhost     : database hostname"
+				echo "-dbuser     : database username"
+				echo "-dbpw       : database password"
 				exit
 			;;
 			*)
@@ -103,6 +147,7 @@ function decodeArgs() {
 }
 
 # Check for dependencies
+
 function checkDependency() {
 	if ! hash $1 2>&-;
 	then
@@ -134,32 +179,6 @@ path_sql=''
 
 decodeArgs $*
 
-# DB configuration
-if [ -f typo3conf/LocalConfiguration.php ]
-then
-	# v6
-	path_localconf='typo3conf/LocalConfiguration.php'
-	typo_db_username=$(grep "'username' => *" $path_localconf | sed -e "s/\s*'username'\s*=>\s*'\(.*\)'\s*,/\1/");
-	typo_db_password=$(grep "'password' => *" $path_localconf | sed -e "s/\s*'password'\s*=>\s*'\(.*\)'\s*,/\1/");
-	typo_db_host=$(grep "'host' => *" $path_localconf | sed -e "s/\s*'host'\s*=>\s*'\(.*\)'\s*,/\1/");
-	typo_db=$(grep "'database' => *" $path_localconf | sed -e "s/\s*'database'\s*=>\s*'\(.*\)'\s*,/\1/");
-	# v8
-	if [ -z "$typo_db_username" ]
-	then 
-		typo_db_username=$(grep "'user' => *" $path_localconf | sed -e "s/\s*'user'\s*=>\s*'\(.*\)'\s*,/\1/");
-	fi
-	if [ -z "$typo_db" ]
-	then
-		typo_db=$(grep "'dbname' => *" $path_localconf | sed -e "s/\s*'dbname'\s*=>\s*'\(.*\)'\s*,/\1/");
-	fi
-else
-	# v4
-	path_localconf='typo3conf/localconf.php'
-	typo_db_username=$(grep "typo_db_username =*" $path_localconf | sed 's/$typo_db_username = '\''\([^\;]*\)'\'';.*/\1/');
-	typo_db_password=$(grep "typo_db_password =*" $path_localconf | sed 's/$typo_db_password = '\''\([^\;]*\)'\'';.*/\1/');
-	typo_db_host=$(grep "typo_db_host =*" $path_localconf | sed 's/$typo_db_host = '\''\([^\;]*\)'\'';.*/\1/');
-	typo_db=$(grep "typo_db =*" $path_localconf | sed 's/$typo_db = '\''\([^\;]*\)'\'';.*/\1/');
-fi
 
 # TYPO3 infos
 if [ -f typo3/sysext/core/Classes/Information/Typo3Version.php ]
@@ -209,8 +228,6 @@ echo "TYPO3 version      : $typo_version"
 echo "PATH_site          : "$(pwd)
 echo "Tar file           : $filename"
 echo "SQL file           : $filenamesql"
-echo "-----------------------------------------------------------------------"
-echo "Check informations in '$path_localconf'"
 echo "-----------------------------------------------------------------------"
 echo "typo_db_host       : $typo_db_host"
 echo "typo_db_username   : $typo_db_username"
@@ -272,8 +289,8 @@ echo
 echo "-----------------------------------------------------------------------"
 echo "Dump the DB $typo_db..."
 echo "-----------------------------------------------------------------------"
-mysqldump -d -h$typo_db_host -u$typo_db_username -p$typo_db_password $typo_db > $filenamesql
-mysqldump -nt $ignoretableslist -h$typo_db_host -u$typo_db_username -p$typo_db_password $typo_db >> $filenamesql
+mysqldump -d -h$typo_db_host -u$typo_db_username -p$typo_db_password --no-tablespaces $typo_db > $filenamesql
+mysqldump -nt $ignoretableslist -h$typo_db_host -u$typo_db_username -p$typo_db_password --no-tablespaces $typo_db >> $filenamesql
 
 if [ $dbonly = 1 ]
 then
