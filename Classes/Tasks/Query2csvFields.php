@@ -20,8 +20,6 @@ class Query2csvFields extends BaseAdditionalFieldProvider
 {
 
     /**
-     * @param array                     $submittedData
-     * @param SchedulerModuleController $parentObject
      * @return bool
      */
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
@@ -31,6 +29,7 @@ class Query2csvFields extends BaseAdditionalFieldProvider
             $this->addMessage('query.error.required', FlashMessage::ERROR);
             $result = false;
         }
+
         return $result;
     }
 

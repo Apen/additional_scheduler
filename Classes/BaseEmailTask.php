@@ -31,7 +31,6 @@ abstract class BaseEmailTask extends AbstractTask
      * Default subject for emails
      *
      * @param string $task
-     * @return string
      */
     protected function getDefaultSubject($task): string
     {

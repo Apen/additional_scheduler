@@ -22,6 +22,7 @@ class ExecqueryTask extends BaseEmailTask
      * @var string
      */
     public $emailtemplate;
+
     /**
      * @var string
      */
@@ -41,6 +42,7 @@ class ExecqueryTask extends BaseEmailTask
         } else {
             $template->initTemplate('typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html');
         }
+
         $markersArray = [];
 
         // exec query
@@ -58,17 +60,21 @@ class ExecqueryTask extends BaseEmailTask
                     foreach ($item as $itemKey => $itemValue) {
                         $return .= '<th>' . $itemKey . '</th>';
                     }
+
                     $return .= '</tr>';
                     $return .= '</thead>';
                     $return .= '<tbody>';
                 }
+
                 $return .= '<tr>';
                 foreach ($item as $itemValue) {
                     $return .= '<td>' . $itemValue . '</td>';
                 }
+
                 $return .= '</tr>';
                 $i++;
             }
+
             $return .= '</tbody>';
             $return .= '</table>';
         } else {

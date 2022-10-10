@@ -15,6 +15,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class Cleart3tempTask extends AbstractTask
 {
     public $dirfilter;
+
     /**
      * @var array
      */
@@ -57,7 +58,7 @@ class Cleart3tempTask extends AbstractTask
      * Delete all files of a directory older than x days
      *
      * @param string $dirname
-     * @param int $nbdays
+     * @param int    $nbdays
      * @return bool
      */
     public function emptyDirectory($dirname, $nbdays)
@@ -82,9 +83,11 @@ class Cleart3tempTask extends AbstractTask
                                         $this->stats['nbfilesdeletedsize'] += $size;
                                         @unlink($absoluteFileName);
                                     }
+
                                     // dont delete files with this mask
                                 }
                             }
+
                             // cannot delete files
                         }
                     } else {
@@ -93,9 +96,11 @@ class Cleart3tempTask extends AbstractTask
                     }
                 }
             }
+
             closedir($dir_handle);
             return true;
         }
+
         return false;
     }
 

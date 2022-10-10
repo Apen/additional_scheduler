@@ -25,11 +25,13 @@ class ExecFields extends BaseAdditionalFieldProvider
             $this->addMessage('execdirerror', FlashMessage::ERROR);
             $result = false;
         }
+
         // check script is executable
         $script = GeneralUtility::trimExplode(' ', $submittedData[$pathFieldName]);
         if (substr($script[0], 0, 1) !== '/') {
             $script[0] = Utils::getPathSite() . $script[0];
         }
+
         if (!empty($script[0]) && !is_executable($script[0])) {
             $this->addMessage(
                 sprintf(
@@ -40,6 +42,7 @@ class ExecFields extends BaseAdditionalFieldProvider
             );
             $result = false;
         }
+
         return $result;
     }
 
