@@ -22,6 +22,7 @@ class ExecqueryFields extends BaseAdditionalFieldProvider
             $this->addMessage('savedirerror', FlashMessage::ERROR);
             $result = false;
         }
+
         return $result;
     }
 

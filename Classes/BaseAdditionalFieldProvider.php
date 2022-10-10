@@ -2,7 +2,9 @@
 
 namespace Sng\Additionalscheduler;
 
+use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
  *
@@ -19,7 +21,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 /**
  * Class BaseAdditionalFieldProvider
  */
-abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInterface
+abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
     /**
      * plugin namespace, mainly to compute formfield names
@@ -28,7 +30,6 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
      * @var string
      */
     protected $pluginNS = 'additionalscheduler';
-
     /**
      * The locallang path
      *
@@ -97,9 +98,7 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
     /**
      * Auto-add additionnal fields, based on the getFields() implementation
      *
-     * @param array                     $taskInfo
-     * @param AbstractTask              $task
-     * @param SchedulerModuleController $parentObject
+     * @param AbstractTask $task
      * @return array
      */
     public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
@@ -124,16 +123,16 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
                 'code' => strtr($codeTemplates[$templateName]['code'], $tr),
                 'label' => 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xml:' . $field,
                 'cshKey' => 'additional_scheduler',
-                'cshLabel' => $fieldID
+                'cshLabel' => $fieldID,
             ];
         }
+
         return $additionalFields;
     }
 
     /**
-     * @param array                     $taskInfo
-     * @param AbstractTask              $task
-     * @param SchedulerModuleController $parentObject
+     * @param array        $taskInfo
+     * @param AbstractTask $task
      */
     protected function initFields(&$taskInfo, $task, SchedulerModuleController $parentObject)
     {
@@ -141,15 +140,11 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
             $name = $this->getFieldName($field);
             if (empty($taskInfo[$name])) {
                 $default = $data['default'] ?? '';
-                $taskInfo[$name] = $task->$field ?: $default;
+                $taskInfo[$name] = $task->$field ?? $default;
             }
         }
     }
 
-    /**
-     * @param array        $submittedData
-     * @param AbstractTask $task
-     */
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         foreach (array_keys($this->getFields()) as $field) {
@@ -159,18 +154,15 @@ abstract class BaseAdditionalFieldProvider implements AdditionalFieldProviderInt
 
     /**
      * Shortcut to add error message
-     *
-     * @param string $trKey - the translation key in localang
-     * @param string $alert
      */
-    protected function addMessage(string $trKey, $alert)
+    protected function addMessage(string $message, int $severity = FlashMessage::OK): void
     {
-        $message = $GLOBALS['LANG']->sL($this->locallangPath . ':' . $trKey);
+        $message = $GLOBALS['LANG']->sL($this->locallangPath . ':' . $message);
         $flashMessage = GeneralUtility::makeInstance(
             FlashMessage::class,
             $message,
             '',
-            $alert,
+            $severity,
             true
         );
         $service = GeneralUtility::makeInstance(FlashMessageService::class);

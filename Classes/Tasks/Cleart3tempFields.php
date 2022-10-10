@@ -22,6 +22,7 @@ class Cleart3tempFields extends BaseAdditionalFieldProvider
             $this->addMessage('nbdayserror', FlashMessage::ERROR);
             $result = false;
         }
+
         return $result;
     }
 

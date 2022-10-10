@@ -38,7 +38,7 @@ class Utils
     {
         return method_exists(Environment::class, 'getPublicPath')
             ? Environment::getPublicPath() . '/'
-            : PATH_site;
+            : Environment::getPublicPath() . '/';
     }
 
     /**
@@ -55,51 +55,34 @@ class Utils
     public static function sendEmail($to, $subject, $message, $type = 'plain', $charset = 'utf-8', $files = [])
     {
         $from = MailUtility::getSystemFrom();
-        $mail = GeneralUtility::makeInstance(MailMessage::class);
-        if (version_compare(TYPO3_version, '10.4.0', '>=')) {
-            $mail
-                ->from(new Address($from[0]))
-                ->to(new Address($to))
-                ->subject($subject);
-            if ($type === 'plain') {
-                $mail->text($message);
-            } else {
-                $mail->html($message);
-            }
-            // add Files
-            if (!empty($files)) {
-                foreach ($files as $fileName => $path) {
-                    $altName = is_string($fileName) ? $fileName : null;
-                    $mail->attachFromPath($path, $altName);
-                }
-            }
-            $mail->send();
-        } else {
-            $mail->setTo(explode(',', $to));
-            $mail->setSubject($subject);
-            $mail->setCharset($charset);
-            $mail->setFrom($from);
-            $mail->setReplyTo($from);
-            // add Files
-            if (!empty($files)) {
-                foreach ($files as $fileName => $path) {
-                    $attachment = Swift_Attachment::fromPath($path);
-                    if (is_string($fileName)) {
-                        $attachment->setFilename($fileName);
-                    }
-                    $mail->attach($attachment);
-                }
-            }
-            // add Plain
-            if ($type === 'plain') {
-                $mail->addPart($message, 'text/plain');
-            }
-            // add HTML
-            if ($type === 'html') {
-                $mail->setBody($message, 'text/html');
-            }
-            // send
-            $mail->send();
+        if ($from === null) {
+            throw new \RuntimeException('System email is not configured', 165282396);
         }
+
+        $fromAdress = key($from);
+        if (is_numeric($fromAdress)) {
+            $fromAdress = $from[0];
+        }
+
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+
+        $mail
+            ->from(new Address($fromAdress))
+            ->to(new Address($to))
+            ->subject($subject);
+        if ($type === 'plain') {
+            $mail->text($message);
+        } else {
+            $mail->html($message);
+        }
+
+        // add Files
+        foreach ($files as $fileName => $path) {
+            $altName = is_string($fileName) ? $fileName : null;
+            $mail->attachFromPath($path, $altName);
+        }
+
+        $mail->send();
+
     }
 }

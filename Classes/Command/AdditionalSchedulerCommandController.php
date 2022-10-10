@@ -48,12 +48,12 @@ class AdditionalSchedulerCommandController extends CommandController
             $stmt = $queryBuilder->getConnection()->executeQuery($query);
             $log[] = $stmt->rowCount() . " rows updated\n";
         }
+
         return implode("\n", $log);
     }
 
     /**
      * @param string $str
-     * @return string
      */
     protected function getSerializedName($str): string
     {

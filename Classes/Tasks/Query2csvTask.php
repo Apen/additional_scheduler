@@ -79,10 +79,12 @@ class Query2csvTask extends BaseEmailTask
         if ($this->noDatetimeFlag === 0) {
             $filename .= date('-Y-m-d_Hi');
         }
+
         $filename .= '.csv';
         if (!empty($this->email)) {
             Utils::sendEmail($this->email, $mailSubject, $this->body, 'plain', 'utf-8', [$filename => $path]);
         }
+
         unlink($path);
         return true;
     }

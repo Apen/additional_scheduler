@@ -25,12 +25,14 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
             $this->addMessage('savedirerror', FlashMessage::ERROR);
             $result = false;
         }
+
         // check save script is executable
         $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
         if (!is_executable($saveScript)) {
             $this->addMessage(sprintf($GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'), $saveScript), FlashMessage::ERROR);
             $result = false;
         }
+
         return $result;
     }
 

@@ -39,10 +39,14 @@ class Templating
                 if ($this->templateContent === null) {
                     DebugUtility::debug('Check the path template or the rights', 'Error');
                 }
+
                 DebugUtility::debug($this->templateContent, 'Content of ' . $templateFile);
             }
+
             return true;
         }
+
+
         return false;
     }
 
@@ -72,7 +76,7 @@ class Templating
 
         $content = '';
 
-        if (is_array($templateMarkers[0])) {
+        if (is_array($templateMarkers[0] ?? '')) {
             foreach ($templateMarkers as $markers) {
                 $content .= $this->renderAllTemplate($markers, $templateSection, $debug);
             }

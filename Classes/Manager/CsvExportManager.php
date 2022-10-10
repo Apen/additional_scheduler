@@ -19,14 +19,17 @@ class CsvExportManager extends QueryExportManager
      * @var string
      */
     protected $delimiter;
+
     /**
      * @var  string
      */
     protected $enclosure;
+
     /**
      * @var  string
      */
     protected $escape;
+
     /**
      * @var bool  string
      */
@@ -90,6 +93,7 @@ class CsvExportManager extends QueryExportManager
                 fputcsv($handle, $cols, $this->delimiter, $this->enclosure, $this->escape);
                 $first = false;
             }
+
             fputcsv($handle, $row, $this->delimiter, $this->enclosure, $this->escape);
         });
         fclose($handle);
