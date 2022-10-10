@@ -28,8 +28,12 @@ class SavewebsiteTask extends BaseEmailTask
         if (!is_executable($saveScript)) {
             throw new \ErrorException($saveScript.' must be executable');
         }
+	$dbname = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['dbname'];
+	$dbhost = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['host'];
+	$dbuser = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['user'];
+	$dbpw = $GLOBALS['TYPO3_CONF_VARS']['DB']['Connections']['Default']['password'];
 
-        $cmd = $saveScript . ' -p ' . Utils::getPathSite() . ' -o ' . $this->savedir . ' -f';
+	$cmd = $saveScript . ' -p ' . Utils::getPathSite() . ' -o ' . $this->savedir . ' -dbname ' . $dbname . ' -dbhost ' . $dbhost . ' -dbuser ' . $dbuser . ' -dbpw ' . $dbpw . ' -f';
 
         $return = shell_exec($cmd . ' 2>&1');
 
