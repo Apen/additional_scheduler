@@ -1,8 +1,11 @@
 parameters:
-  level: 3
+  level: 5
   reportUnmatchedIgnoredErrors: false
-  excludes_analyse:
-    - *Build/*
+  paths:
+    - ../Classes/
+  excludePaths:
+    - ../Build/*
+    - ../.Build/*
   ignoreErrors:
     - "#Undefined variable: \\$_EXTKEY#"
     - "#Constant .*? not found.#"
