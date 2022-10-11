@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -15,14 +17,13 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 class ClearcacheTask extends AbstractTask
 {
-
     /**
      * Executes the commit task and returns TRUE if the execution was
      * succesfull
      *
      * @return bool
      */
-    public function execute()
+    public function execute(): bool
     {
         $GLOBALS['BE_USER']->user['admin'] = 1;
         $tce = GeneralUtility::makeInstance(DataHandler::class);

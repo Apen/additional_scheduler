@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -13,16 +15,12 @@ use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
-/**
- * Class Query2csvFields
- */
 class Query2csvFields extends BaseAdditionalFieldProvider
 {
-
     /**
      * @return bool
      */
-    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject)
+    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $parentObject): bool
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
@@ -45,7 +43,7 @@ class Query2csvFields extends BaseAdditionalFieldProvider
      *
      * @return array
      */
-    protected function getFields()
+    protected function getFields(): array
     {
         return [
             'filename' => ['code' => 'input', 'default' => 'data.csv'],
@@ -64,7 +62,7 @@ class Query2csvFields extends BaseAdditionalFieldProvider
     /**
      * @return string
      */
-    protected function getTaskNs()
+    protected function getTaskNs(): string
     {
         return 'query2csv';
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -32,7 +34,7 @@ class Cleart3tempFields extends BaseAdditionalFieldProvider
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
      */
-    protected function getTaskNs()
+    protected function getTaskNs(): string
     {
         return 'cleart3temp';
     }
@@ -49,7 +51,7 @@ class Cleart3tempFields extends BaseAdditionalFieldProvider
      *
      * @return array
      */
-    protected function getFields()
+    protected function getFields(): array
     {
         return [
             'nbdays' => 'input',

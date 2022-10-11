@@ -1,9 +1,8 @@
 <?php
 
-namespace Sng\Additionalscheduler;
+declare(strict_types=1);
 
-use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+namespace Sng\Additionalscheduler;
 
 /*
  * This file is part of the "additional_scheduler" Extension for TYPO3 CMS.
@@ -12,15 +11,13 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
+use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
-/**
- * Class BaseAdditionalFieldProvider
- */
 abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
     /**
@@ -44,7 +41,7 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
      */
-    abstract protected function getTaskNs();
+    abstract protected function getTaskNs(): string;
 
     /**
      * Code template repository
@@ -52,7 +49,7 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
      *
      * @return array
      */
-    protected function getCodeTemplates()
+    protected function getCodeTemplates(): array
     {
         return [
             'input' => [
@@ -82,7 +79,7 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
      *
      * @return array
      */
-    abstract protected function getFields();
+    abstract protected function getFields(): array;
 
     /**
      * Compute the fieldname, based on plugin and task namespaces
@@ -90,20 +87,22 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
      * @param string $field
      * @return string
      */
-    protected function getFieldName($field)
+    protected function getFieldName(string $field): string
     {
         return implode('_', [$this->pluginNS, $this->getTaskNs(), $field]);
     }
 
     /**
-     * Auto-add additionnal fields, based on the getFields() implementation
+     * Gets additional fields to render in the form to add/edit a task
      *
-     * @param AbstractTask $task
-     * @return array
+     * @param array $taskInfo Values of the fields from the add/edit task form
+     * @param \TYPO3\CMS\Scheduler\Task\AbstractTask|null $task The task object being edited. Null when adding a task!
+     * @param \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule Reference to the scheduler backend module
+     * @return array A two dimensional array: array('fieldId' => array('code' => '', 'label' => '', 'cshKey' => '', 'cshLabel' => ''))
      */
-    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $parentObject)
+    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule): array
     {
-        $this->initFields($taskInfo, $task, $parentObject);
+        $this->initFields($taskInfo, $task, $schedulerModule);
         $additionalFields = [];
         $codeTemplates = $this->getCodeTemplates();
         foreach ($this->getFields() as $field => $data) {
@@ -115,7 +114,7 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
                 '%name%' => $this->getFieldName($field),
                 '%id%' => $fieldID,
                 '%value%' => $value,
-                '%checked%' => $value == 1 ? 'checked' : '',
+                '%checked%' => $value === 1 ? 'checked' : '',
             ];
             // escape data in tag attributes (in case value contains quotes), then add extra attributes
             $tr = array_map('htmlspecialchars', $tr) + ['%extraAttributes%' => $extraAttributes];
@@ -134,21 +133,21 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
      * @param array        $taskInfo
      * @param AbstractTask $task
      */
-    protected function initFields(&$taskInfo, $task, SchedulerModuleController $parentObject)
+    protected function initFields(array &$taskInfo, AbstractTask $task, SchedulerModuleController $parentObject): void
     {
         foreach ($this->getFields() as $field => $data) {
             $name = $this->getFieldName($field);
             if (empty($taskInfo[$name])) {
                 $default = $data['default'] ?? '';
-                $taskInfo[$name] = $task->$field ?? $default;
+                $taskInfo[$name] = $task->{$field} ?? $default;
             }
         }
     }
 
-    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task): void
     {
         foreach (array_keys($this->getFields()) as $field) {
-            $task->$field = $submittedData[$this->getFieldName($field)] ?? '';
+            $task->{$field} = $submittedData[$this->getFieldName($field)] ?? '';
         }
     }
 

@@ -19,7 +19,7 @@ This extension add new process in your scheduler module, for example you can :
 
 Do not hesitate to contact me if you have any good ideas.
 
-This extension work with TYPO3 6.2.x-10.x.
+This extension work with TYPO3 10.4.x-11.5.x.
 
 ## Screenshots
 

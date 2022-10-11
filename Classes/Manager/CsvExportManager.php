@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Manager;
 
 /*
@@ -9,12 +11,8 @@ namespace Sng\Additionalscheduler\Manager;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-/**
- * Class CsvExportManager
- */
 class CsvExportManager extends QueryExportManager
 {
-
     /**
      * @var string
      */
@@ -39,7 +37,7 @@ class CsvExportManager extends QueryExportManager
      * @param bool $noHeader
      * @return $this
      */
-    public function setNoHeader($noHeader)
+    public function setNoHeader(bool $noHeader)
     {
         $this->noHeader = $noHeader;
         return $this;
@@ -49,7 +47,7 @@ class CsvExportManager extends QueryExportManager
      * @param string $delimiter
      * @return $this
      */
-    public function setDelimiter($delimiter)
+    public function setDelimiter(string $delimiter)
     {
         $this->delimiter = $delimiter;
         return $this;
@@ -59,7 +57,7 @@ class CsvExportManager extends QueryExportManager
      * @param string $enclosure
      * @return $this
      */
-    public function setEnclosure($enclosure)
+    public function setEnclosure(string $enclosure)
     {
         $this->enclosure = $enclosure;
         return $this;
@@ -69,7 +67,7 @@ class CsvExportManager extends QueryExportManager
      * @param string $escape
      * @return $this
      */
-    public function setEscape($escape)
+    public function setEscape(string $escape)
     {
         $this->escape = $escape;
         return $this;
@@ -81,12 +79,12 @@ class CsvExportManager extends QueryExportManager
      * @param string $filename
      * @return string - the path to the csv file
      */
-    public function renderFile($filename): string
+    public function renderFile(string $filename): string
     {
         $temp = tempnam(sys_get_temp_dir(), $filename);
         $handle = fopen($temp, 'w');
         $addHeader = !$this->noHeader;
-        $this->parseResultSet(function ($row) use ($handle, $addHeader) {
+        $this->parseResultSet(function ($row) use ($handle, $addHeader): void {
             static $first = true;
             if ($first && $addHeader) {
                 $cols = array_keys($row);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -14,7 +16,6 @@ use Sng\Additionalscheduler\Utils;
 
 class ExecTask extends BaseEmailTask
 {
-
     /**
      * @var string
      */
@@ -26,7 +27,7 @@ class ExecTask extends BaseEmailTask
      *
      * @return bool
      */
-    public function execute()
+    public function execute(): bool
     {
         $cmd = substr($this->execdir, 0, 1) === '/' ? $this->execdir : Utils::getPathSite() . $this->execdir;
 
@@ -52,7 +53,7 @@ class ExecTask extends BaseEmailTask
      *
      * @return string
      */
-    public function getAdditionalInformation()
+    public function getAdditionalInformation(): string
     {
         return $this->execdir;
     }

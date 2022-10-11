@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler;
 
 /*
@@ -10,8 +12,8 @@ namespace Sng\Additionalscheduler;
  */
 
 use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * This class provides methods to generate the templates reports
@@ -30,7 +32,7 @@ class Templating
      * @param bool   $debug
      * @return bool
      */
-    public function initTemplate($templateFile, $debug = false)
+    public function initTemplate(string $templateFile, bool $debug = false): bool
     {
         $templateAbsPath = GeneralUtility::getFileAbsFileName($templateFile);
         if ($templateAbsPath !== '') {
@@ -57,7 +59,7 @@ class Templating
      * @param bool   $debug
      * @return string HTML code
      */
-    public function renderAllTemplate($templateMarkers, $templateSection, $debug = false)
+    public function renderAllTemplate(array $templateMarkers, string $templateSection, bool $debug = false): string
     {
         // Check if the template is loaded
         if (!$this->templateContent) {
@@ -93,7 +95,7 @@ class Templating
      * @param string $templateSection
      * @return string
      */
-    public function renderSingle($templateMarkers, $templateSection)
+    public function renderSingle(array $templateMarkers, string $templateSection): string
     {
         $subParts = $this->getSubpart($this->templateContent, $templateSection);
 
@@ -115,7 +117,7 @@ class Templating
      * @param array  $marker   The markers that are to be replaced
      * @return string           The template with replaced markers
      */
-    protected function substituteMarkerArray($template, $marker)
+    protected function substituteMarkerArray(string $template, array $marker): string
     {
         $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
         return $templateService->substituteMarkerArray($template, $marker, '', false, false);
@@ -130,7 +132,7 @@ class Templating
      * @param string $replace  The subpart content
      * @return string           The template with replaced subpart.
      */
-    protected function substituteSubpart($template, $subpart, $replace)
+    protected function substituteSubpart(string $template, string $subpart, string $replace): string
     {
         $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
         return $templateService->substituteSubpart($template, $subpart, $replace, true, false);
@@ -144,7 +146,7 @@ class Templating
      * @param string $subpart  The subpart name
      * @return string           The subpart
      */
-    protected function getSubpart($template, $subpart)
+    protected function getSubpart(string $template, string $subpart): string
     {
         $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
         return $templateService->getSubpart($template, $subpart);
@@ -156,7 +158,7 @@ class Templating
      * @param string $content
      * @return mixed
      */
-    protected function cleanTemplate($content)
+    protected function cleanTemplate(string $content)
     {
         return preg_replace('#^[\t\s\r]*\n+#m', '', $content);
     }
