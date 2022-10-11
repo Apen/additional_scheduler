@@ -10,7 +10,7 @@ namespace Sng\Additionalscheduler;
  */
 
 use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use TYPO3\CMS\Core\Utility\DebugUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -33,19 +33,18 @@ class Templating
     public function initTemplate($templateFile, $debug = false)
     {
         $templateAbsPath = GeneralUtility::getFileAbsFileName($templateFile);
-        if ($templateAbsPath !== null) {
+        if ($templateAbsPath !== '') {
             $this->templateContent = GeneralUtility::getURL($templateAbsPath);
             if ($debug) {
                 if ($this->templateContent === null) {
-                    DebugUtility::debug('Check the path template or the rights', 'Error');
+                    DebuggerUtility::var_dump('Check the path template or the rights', 'Error');
                 }
 
-                DebugUtility::debug($this->templateContent, 'Content of ' . $templateFile);
+                DebuggerUtility::var_dump($this->templateContent, 'Content of ' . $templateFile);
             }
 
             return true;
         }
-
 
         return false;
     }
@@ -71,7 +70,7 @@ class Templating
         }
 
         if ($debug) {
-            DebugUtility::debug($templateMarkers, 'Markers for ' . $templateSection);
+            DebuggerUtility::var_dump($templateMarkers, 'Markers for ' . $templateSection);
         }
 
         $content = '';

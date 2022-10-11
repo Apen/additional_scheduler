@@ -16,7 +16,7 @@
   ],
   "license": "GPL-2.0+",
   "require": {
-    "php": "^7.2",
+    "php": "^7.2||^8.0||^8.1",
     "typo3/cms-core": "^10||^11",
     "typo3/cms-scheduler": "^10||^11"
   },
@@ -48,5 +48,10 @@
       "typo3/cms-composer-installers": true,
       "typo3/class-alias-loader": true
     }
+  },
+  "scripts": {
+    "php:phpstan:additional_scheduler": ".Build/bin/phpstan analyse -c Build/phpstan.neon --ansi",
+    "php:rector:additional_scheduler": ".Build/bin/rector process . -c Build/rector.php --ansi",
+    "php:rectordry:additional_scheduler": ".Build/bin/rector process . -c Build/rector.php --dry-run --ansi"
   }
 }
