@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
+use Rector\Config\RectorConfig;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Php73\Rector\ConstFetch\SensitiveConstantNameRector;
 use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\PostRector\Rector\NameImportingPostRector;
-use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
 use Ssch\TYPO3Rector\Configuration\Typo3Option;
 use Ssch\TYPO3Rector\Set\Typo3LevelSetList;

@@ -50,8 +50,12 @@
     }
   },
   "scripts": {
-    "php:phpstan:additional_scheduler": ".Build/bin/phpstan analyse -c Build/phpstan.neon --ansi",
-    "php:rector:additional_scheduler": ".Build/bin/rector process . -c Build/rector.php --ansi",
-    "php:rectordry:additional_scheduler": ".Build/bin/rector process . -c Build/rector.php --dry-run --ansi"
+    "php:ecs": ".Build/bin/ecs check . --config ./Build/ecs.php --fix --ansi",
+    "php:ecsdry": ".Build/bin/ecs check . --config ./Build/ecs.php --ansi",
+    "php:fix": ".Build/bin/php-cs-fixer --config=./Build/.php-cs-fixer.php fix",
+    "php:fixdry": ".Build/bin/php-cs-fixer -vvv --diff --dry-run --config=./Build/.php-cs-fixer.php fix",
+    "php:phpstan": ".Build/bin/phpstan analyse -c  ./Build/phpstan.neon --ansi",
+    "php:rector": ".Build/bin/rector process . -c  ./Build/rector.php --ansi",
+    "php:rectordry": ".Build/bin/rector process . -c  ./Build/rector.php --dry-run --ansi"
   }
 }

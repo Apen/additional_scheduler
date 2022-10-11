@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler;
 
 /*
@@ -11,12 +13,8 @@ namespace Sng\Additionalscheduler;
 
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
-/**
- * Class BaseEmailTask
- */
 abstract class BaseEmailTask extends AbstractTask
 {
-
     /**
      * @var string
      */
@@ -32,7 +30,7 @@ abstract class BaseEmailTask extends AbstractTask
      *
      * @param string $task
      */
-    protected function getDefaultSubject($task): string
+    protected function getDefaultSubject(string $task): string
     {
         return '[additional_scheduler] : ' . $GLOBALS['LANG']->sL('LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf:task.' . $task . '.name');
     }

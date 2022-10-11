@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Manager;
 
 /*
@@ -13,9 +15,6 @@ use Closure;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class QueryExportManager
- */
 class QueryExportManager
 {
     /**
@@ -28,7 +27,7 @@ class QueryExportManager
      * @param string $query
      * @return QueryExportManager
      */
-    public function setQuery($query)
+    public function setQuery(string $query): QueryExportManager
     {
         $this->query = $query;
         return $this;
@@ -38,7 +37,7 @@ class QueryExportManager
      * Execute the query and parse the resultSet by executing the bypassed callback
      * @param Closure $func - function that accept a unique array parameter
      */
-    public function parseResultSet(Closure $func)
+    public function parseResultSet(Closure $func): void
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('additional_scheduler');
         $stmt = $queryBuilder->getConnection()->executeQuery($this->query);

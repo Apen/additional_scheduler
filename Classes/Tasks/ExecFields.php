@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -52,7 +54,7 @@ class ExecFields extends BaseAdditionalFieldProvider
      * @return string
      * @see BaseAdditionalFieldProvider::getFieldName()
      */
-    protected function getTaskNs()
+    protected function getTaskNs(): string
     {
         return 'exec';
     }
@@ -69,7 +71,7 @@ class ExecFields extends BaseAdditionalFieldProvider
      *
      * @return array
      */
-    protected function getFields()
+    protected function getFields(): array
     {
         return [
             'execdir' => 'input',

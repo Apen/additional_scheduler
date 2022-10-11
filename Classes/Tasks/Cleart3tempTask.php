@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -35,7 +37,7 @@ class Cleart3tempTask extends AbstractTask
      *
      * @return bool
      */
-    public function execute()
+    public function execute(): bool
     {
         $this->stats['nbfiles'] = 0;
         $this->stats['nbfilessize'] = 0;
@@ -43,7 +45,7 @@ class Cleart3tempTask extends AbstractTask
         $this->stats['nbfilesdeletedsize'] = 0;
         $this->stats['nbdirectories'] = 0;
 
-        $this->emptyDirectory(Utils::getPathSite() . 'typo3temp', $this->nbdays);
+        $this->emptyDirectory(Utils::getPathSite() . 'typo3temp', (int)$this->nbdays);
 
         if (defined('TYPO3_cliMode') && TYPO3_cliMode) {
             echo 'Nb files: ' . $this->stats['nbfiles'] . ' (' . $this->stats['nbfilessize'] . ' ko)' . LF;
@@ -61,7 +63,7 @@ class Cleart3tempTask extends AbstractTask
      * @param int    $nbdays
      * @return bool
      */
-    public function emptyDirectory($dirname, $nbdays)
+    public function emptyDirectory(string $dirname, int $nbdays): bool
     {
         if ((is_dir($dirname)) && (($dir_handle = opendir($dirname)) !== false)) {
             while ($file = readdir($dir_handle)) {
@@ -92,7 +94,7 @@ class Cleart3tempTask extends AbstractTask
                         }
                     } else {
                         $this->stats['nbdirectories']++;
-                        $this->emptyDirectory($absoluteFileName, $nbdays);
+                        $this->emptyDirectory($absoluteFileName, (int)$nbdays);
                     }
                 }
             }
@@ -112,7 +114,7 @@ class Cleart3tempTask extends AbstractTask
      *
      * @return string
      */
-    public function getAdditionalInformation()
+    public function getAdditionalInformation(): string
     {
         return $this->nbdays . ' days';
     }

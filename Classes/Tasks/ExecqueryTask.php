@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -17,7 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ExecqueryTask extends BaseEmailTask
 {
-
     /**
      * @var string
      */
@@ -31,7 +32,7 @@ class ExecqueryTask extends BaseEmailTask
     /**
      * @return bool
      */
-    public function execute()
+    public function execute(): bool
     {
         $this->query = preg_replace('#\r\n#', ' ', $this->query);
 
@@ -107,7 +108,7 @@ class ExecqueryTask extends BaseEmailTask
      *
      * @return string
      */
-    public function getAdditionalInformation()
+    public function getAdditionalInformation(): string
     {
         return substr($this->query, 0, 30);
     }

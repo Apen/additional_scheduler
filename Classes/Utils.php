@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler;
 
 /*
@@ -9,7 +11,6 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Swift_Attachment;
 use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -26,7 +27,7 @@ class Utils
      *
      * @return array
      */
-    public static function getTasksList()
+    public static function getTasksList(): array
     {
         return ['Savewebsite', 'Exec', 'Execquery', 'Clearcache', 'Cleart3temp', 'Query2csv'];
     }
@@ -34,7 +35,7 @@ class Utils
     /**
      * @return string
      */
-    public static function getPathSite()
+    public static function getPathSite(): string
     {
         return method_exists(Environment::class, 'getPublicPath')
             ? Environment::getPublicPath() . '/'
@@ -52,7 +53,7 @@ class Utils
      * @param string $charset
      * @param array  $files
      */
-    public static function sendEmail($to, $subject, $message, $type = 'plain', $charset = 'utf-8', $files = [])
+    public static function sendEmail(string $to, string $subject, string $message, string $type = 'plain', string $charset = 'utf-8', array $files = []): void
     {
         $from = MailUtility::getSystemFrom();
         if ($from === null) {
@@ -83,6 +84,5 @@ class Utils
         }
 
         $mail->send();
-
     }
 }

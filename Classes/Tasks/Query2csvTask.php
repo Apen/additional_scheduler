@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sng\Additionalscheduler\Tasks;
 
 /*
@@ -14,12 +16,8 @@ use Sng\Additionalscheduler\Manager\CsvExportManager;
 use Sng\Additionalscheduler\Utils;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class Query2csvTask
- */
 class Query2csvTask extends BaseEmailTask
 {
-
     /**
      * @var string
      */
@@ -41,7 +39,7 @@ class Query2csvTask extends BaseEmailTask
     public $escape;
 
     /**
-     * @var int
+     * @var bool
      */
     public $noHeader;
 
@@ -63,7 +61,7 @@ class Query2csvTask extends BaseEmailTask
     /**
      * @return bool
      */
-    public function execute()
+    public function execute(): bool
     {
         $this->query = preg_replace('#\r\n#', ' ', $this->query);
 
@@ -73,7 +71,7 @@ class Query2csvTask extends BaseEmailTask
             ->setDelimiter($this->delimiter)
             ->setEnclosure($this->enclosure)
             ->setEscape($this->escape)
-            ->setNoHeader($this->noHeader)
+            ->setNoHeader((bool)$this->noHeader)
             ->renderFile($this->filename);
         $filename = str_replace('.csv', '', $this->filename);
         if ($this->noDatetimeFlag === 0) {
