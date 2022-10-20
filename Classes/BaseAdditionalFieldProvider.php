@@ -131,9 +131,9 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
 
     /**
      * @param array        $taskInfo
-     * @param AbstractTask $task
+     * @param AbstractTask|null $task
      */
-    protected function initFields(array &$taskInfo, AbstractTask $task, SchedulerModuleController $parentObject): void
+    protected function initFields(array &$taskInfo, ?AbstractTask $task, SchedulerModuleController $parentObject): void
     {
         foreach ($this->getFields() as $field => $data) {
             $name = $this->getFieldName($field);
