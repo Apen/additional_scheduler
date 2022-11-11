@@ -11,7 +11,7 @@
 				<source><![CDATA[Skip this files/directories with a regexp (can be empty for all). Ex: (llxml|rtehtmlarea)]]></source>
 			</trans-unit>
 			<trans-unit id="email">
-				<source><![CDATA[Email address]]></source>
+				<source><![CDATA[Email addresses]]></source>
 			</trans-unit>
 			<trans-unit id="subject">
 				<source><![CDATA[Email subject]]></source>
