@@ -74,7 +74,7 @@ class Query2csvTask extends BaseEmailTask
             ->setNoHeader((bool)$this->noHeader)
             ->renderFile($this->filename);
         $filename = str_replace('.csv', '', $this->filename);
-        if ($this->noDatetimeFlag === 0) {
+        if ($this->noDatetimeFlag == 0) {
             $filename .= date('-Y-m-d_Hi');
         }
 
