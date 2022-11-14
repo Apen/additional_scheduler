@@ -114,7 +114,7 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
                 '%name%' => $this->getFieldName($field),
                 '%id%' => $fieldID,
                 '%value%' => $value,
-                '%checked%' => $value === 1 ? 'checked' : '',
+                '%checked%' => $value === '1' ? 'checked' : '',
             ];
             // escape data in tag attributes (in case value contains quotes), then add extra attributes
             $tr = array_map('htmlspecialchars', $tr) + ['%extraAttributes%' => $extraAttributes];

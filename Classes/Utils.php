@@ -66,11 +66,14 @@ class Utils
         }
 
         $mail = GeneralUtility::makeInstance(MailMessage::class);
-
-        $mail
-            ->from(new Address($fromAdress))
-            ->to(new Address($to))
-            ->subject($subject);
+        
+        $parsedRecipients = MailUtility::parseAddresses($to);
+        if (!empty($parsedRecipients)) {
+            $mail
+                ->from(new Address($fromAdress))
+                ->to(...$parsedRecipients)
+                ->subject($subject);
+        }
         if ($type === 'plain') {
             $mail->text($message);
         } else {
