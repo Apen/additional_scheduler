@@ -83,6 +83,7 @@ class CsvExportManager extends QueryExportManager
     {
         $temp = tempnam(sys_get_temp_dir(), $filename);
         $handle = fopen($temp, 'w');
+        fputs($handle, $bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ));
         $addHeader = !$this->noHeader;
         $this->parseResultSet(function ($row) use ($handle, $addHeader): void {
             static $first = true;
