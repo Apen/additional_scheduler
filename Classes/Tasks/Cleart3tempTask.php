@@ -44,15 +44,7 @@ class Cleart3tempTask extends AbstractTask
         $this->stats['nbfilesdeleted'] = 0;
         $this->stats['nbfilesdeletedsize'] = 0;
         $this->stats['nbdirectories'] = 0;
-
         $this->emptyDirectory(Utils::getPathSite() . 'typo3temp', (int)$this->nbdays);
-
-        if (defined('TYPO3_cliMode') && TYPO3_cliMode) {
-            echo 'Nb files: ' . $this->stats['nbfiles'] . ' (' . $this->stats['nbfilessize'] . ' ko)' . LF;
-            echo 'Nb files deleted: ' . $this->stats['nbfilesdeleted'] . ' (' . $this->stats['nbfilesdeletedsize'] . ' ko)' . LF;
-            echo 'Nb directories: ' . $this->stats['nbdirectories'] . LF;
-        }
-
         return true;
     }
 

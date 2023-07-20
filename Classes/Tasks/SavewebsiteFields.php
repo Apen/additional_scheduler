@@ -14,6 +14,7 @@ namespace Sng\Additionalscheduler\Tasks;
 use Sng\Additionalscheduler\BaseAdditionalFieldProvider;
 use Sng\Additionalscheduler\Utils;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 class SavewebsiteFields extends BaseAdditionalFieldProvider
@@ -24,14 +25,14 @@ class SavewebsiteFields extends BaseAdditionalFieldProvider
         // check dir is writable
         $pathFieldName = $this->getFieldName('savedir');
         if ((empty($submittedData[$pathFieldName])) || (!is_writable($submittedData[$pathFieldName]))) {
-            $this->addMessage('savedirerror', FlashMessage::ERROR);
+            $this->addErrorMessage('savedirerror');
             $result = false;
         }
 
         // check save script is executable
-        $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
+        $saveScript = GeneralUtility::getFileAbsFileName('EXT:additional_scheduler/Resources/Shell/save_typo3_website.sh');
         if (!is_executable($saveScript)) {
-            $this->addMessage(sprintf($GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'), $saveScript), FlashMessage::ERROR);
+            $this->addErrorMessage('mustbeexecutable', $saveScript);
             $result = false;
         }
 

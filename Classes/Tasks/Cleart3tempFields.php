@@ -21,7 +21,7 @@ class Cleart3tempFields extends BaseAdditionalFieldProvider
     {
         $result = true;
         if (!isset($submittedData[$this->getFieldName('nbdays')])) {
-            $this->addMessage('nbdayserror', FlashMessage::ERROR);
+            $this->addErrorMessage('nbdayserror');
             $result = false;
         }
 
