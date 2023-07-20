@@ -21,7 +21,7 @@ class ExecqueryFields extends BaseAdditionalFieldProvider
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
-            $this->addMessage('savedirerror', FlashMessage::ERROR);
+            $this->addErrorMessage('savedirerror');
             $result = false;
         }
 

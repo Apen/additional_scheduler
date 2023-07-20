@@ -24,7 +24,7 @@ class ExecFields extends BaseAdditionalFieldProvider
         $result = true;
         $pathFieldName = $this->getFieldName('execdir');
         if (empty($submittedData[$pathFieldName])) {
-            $this->addMessage('execdirerror', FlashMessage::ERROR);
+            $this->addErrorMessage('execdirerror');
             $result = false;
         }
 
@@ -35,12 +35,11 @@ class ExecFields extends BaseAdditionalFieldProvider
         }
 
         if (!empty($script[0]) && !is_executable($script[0])) {
-            $this->addMessage(
+            $this->addErrorMessage(
                 sprintf(
                     $GLOBALS['LANG']->sL($this->locallangPath . ':mustbeexecutable'),
                     $submittedData['additionalscheduler_exec_path']
-                ),
-                FlashMessage::ERROR
+                )
             );
             $result = false;
         }

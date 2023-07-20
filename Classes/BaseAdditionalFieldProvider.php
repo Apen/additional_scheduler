@@ -11,8 +11,10 @@ namespace Sng\Additionalscheduler;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
@@ -30,7 +32,6 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
     /**
      * The locallang path
      *
-     * @see BaseAdditionalFieldProvider::addMessage()
      * @var string
      */
     protected $locallangPath = 'LLL:EXT:additional_scheduler/Resources/Private/Language/locallang.xlf';
@@ -151,21 +152,17 @@ abstract class BaseAdditionalFieldProvider extends AbstractAdditionalFieldProvid
         }
     }
 
-    /**
-     * Shortcut to add error message
-     */
-    protected function addMessage(string $message, int $severity = FlashMessage::OK): void
-    {
+    protected function addErrorMessage (string $message, ...$values) {
         $message = $GLOBALS['LANG']->sL($this->locallangPath . ':' . $message);
-        $flashMessage = GeneralUtility::makeInstance(
-            FlashMessage::class,
-            $message,
-            '',
-            $severity,
-            true
-        );
-        $service = GeneralUtility::makeInstance(FlashMessageService::class);
-        $flashMessageQueue = $service->getMessageQueueByIdentifier();
-        $flashMessageQueue->enqueue($flashMessage);
+        if (!empty($values)) {
+            $message = sprintf($message, ...$values);
+        }
+        $version = GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion();
+        if ($version === 11) {
+            $this->addMessage($message, FlashMessage::ERROR);
+        } else {
+            $this->addMessage($message, ContextualFeedbackSeverity::ERROR);
+        }
     }
+
 }

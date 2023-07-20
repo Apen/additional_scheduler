@@ -3,8 +3,7 @@
 $EM_CONF['additional_scheduler'] = [
     'title' => 'Useful tasks in scheduler module',
     'description' => 'Useful tasks in the scheduler module : full backup, send query result in mail, exec SH script with reports...',
-    'category' => 'misc',
-    'version' => '1.5.9',
+    'version' => '1.6.0',
     'state' => 'stable',
     'clearCacheOnLoad' => true,
     'author' => 'CERDAN Yohann',
@@ -12,7 +11,7 @@ $EM_CONF['additional_scheduler'] = [
     'author_company' => '',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-11.5.99',
+            'typo3' => '11.5.0-12.4.99',
         ],
         'conflicts' => [],
         'suggests' => [],

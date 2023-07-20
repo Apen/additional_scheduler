@@ -24,7 +24,7 @@ class Query2csvFields extends BaseAdditionalFieldProvider
     {
         $result = true;
         if (empty($submittedData[$this->getFieldName('query')])) {
-            $this->addMessage('query.error.required', FlashMessage::ERROR);
+            $this->addErrorMessage('query.error.required');
             $result = false;
         }
 

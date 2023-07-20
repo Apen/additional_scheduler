@@ -13,6 +13,7 @@ namespace Sng\Additionalscheduler\Tasks;
 
 use Sng\Additionalscheduler\BaseEmailTask;
 use Sng\Additionalscheduler\Utils;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class SavewebsiteTask extends BaseEmailTask
 {
@@ -26,7 +27,7 @@ class SavewebsiteTask extends BaseEmailTask
     public function execute()
     {
         // exec SH
-        $saveScript = Utils::getPathSite() . 'typo3conf/ext/additional_scheduler/Resources/Shell/save_typo3_website.sh';
+        $saveScript = GeneralUtility::getFileAbsFileName('EXT:additional_scheduler/Resources/Shell/save_typo3_website.sh');
         if (!is_executable($saveScript)) {
             throw new \ErrorException($saveScript . ' must be executable');
         }
