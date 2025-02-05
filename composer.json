@@ -17,8 +17,8 @@
   "license": "GPL-2.0+",
   "require": {
     "php": "^7.4||^8.0||^8.1",
-    "typo3/cms-core": "^11||^12",
-    "typo3/cms-scheduler": "^11||^12"
+    "typo3/cms-core": "^11||^12||^13",
+    "typo3/cms-scheduler": "^11||^12||^13"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3",
