@@ -41,7 +41,7 @@ class QueryExportManager
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('additional_scheduler');
         $stmt = $queryBuilder->getConnection()->executeQuery($this->query);
-        while ($row = $stmt->fetch()) {
+        while ($row = $stmt->fetchAssociative()) {
             $func($row);
         }
     }

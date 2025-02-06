@@ -54,7 +54,7 @@ class ExecqueryTask extends BaseEmailTask
         if (preg_match('#SELECT.*?FROM#i', $this->query, $matches)) {
             $i = 0;
             $return .= '<table>';
-            while ($item = $res->fetch()) {
+            while ($item = $res->fetchAssociative()) {
                 if ($i === 0) {
                     $return .= '<thead>';
                     $return .= '<tr>';
