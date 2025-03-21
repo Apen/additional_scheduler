@@ -2,8 +2,9 @@
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/apen/additional_scheduler?label=version)](https://packagist.org/packages/apen/additional_scheduler)
 [![Total Downloads](https://img.shields.io/packagist/dt/apen/additional_scheduler)](https://packagist.org/packages/apen/additional_scheduler)
-[![TYPO3](https://img.shields.io/badge/TYPO3-10.4-orange.svg?style=flat-square)](https://typo3.org/)
 [![TYPO3](https://img.shields.io/badge/TYPO3-11.5-orange.svg?style=flat-square)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-12.4-orange.svg?style=flat-square)](https://typo3.org/)
+[![TYPO3](https://img.shields.io/badge/TYPO3-13.4-orange.svg?style=flat-square)](https://typo3.org/)
 
 >  Useful tasks in the scheduler module : full backup, send query result in mail as HTML or CSV, exec SH script with reports...
 
@@ -19,7 +20,7 @@ This extension add new process in your scheduler module, for example you can :
 
 Do not hesitate to contact me if you have any good ideas.
 
-This extension work with TYPO3 10.4.x-11.5.x.
+This extension work with TYPO3 11.5.x-13.4.x.
 
 ## Screenshots
 
