@@ -14,6 +14,7 @@ namespace Sng\Additionalscheduler\Manager;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\Environment; // Added import
 
 class XlsxExportManager extends QueryExportManager
 {
@@ -39,6 +40,7 @@ class XlsxExportManager extends QueryExportManager
      * @return string - the path to the xlsx file
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     * @throws \TYPO3\CMS\Core\Exception\SiteNotFoundException
      */
     public function renderFile(string $filename): string
     {
@@ -72,7 +74,17 @@ class XlsxExportManager extends QueryExportManager
             $rowNumber++;
         });
 
-        $tempDir = sys_get_temp_dir();
+        // Use TYPO3's var path for temporary files
+        $tempDirParent = Environment::getVarPath() . '/transient'; // Using /transient which is common for such files
+        if (!is_dir($tempDirParent)) {
+            GeneralUtility::mkdir_deep($tempDirParent); // Ensure the parent directory exists
+        }
+        // Specific subdirectory for this extension's temp files
+        $tempDir = $tempDirParent . '/additional_scheduler_xlsx';
+        if (!is_dir($tempDir)) {
+            GeneralUtility::mkdir_deep($tempDir); // Ensure the specific temp directory exists
+        }
+
 
         // Ensure the input filename has a base name for uniqid
         $baseFilename = basename($filename, '.xlsx');
@@ -90,8 +102,14 @@ class XlsxExportManager extends QueryExportManager
         $tempFilePath = GeneralUtility::getFileAbsFileName($tempDir . '/' . $tempFilename);
 
         if (empty($tempFilePath)) {
-            // This case should ideally not be reached if $tempDir and $tempFilename are valid
-            throw new \RuntimeException('Could not generate a valid temporary file path.');
+            // Log details if possible, or make the exception more informative
+            $debugInfo = sprintf(
+                "Failed to get absolute path. Temp dir: '%s', Temp filename: '%s', Calculated full path before getFileAbsFileName: '%s'",
+                $tempDir,
+                $tempFilename,
+                $tempDir . '/' . $tempFilename
+            );
+            throw new \RuntimeException('Could not generate a valid temporary file path. ' . $debugInfo);
         }
 
         $writer = new Xlsx($spreadsheet);
