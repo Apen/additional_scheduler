@@ -31,7 +31,7 @@ class Query2xlsxTask extends BaseEmailTask
     /**
      * @var string
      */
-    public $filename;
+    public $filename; // This should be populated by TYPO3 scheduler from saved configuration
 
     /**
      * @var int
@@ -56,31 +56,35 @@ class Query2xlsxTask extends BaseEmailTask
 
         // Ensure PhpSpreadsheet is available
         if (!class_exists(\PhpOffice\PhpSpreadsheet\Spreadsheet::class)) {
-            // Log error or notify admin, then return false or throw exception
-            // For now, simple throw, but TYPO3 logging would be better
             throw new \RuntimeException('PhpSpreadsheet library is not available for Query2xlsxTask. Please install it via Composer.');
+        }
+
+        // Fallback for filename if it's empty
+        $currentFilename = trim($this->filename ?? '');
+        if (empty($currentFilename)) {
+            $currentFilename = 'data.xlsx'; // Default filename
         }
 
         $path = GeneralUtility::makeInstance(XlsxExportManager::class)
             ->setQuery($this->query)
             ->setNoHeader((bool)$this->noHeader)
-            ->renderFile($this->filename); // XlsxExportManager handles the .xlsx extension
+            ->renderFile($currentFilename); // Use the potentially defaulted filename
 
-        $finalFilename = $this->filename;
-        // Remove .xlsx if present, as it might be added by user or by default
-        if (str_ends_with(strtolower($finalFilename), '.xlsx')) {
-            $finalFilename = substr($finalFilename, 0, -5);
+        // Prepare the final filename for the email attachment
+        $finalAttachmentFilename = $currentFilename;
+        // Remove .xlsx if present, as it might be added by user or by default, for timestamp logic
+        if (strtolower(substr($finalAttachmentFilename, -5)) === '.xlsx') {
+            $finalAttachmentFilename = substr($finalAttachmentFilename, 0, -5);
         }
-
 
         if ($this->noDatetimeFlag == 0) {
-            $finalFilename .= date('-Y-m-d_Hi');
+            $finalAttachmentFilename .= date('-Y-m-d_Hi');
         }
 
-        $finalFilename .= '.xlsx'; // Ensure correct extension
+        $finalAttachmentFilename .= '.xlsx'; // Ensure correct extension
 
         if (!empty($this->email)) {
-            Utils::sendEmail($this->email, $mailSubject, $this->body, 'plain', 'utf-8', [$finalFilename => $path]);
+            Utils::sendEmail($this->email, $mailSubject, $this->body, 'plain', 'utf-8', [$finalAttachmentFilename => $path]);
         }
 
         unlink($path);

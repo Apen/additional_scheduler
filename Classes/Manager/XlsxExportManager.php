@@ -35,7 +35,7 @@ class XlsxExportManager extends QueryExportManager
     /**
      * Create a temporary xlsx file and return its path
      *
-     * @param string $filename
+     * @param string $filename The desired filename (e.g., "my_export.xlsx")
      * @return string - the path to the xlsx file
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
@@ -43,10 +43,6 @@ class XlsxExportManager extends QueryExportManager
     public function renderFile(string $filename): string
     {
         if (!class_exists(Spreadsheet::class)) {
-            // This check is basic. A more robust check or handling might be needed
-            // depending on how dependencies are managed in the TYPO3 extension (e.g., Composer autoloading).
-            // For now, we assume if this class is called, the library should be available.
-            // A proper dependency check will be part of a later step.
             throw new \RuntimeException('PhpSpreadsheet library is not available. Please install it via Composer: composer require phpoffice/phpspreadsheet');
         }
 
@@ -77,11 +73,21 @@ class XlsxExportManager extends QueryExportManager
         });
 
         $tempDir = sys_get_temp_dir();
-        // Ensure filename ends with .xlsx
-        if (!str_ends_with($filename, '.xlsx')) {
-            $filename .= '.xlsx';
+
+        // Ensure the input filename has a base name for uniqid
+        $baseFilename = basename($filename, '.xlsx');
+        if (empty(trim($baseFilename))) {
+            $baseFilename = 'export'; // Default base if original was empty or just ".xlsx"
         }
-        $tempFilePath = GeneralUtility::getFileAbsFileName($tempDir . '/' . uniqid(basename($filename, '.xlsx') . '_', true) . '.xlsx');
+
+        // Ensure filename for temp file ends with .xlsx, and is unique
+        $tempFilename = uniqid($baseFilename . '_', true) . '.xlsx';
+        $tempFilePath = GeneralUtility::getFileAbsFileName($tempDir . '/' . $tempFilename);
+
+        if (empty($tempFilePath)) {
+            // This case should ideally not be reached if $tempDir and $tempFilename are valid
+            throw new \RuntimeException('Could not generate a valid temporary file path.');
+        }
 
         $writer = new Xlsx($spreadsheet);
         $writer->save($tempFilePath);
