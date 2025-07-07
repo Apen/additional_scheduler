@@ -79,9 +79,14 @@ class XlsxExportManager extends QueryExportManager
         if (empty(trim($baseFilename))) {
             $baseFilename = 'export'; // Default base if original was empty or just ".xlsx"
         }
+        // Further sanitize baseFilename to remove characters that might cause issues
+        $sanitizedBaseFilename = preg_replace('/[^a-zA-Z0-9_-]/', '', $baseFilename);
+        if (empty($sanitizedBaseFilename)) {
+            $sanitizedBaseFilename = 'export'; // Fallback if sanitization results in empty string
+        }
 
         // Ensure filename for temp file ends with .xlsx, and is unique
-        $tempFilename = uniqid($baseFilename . '_', true) . '.xlsx';
+        $tempFilename = uniqid($sanitizedBaseFilename . '_', true) . '.xlsx';
         $tempFilePath = GeneralUtility::getFileAbsFileName($tempDir . '/' . $tempFilename);
 
         if (empty($tempFilePath)) {
