@@ -29,7 +29,7 @@ class Utils
      */
     public static function getTasksList(): array
     {
-        return ['Savewebsite', 'Exec', 'Execquery', 'Clearcache', 'Cleart3temp', 'Query2csv'];
+        return ['Savewebsite', 'Exec', 'Execquery', 'Clearcache', 'Cleart3temp', 'Query2csv', 'Query2xlsx'];
     }
 
     /**

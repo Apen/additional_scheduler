@@ -29,6 +29,9 @@
     "symplify/easy-coding-standard": "^11",
     "helmich/typo3-typoscript-lint": "^3"
   },
+  "suggests": {
+    "phpoffice/phpspreadsheet": "Required for XLSX export functionality. Install with 'composer require phpoffice/phpspreadsheet'"
+  },
   "autoload": {
     "psr-4": {
       "Sng\\Additionalscheduler\\": "Classes"

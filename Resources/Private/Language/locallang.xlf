@@ -29,7 +29,7 @@
 				<source><![CDATA[Don't add date-time at the end of the filename]]></source>
 			</trans-unit>
 			<trans-unit id="noHeader">
-				<source><![CDATA[Don't add field names as the first line of the CSV]]></source>
+				<source><![CDATA[Don't add field names as the first row of the export file (CSV/XLSX)]]></source>
 			</trans-unit>
             <trans-unit id="delimiter">
                 <source><![CDATA[Delimiter for csv file]]></source>
@@ -73,6 +73,9 @@
 			<trans-unit id="query.error.required">
 				<source><![CDATA[SQL query is mandatory]]></source>
 			</trans-unit>
+            <trans-unit id="filename.error.required">
+                <source><![CDATA[Filename is mandatory.]]></source>
+            </trans-unit>
 			<trans-unit id="savedir">
 				<source><![CDATA[Full path of the save directory (/aaa/bbb/ccc/)]]></source>
 			</trans-unit>
@@ -103,6 +106,12 @@
 			<trans-unit id="task.query2csv.name">
 				<source><![CDATA[Send a CSV]]></source>
 			</trans-unit>
+            <trans-unit id="task.query2xlsx.name">
+                <source><![CDATA[Query to XLSX (Email Attachment)]]></source>
+            </trans-unit>
+            <trans-unit id="task.query2xlsx.description">
+                <source><![CDATA[Executes a SQL query and sends the results as an XLSX file attached to an email. Requires phpoffice/phpspreadsheet library.]]></source>
+            </trans-unit>
 			<trans-unit id="task.savewebsite.description">
 				<source><![CDATA[Full backup with DB + files]]></source>
 			</trans-unit>
