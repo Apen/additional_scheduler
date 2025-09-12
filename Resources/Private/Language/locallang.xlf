@@ -44,7 +44,7 @@
 				<source><![CDATA[Email FROM]]></source>
 			</trans-unit>
 			<trans-unit id="emailtemplate">
-				<source><![CDATA[Email HTML template (relative to the site root, example in typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html)]]></source>
+				<source><![CDATA[Email HTML template (relative to the site root, example in EXT:/additional_scheduler/Resources/Private/Templates/execquery.html)]]></source>
 			</trans-unit>
 			<trans-unit id="execdir">
 				<source><![CDATA[Full path of the SH script (/aaa/bbb/ccc/ddd.sh or relative to the website : typo3/cli_dispatch.phpsh xxx)]]></source>

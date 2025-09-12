@@ -41,7 +41,7 @@ class ExecqueryTask extends BaseEmailTask
         if (!empty($this->emailtemplate)) {
             $template->initTemplate($this->emailtemplate);
         } else {
-            $template->initTemplate('typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html');
+            $template->initTemplate('EXT:additional_scheduler/Resources/Private/Templates/execquery.html');
         }
 
         $markersArray = [];
