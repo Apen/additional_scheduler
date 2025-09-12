@@ -79,6 +79,9 @@
 			<trans-unit id="savedirerror">
 				<source><![CDATA[Specify a correct save directory (existing and writable directory)]]></source>
 			</trans-unit>
+			<trans-unit id="sendZeroResult">
+				<source><![CDATA[Send the email even when query returns no results]]></source>
+			</trans-unit>
 			<trans-unit id="task.clearcache.name">
 				<source><![CDATA[Clear caches]]></source>
 			</trans-unit>

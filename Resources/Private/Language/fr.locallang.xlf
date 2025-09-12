@@ -90,6 +90,10 @@
 				<source><![CDATA[Specify a correct save directory (existing and writable directory)]]></source>
 				<target><![CDATA[Spécifier un répertoire de sauvegarde correct (qui existe et qui est inscriptible)]]></target>
 			</trans-unit>
+			<trans-unit id="sendZeroResult" approved="yes">
+				<source><![CDATA[Send the email even when query returns 0 results]]></source>
+				<target><![CDATA[Envoyer le courriel même lorsque la requête ne retourne aucun résultat]]></target>
+			</trans-unit>
 			<trans-unit id="task.clearcache.description" approved="yes">
 				<source><![CDATA[]]></source>
 				<target><![CDATA[Vider les caches]]></target>

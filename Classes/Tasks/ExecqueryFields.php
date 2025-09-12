@@ -57,6 +57,7 @@ class ExecqueryFields extends BaseAdditionalFieldProvider
             'query' => 'textarea',
             'subject' => 'input',
             'email' => 'input',
+            'sendZeroResult' => ['code' => 'checkbox', 'default' => '1'],
             'emailtemplate' => 'input',
         ];
     }
