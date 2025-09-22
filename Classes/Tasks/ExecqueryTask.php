@@ -30,6 +30,11 @@ class ExecqueryTask extends BaseEmailTask
     public $query;
 
     /**
+     * @var bool
+     */
+    public $sendZeroResult;
+
+    /**
      * @return bool
      */
     public function execute(): bool
@@ -41,7 +46,7 @@ class ExecqueryTask extends BaseEmailTask
         if (!empty($this->emailtemplate)) {
             $template->initTemplate($this->emailtemplate);
         } else {
-            $template->initTemplate('typo3conf/ext/additional_scheduler/Resources/Private/Templates/execquery.html');
+            $template->initTemplate('EXT:additional_scheduler/Resources/Private/Templates/execquery.html');
         }
 
         $markersArray = [];
@@ -49,8 +54,13 @@ class ExecqueryTask extends BaseEmailTask
         // exec query
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('additional_scheduler');
         $res = $queryBuilder->getConnection()->executeQuery($this->query);
-        $return = '';
 
+        // No query result and task is configured not to send empty result, we're done
+        if ( !$this->sendZeroResult && $res->rowCount() == 0 ) {
+            return true;
+        }
+
+        $return = '';
         if (preg_match('#SELECT.*?FROM#i', $this->query, $matches)) {
             $i = 0;
             $return .= '<table>';
